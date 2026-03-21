@@ -122,4 +122,5 @@ tab:
   enabled: true
 
 # Task intervals (ticks)
-buff-check-interval: 300
+buff-check-interval: 150
+unlock-check-interval: 150

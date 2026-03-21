@@ -23,6 +23,7 @@ import ru.nyansus.mc.domya_fate.listener.TradeListener;
 import ru.nyansus.mc.domya_fate.listener.VillagerCureListener;
 import ru.nyansus.mc.domya_fate.title.TitleManager;
 import ru.nyansus.mc.domya_fate.title.TitleRegistry;
+import ru.nyansus.mc.domya_fate.title.UnlockScanTask;
 import ru.nyansus.mc.domya_fate.title.YamlTitleStorage;
 
 public class DomyaFate extends JavaPlugin {
@@ -61,9 +62,13 @@ public class DomyaFate extends JavaPlugin {
 
         registerListeners();
         registerCommands();
+        registerPlaceholders();
 
         long interval = getConfig().getLong("buff-check-interval", 1200L);
         new BuffApplyTask(this, karmaManager).runTaskTimer(this, 100L, interval);
+
+        long unlockInterval = getConfig().getLong("unlock-check-interval", 6000L);
+        new UnlockScanTask(this).runTaskTimer(this, 200L, unlockInterval);
     }
 
     @Override
@@ -101,6 +106,13 @@ public class DomyaFate extends JavaPlugin {
             TitleCommand titleCommand = new TitleCommand(this);
             dtCmd.setExecutor(titleCommand);
             dtCmd.setTabCompleter(titleCommand);
+        }
+    }
+
+    private void registerPlaceholders() {
+        if (Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null) {
+            new ru.nyansus.mc.domya_fate.integration.DomyaFatePlaceholders(this).register();
+            getLogger().info("PlaceholderAPI integration enabled.");
         }
     }
 

@@ -1,15 +1,20 @@
 package ru.nyansus.mc.domya_fate.title;
 
+import org.bukkit.Material;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.entity.EntityType;
 
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.logging.Level;
@@ -75,10 +80,61 @@ public class TitleRegistry {
             String descRu = descSection != null ? descSection.getString("ru", "") : "";
             String descEn = descSection != null ? descSection.getString("en", "") : "";
 
-            titles.put(id, new Title(id, nameRu, nameEn, color, descRu, descEn));
+            UnlockCondition condition = parseUnlockCondition(entry);
+
+            titles.put(id, new Title(id, nameRu, nameEn, color, descRu, descEn, condition));
         }
 
         LOGGER.info("Loaded " + titles.size() + " titles");
+    }
+
+    private UnlockCondition parseUnlockCondition(ConfigurationSection entry) {
+        ConfigurationSection unlock = entry.getConfigurationSection("unlock");
+        if (unlock == null) {
+            return null;
+        }
+
+        String typeName = unlock.getString("type");
+        if (typeName == null) {
+            return null;
+        }
+
+        UnlockCondition.Type type;
+        try {
+            type = UnlockCondition.Type.valueOf(typeName);
+        } catch (IllegalArgumentException e) {
+            LOGGER.warning("Unknown unlock type: " + typeName);
+            return null;
+        }
+
+        int value = unlock.getInt("value", 0);
+
+        List<EntityType> entities = new ArrayList<>();
+        String entityStr = unlock.getString("entity");
+        if (entityStr != null) {
+            for (String name : entityStr.split(",")) {
+                try {
+                    entities.add(EntityType.valueOf(name.trim()));
+                } catch (IllegalArgumentException e) {
+                    LOGGER.warning("Unknown entity type: " + name);
+                }
+            }
+        }
+
+        List<Material> materials = new ArrayList<>();
+        String materialStr = unlock.getString("material");
+        if (materialStr != null) {
+            for (String name : materialStr.split(",")) {
+                Material mat = Material.matchMaterial(name.trim());
+                if (mat != null) {
+                    materials.add(mat);
+                } else {
+                    LOGGER.warning("Unknown material: " + name);
+                }
+            }
+        }
+
+        return new UnlockCondition(type, value, entities, materials);
     }
 
     public Optional<Title> getTitle(int id) {

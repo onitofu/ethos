@@ -47,6 +47,9 @@ public class KarmaManager {
         double factor = Math.pow(1.0 - decayPercentPerHour / 100.0, hours);
         int effective = (int) (stored * factor);
         storage.setKarma(uuid, effective, now);
+        if (effective != stored) {
+            fireChange(uuid, effective);
+        }
         return effective;
     }
 
