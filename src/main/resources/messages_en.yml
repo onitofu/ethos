@@ -1,0 +1,31 @@
+# English localization
+
+command:
+  no-permission: "§cYou do not have permission to use this command."
+  reload-success: "§aConfig reloaded successfully."
+
+karma:
+  display: "§6Karma §7{player}: §f{karma} {bar}{title}"
+  player-only: "§cThis command can only be used by players."
+  player-not-found: "§cPlayer {player} not found."
+  trade-blocked: "§cVillagers refuse to trade with you due to your bad reputation."
+  change-positive: "§a+{amount} karma"
+  change-negative: "§c{amount} karma"
+  set-usage: "§cUsage: /karma set <player> <value>"
+  set-success: "§aKarma of {player} set to {karma}."
+  invalid-number: "§cInvalid number."
+
+title:
+  no-titles: "§7You have no unlocked titles."
+  list-header: "§6Your titles:"
+  selected: "§aTitle \"{title}\" selected."
+  not-unlocked: "§cThis title is not unlocked."
+  not-found: "§cTitle not found."
+  invalid-id: "§cInvalid title ID."
+  reset: "§aTitle removed."
+  status: "Status"
+  info-header: "§6Title info:"
+  give-usage: "§cUsage: /dt give <player> <id>"
+  give-success: "§aTitle \"{title}\" granted to {player}."
+  unlock-broadcast: "§e{player} §6unlocked the title §e\"{title}\"§6!"
+  unlock-hint: "§7Type §f/dt§7 to select a title."

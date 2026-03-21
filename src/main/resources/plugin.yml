@@ -1,0 +1,22 @@
+name: domya-fate
+version: '${version}'
+main: ru.nyansus.mc.domya_fate.DomyaFate
+api-version: '1.21'
+softdepend:
+  - PlaceholderAPI
+
+commands:
+  karma:
+    description: View or manage karma
+    usage: /karma [player|set <player> <value>]
+  dt:
+    description: Manage your titles
+    usage: /dt [id|reset|info <id>|give <player> <id>]
+
+permissions:
+  domya.karma.view.others:
+    description: View other players' karma
+    default: true
+  domya.karma.admin:
+    description: Admin commands for karma and titles
+    default: op

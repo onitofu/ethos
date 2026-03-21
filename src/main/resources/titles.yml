@@ -1,0 +1,1940 @@
+# ============================================================
+# Title definitions
+# Karmic titles (ID 1-8) are auto-granted/revoked by karma
+# Vanilla titles (ID 100+) are unlocked by achievements
+# ============================================================
+
+titles:
+  # === Karmic (1-8) ===
+  1:
+    name:
+      ru: "Тиран"
+      en: "Tyrant"
+    color: "dark_red"
+    description:
+      ru: "Карма от -1000 до -800"
+      en: "Karma from -1000 to -800"
+  2:
+    name:
+      ru: "Каратель"
+      en: "Punisher"
+    color: "red"
+    description:
+      ru: "Карма от -800 до -600"
+      en: "Karma from -800 to -600"
+  3:
+    name:
+      ru: "Головорез"
+      en: "Thug"
+    color: "red"
+    description:
+      ru: "Карма от -600 до -400"
+      en: "Karma from -600 to -400"
+  4:
+    name:
+      ru: "Разбойник"
+      en: "Bandit"
+    color: "gold"
+    description:
+      ru: "Карма от -400 до -200"
+      en: "Karma from -400 to -200"
+  5:
+    name:
+      ru: "Защитник"
+      en: "Defender"
+    color: "green"
+    description:
+      ru: "Карма от 200 до 400"
+      en: "Karma from 200 to 400"
+  6:
+    name:
+      ru: "Страж"
+      en: "Guardian"
+    color: "green"
+    description:
+      ru: "Карма от 400 до 600"
+      en: "Karma from 400 to 600"
+  7:
+    name:
+      ru: "Герой"
+      en: "Hero"
+    color: "aqua"
+    description:
+      ru: "Карма от 600 до 800"
+      en: "Karma from 600 to 800"
+  8:
+    name:
+      ru: "Легенда"
+      en: "Legend"
+    color: "light_purple"
+    description:
+      ru: "Карма от 800 до 1000"
+      en: "Karma from 800 to 1000"
+
+  # === PvP (100-199) ===
+  100:
+    name:
+      ru: "Заморыш"
+      en: "Weakling"
+    color: "gray"
+    description:
+      ru: "Убить 1 игрока"
+      en: "Kill 1 player"
+  101:
+    name:
+      ru: "Задира"
+      en: "Bully"
+    color: "gold"
+    description:
+      ru: "Убить 10 игроков"
+      en: "Kill 10 players"
+  102:
+    name:
+      ru: "Душегуб"
+      en: "Slayer"
+    color: "red"
+    description:
+      ru: "Убить 50 игроков"
+      en: "Kill 50 players"
+  103:
+    name:
+      ru: "Мясник"
+      en: "Butcher"
+    color: "dark_red"
+    description:
+      ru: "Убить 100 игроков"
+      en: "Kill 100 players"
+  104:
+    name:
+      ru: "Жнец"
+      en: "Reaper"
+    color: "dark_red"
+    description:
+      ru: "Убить 300 игроков"
+      en: "Kill 300 players"
+  105:
+    name:
+      ru: "Убийца Убийц"
+      en: "Killer of Killers"
+    color: "light_purple"
+    description:
+      ru: "Убить игрока с титулом «Жнец»"
+      en: "Kill a player with the Reaper title"
+  106:
+    name:
+      ru: "Неприкасаемый"
+      en: "Untouchable"
+    color: "gold"
+    description:
+      ru: "Умереть 0 раз в PvP (при 50+ убийствах)"
+      en: "Die 0 times in PvP (with 50+ kills)"
+  107:
+    name:
+      ru: "Берсерк"
+      en: "Berserker"
+    color: "red"
+    description:
+      ru: "Убить 3 игроков за 1 минуту"
+      en: "Kill 3 players within 1 minute"
+
+  # === Zombies (200-209) ===
+  200:
+    name:
+      ru: "Новобранец"
+      en: "Recruit"
+    color: "gray"
+    description:
+      ru: "Убить 10 зомби"
+      en: "Kill 10 zombies"
+  201:
+    name:
+      ru: "Санитар"
+      en: "Medic"
+    color: "green"
+    description:
+      ru: "Убить 50 зомби"
+      en: "Kill 50 zombies"
+  202:
+    name:
+      ru: "Чистильщик"
+      en: "Cleanser"
+    color: "green"
+    description:
+      ru: "Убить 200 зомби"
+      en: "Kill 200 zombies"
+  203:
+    name:
+      ru: "Истребитель Мертвецов"
+      en: "Undead Slayer"
+    color: "dark_green"
+    description:
+      ru: "Убить 500 зомби"
+      en: "Kill 500 zombies"
+  204:
+    name:
+      ru: "Апокалипсис"
+      en: "Apocalypse"
+    color: "dark_red"
+    description:
+      ru: "Убить 1000 зомби"
+      en: "Kill 1000 zombies"
+
+  # === Skeletons (210-219) ===
+  210:
+    name:
+      ru: "Костодробитель"
+      en: "Bone Crusher"
+    color: "gray"
+    description:
+      ru: "Убить 10 скелетов"
+      en: "Kill 10 skeletons"
+  211:
+    name:
+      ru: "Костолом"
+      en: "Bone Breaker"
+    color: "white"
+    description:
+      ru: "Убить 50 скелетов"
+      en: "Kill 50 skeletons"
+  212:
+    name:
+      ru: "Могильщик"
+      en: "Gravedigger"
+    color: "gray"
+    description:
+      ru: "Убить 200 скелетов"
+      en: "Kill 200 skeletons"
+  213:
+    name:
+      ru: "Экзорцист"
+      en: "Exorcist"
+    color: "dark_gray"
+    description:
+      ru: "Убить 500 скелетов"
+      en: "Kill 500 skeletons"
+  214:
+    name:
+      ru: "Повелитель Костей"
+      en: "Bone Lord"
+    color: "dark_red"
+    description:
+      ru: "Убить 1000 скелетов"
+      en: "Kill 1000 skeletons"
+
+  # === Phantoms (220-229) ===
+  220:
+    name:
+      ru: "Полуночник"
+      en: "Night Owl"
+    color: "gray"
+    description:
+      ru: "Убить 10 фантомов"
+      en: "Kill 10 phantoms"
+  221:
+    name:
+      ru: "Ночной Дозор"
+      en: "Night Watch"
+    color: "dark_purple"
+    description:
+      ru: "Убить 50 фантомов"
+      en: "Kill 50 phantoms"
+  222:
+    name:
+      ru: "Бессонный"
+      en: "Sleepless"
+    color: "dark_purple"
+    description:
+      ru: "Убить 200 фантомов"
+      en: "Kill 200 phantoms"
+  223:
+    name:
+      ru: "Кошмар Фантомов"
+      en: "Phantom Nightmare"
+    color: "light_purple"
+    description:
+      ru: "Убить 500 фантомов"
+      en: "Kill 500 phantoms"
+
+  # === Drowned (230-239) ===
+  230:
+    name:
+      ru: "Водолаз"
+      en: "Diver"
+    color: "gray"
+    description:
+      ru: "Убить 10 утопленников"
+      en: "Kill 10 drowned"
+  231:
+    name:
+      ru: "Ныряльщик"
+      en: "Deep Diver"
+    color: "dark_aqua"
+    description:
+      ru: "Убить 50 утопленников"
+      en: "Kill 50 drowned"
+  232:
+    name:
+      ru: "Морской Охотник"
+      en: "Sea Hunter"
+    color: "dark_aqua"
+    description:
+      ru: "Убить 200 утопленников"
+      en: "Kill 200 drowned"
+  233:
+    name:
+      ru: "Бич Глубин"
+      en: "Scourge of the Deep"
+    color: "aqua"
+    description:
+      ru: "Убить 500 утопленников"
+      en: "Kill 500 drowned"
+
+  # === Wither Skeletons (240-249) ===
+  240:
+    name:
+      ru: "Собиратель Черепов"
+      en: "Skull Collector"
+    color: "gray"
+    description:
+      ru: "Убить 10 визер-скелетов"
+      en: "Kill 10 wither skeletons"
+  241:
+    name:
+      ru: "Тёмный Жнец"
+      en: "Dark Reaper"
+    color: "dark_gray"
+    description:
+      ru: "Убить 50 визер-скелетов"
+      en: "Kill 50 wither skeletons"
+  242:
+    name:
+      ru: "Адское Возмездие"
+      en: "Nether Retribution"
+    color: "dark_red"
+    description:
+      ru: "Убить 200 визер-скелетов"
+      en: "Kill 200 wither skeletons"
+
+  # === Spiders (300-309) ===
+  300:
+    name:
+      ru: "Арахнофоб"
+      en: "Arachnophobe"
+    color: "gray"
+    description:
+      ru: "Убить 10 пауков"
+      en: "Kill 10 spiders"
+  301:
+    name:
+      ru: "Паучий Охотник"
+      en: "Spider Hunter"
+    color: "dark_gray"
+    description:
+      ru: "Убить 50 пауков"
+      en: "Kill 50 spiders"
+  302:
+    name:
+      ru: "Паучий Бич"
+      en: "Spider Bane"
+    color: "dark_red"
+    description:
+      ru: "Убить 200 пауков"
+      en: "Kill 200 spiders"
+  303:
+    name:
+      ru: "Арахнид"
+      en: "Arachnid"
+    color: "dark_red"
+    description:
+      ru: "Убить 500 пауков"
+      en: "Kill 500 spiders"
+
+  # === Cave Spiders (310-319) ===
+  310:
+    name:
+      ru: "Спелеолог"
+      en: "Spelunker"
+    color: "gray"
+    description:
+      ru: "Убить 10 пещерных пауков"
+      en: "Kill 10 cave spiders"
+  311:
+    name:
+      ru: "Очиститель Шахт"
+      en: "Mine Clearer"
+    color: "dark_gray"
+    description:
+      ru: "Убить 50 пещерных пауков"
+      en: "Kill 50 cave spiders"
+  312:
+    name:
+      ru: "Ядовитый Иммунитет"
+      en: "Venom Immune"
+    color: "green"
+    description:
+      ru: "Убить 200 пещерных пауков"
+      en: "Kill 200 cave spiders"
+
+  # === Silverfish (320-329) ===
+  320:
+    name:
+      ru: "Шахтёр"
+      en: "Miner"
+    color: "gray"
+    description:
+      ru: "Убить 10 чешуйниц"
+      en: "Kill 10 silverfish"
+  321:
+    name:
+      ru: "Разоритель Гнёзд"
+      en: "Nest Raider"
+    color: "dark_gray"
+    description:
+      ru: "Убить 50 чешуйниц"
+      en: "Kill 50 silverfish"
+  322:
+    name:
+      ru: "Уничтожитель Паразитов"
+      en: "Exterminator"
+    color: "gold"
+    description:
+      ru: "Убить 200 чешуйниц"
+      en: "Kill 200 silverfish"
+
+  # === Creepers (400-409) ===
+  400:
+    name:
+      ru: "Новичок-Сапёр"
+      en: "Rookie Sapper"
+    color: "gray"
+    description:
+      ru: "Убить 10 криперов"
+      en: "Kill 10 creepers"
+  401:
+    name:
+      ru: "Сапёр"
+      en: "Sapper"
+    color: "green"
+    description:
+      ru: "Убить 50 криперов"
+      en: "Kill 50 creepers"
+  402:
+    name:
+      ru: "Взрывотехник"
+      en: "Demolitions Expert"
+    color: "dark_green"
+    description:
+      ru: "Убить 200 криперов"
+      en: "Kill 200 creepers"
+  403:
+    name:
+      ru: "Укротитель Хаоса"
+      en: "Chaos Tamer"
+    color: "gold"
+    description:
+      ru: "Убить 500 криперов"
+      en: "Kill 500 creepers"
+  404:
+    name:
+      ru: "Непробиваемый"
+      en: "Impervious"
+    color: "light_purple"
+    description:
+      ru: "Убить 1000 криперов"
+      en: "Kill 1000 creepers"
+  405:
+    name:
+      ru: "Ловец Молний"
+      en: "Lightning Catcher"
+    color: "yellow"
+    description:
+      ru: "Убить заряженного крипера"
+      en: "Kill a charged creeper"
+
+  # === Blazes (500-509) ===
+  500:
+    name:
+      ru: "Искрогас"
+      en: "Spark Quencher"
+    color: "gray"
+    description:
+      ru: "Убить 10 блейзов"
+      en: "Kill 10 blazes"
+  501:
+    name:
+      ru: "Огнеборец"
+      en: "Firefighter"
+    color: "gold"
+    description:
+      ru: "Убить 50 блейзов"
+      en: "Kill 50 blazes"
+  502:
+    name:
+      ru: "Повелитель Пламени"
+      en: "Flame Lord"
+    color: "red"
+    description:
+      ru: "Убить 200 блейзов"
+      en: "Kill 200 blazes"
+  503:
+    name:
+      ru: "Владыка Огня"
+      en: "Fire Overlord"
+    color: "dark_red"
+    description:
+      ru: "Убить 500 блейзов"
+      en: "Kill 500 blazes"
+
+  # === Ghasts (510-519) ===
+  510:
+    name:
+      ru: "Охотник на Призраков"
+      en: "Ghost Hunter"
+    color: "gray"
+    description:
+      ru: "Убить 10 гастов"
+      en: "Kill 10 ghasts"
+  511:
+    name:
+      ru: "Стрелок Незера"
+      en: "Nether Marksman"
+    color: "white"
+    description:
+      ru: "Убить 50 гастов"
+      en: "Kill 50 ghasts"
+  512:
+    name:
+      ru: "Небесный Истребитель"
+      en: "Sky Destroyer"
+    color: "gold"
+    description:
+      ru: "Убить 200 гастов"
+      en: "Kill 200 ghasts"
+
+  # === Hoglins (520-529) ===
+  520:
+    name:
+      ru: "Свинопас"
+      en: "Swineherd"
+    color: "gray"
+    description:
+      ru: "Убить 10 хоглинов"
+      en: "Kill 10 hoglins"
+  521:
+    name:
+      ru: "Укротитель Зверей"
+      en: "Beast Tamer"
+    color: "red"
+    description:
+      ru: "Убить 50 хоглинов"
+      en: "Kill 50 hoglins"
+  522:
+    name:
+      ru: "Адский Мясник"
+      en: "Nether Butcher"
+    color: "dark_red"
+    description:
+      ru: "Убить 200 хоглинов"
+      en: "Kill 200 hoglins"
+
+  # === Piglins (530-539) ===
+  530:
+    name:
+      ru: "Предатель Свиней"
+      en: "Pig Traitor"
+    color: "gray"
+    description:
+      ru: "Убить 10 пиглинов"
+      en: "Kill 10 piglins"
+  531:
+    name:
+      ru: "Грабитель Бастионов"
+      en: "Bastion Raider"
+    color: "gold"
+    description:
+      ru: "Убить 50 пиглинов"
+      en: "Kill 50 piglins"
+  532:
+    name:
+      ru: "Враг Орды"
+      en: "Enemy of the Horde"
+    color: "dark_red"
+    description:
+      ru: "Убить 200 пиглинов"
+      en: "Kill 200 piglins"
+  533:
+    name:
+      ru: "Убийца Элиты"
+      en: "Elite Slayer"
+    color: "dark_red"
+    description:
+      ru: "Убить 50 пиглин-брутов"
+      en: "Kill 50 piglin brutes"
+
+  # === Magma Cubes (540-549) ===
+  540:
+    name:
+      ru: "Огнеступ"
+      en: "Firestep"
+    color: "gray"
+    description:
+      ru: "Убить 10 магма-кубов"
+      en: "Kill 10 magma cubes"
+  541:
+    name:
+      ru: "Жаропрочный"
+      en: "Heatproof"
+    color: "gold"
+    description:
+      ru: "Убить 50 магма-кубов"
+      en: "Kill 50 magma cubes"
+  542:
+    name:
+      ru: "Лавоход"
+      en: "Lava Walker"
+    color: "red"
+    description:
+      ru: "Убить 200 магма-кубов"
+      en: "Kill 200 magma cubes"
+
+  # === Endermen (600-609) ===
+  600:
+    name:
+      ru: "Охотник на Теней"
+      en: "Shadow Hunter"
+    color: "gray"
+    description:
+      ru: "Убить 10 эндерменов"
+      en: "Kill 10 endermen"
+  601:
+    name:
+      ru: "Пустотный Странник"
+      en: "Void Wanderer"
+    color: "dark_purple"
+    description:
+      ru: "Убить 50 эндерменов"
+      en: "Kill 50 endermen"
+  602:
+    name:
+      ru: "Покоритель Пустоты"
+      en: "Void Conqueror"
+    color: "dark_purple"
+    description:
+      ru: "Убить 200 эндерменов"
+      en: "Kill 200 endermen"
+  603:
+    name:
+      ru: "Энд-Лорд"
+      en: "End Lord"
+    color: "light_purple"
+    description:
+      ru: "Убить 500 эндерменов"
+      en: "Kill 500 endermen"
+  604:
+    name:
+      ru: "Абсолютный Эндер"
+      en: "Absolute Ender"
+    color: "light_purple"
+    description:
+      ru: "Убить 1000 эндерменов"
+      en: "Kill 1000 endermen"
+
+  # === Shulkers (610-619) ===
+  610:
+    name:
+      ru: "Взломщик Городов"
+      en: "City Breaker"
+    color: "gray"
+    description:
+      ru: "Убить 10 шалкеров"
+      en: "Kill 10 shulkers"
+  611:
+    name:
+      ru: "Разоритель Эндов"
+      en: "End Raider"
+    color: "light_purple"
+    description:
+      ru: "Убить 50 шалкеров"
+      en: "Kill 50 shulkers"
+  612:
+    name:
+      ru: "Завоеватель Города Краёв"
+      en: "End City Conqueror"
+    color: "light_purple"
+    description:
+      ru: "Убить 200 шалкеров"
+      en: "Kill 200 shulkers"
+
+  # === Witches (700-709) ===
+  700:
+    name:
+      ru: "Охотник на Ведьм"
+      en: "Witch Hunter"
+    color: "gray"
+    description:
+      ru: "Убить 10 ведьм"
+      en: "Kill 10 witches"
+  701:
+    name:
+      ru: "Инквизитор"
+      en: "Inquisitor"
+    color: "dark_purple"
+    description:
+      ru: "Убить 50 ведьм"
+      en: "Kill 50 witches"
+  702:
+    name:
+      ru: "Великий Инквизитор"
+      en: "Grand Inquisitor"
+    color: "dark_purple"
+    description:
+      ru: "Убить 200 ведьм"
+      en: "Kill 200 witches"
+
+  # === Guardians (710-719) ===
+  710:
+    name:
+      ru: "Подводный Боец"
+      en: "Underwater Fighter"
+    color: "gray"
+    description:
+      ru: "Убить 10 стражей"
+      en: "Kill 10 guardians"
+  711:
+    name:
+      ru: "Покоритель Глубин"
+      en: "Depth Conqueror"
+    color: "dark_aqua"
+    description:
+      ru: "Убить 50 стражей"
+      en: "Kill 50 guardians"
+  712:
+    name:
+      ru: "Повелитель Океана"
+      en: "Ocean Lord"
+    color: "aqua"
+    description:
+      ru: "Убить 200 стражей"
+      en: "Kill 200 guardians"
+  713:
+    name:
+      ru: "Властелин Монумента"
+      en: "Monument Master"
+    color: "aqua"
+    description:
+      ru: "Убить 10 древних стражей"
+      en: "Kill 10 elder guardians"
+
+  # === Ravagers & Raiders (720-729) ===
+  720:
+    name:
+      ru: "Защитник Деревень"
+      en: "Village Defender"
+    color: "gray"
+    description:
+      ru: "Убить 10 разорителей"
+      en: "Kill 10 ravagers"
+  721:
+    name:
+      ru: "Спаситель Деревни"
+      en: "Village Savior"
+    color: "green"
+    description:
+      ru: "Убить 50 разорителей"
+      en: "Kill 50 ravagers"
+  722:
+    name:
+      ru: "Непробиваемый Щит"
+      en: "Unbreakable Shield"
+    color: "gold"
+    description:
+      ru: "Убить 200 разорителей"
+      en: "Kill 200 ravagers"
+  723:
+    name:
+      ru: "Дуэлянт"
+      en: "Duelist"
+    color: "gray"
+    description:
+      ru: "Убить 10 поборников"
+      en: "Kill 10 vindicators"
+  724:
+    name:
+      ru: "Рыцарь"
+      en: "Knight"
+    color: "gold"
+    description:
+      ru: "Убить 50 поборников"
+      en: "Kill 50 vindicators"
+  725:
+    name:
+      ru: "Истребитель Нечисти"
+      en: "Monster Slayer"
+    color: "gray"
+    description:
+      ru: "Убить 50 вредин"
+      en: "Kill 50 vexes"
+  726:
+    name:
+      ru: "Бич Нечисти"
+      en: "Bane of Monsters"
+    color: "dark_gray"
+    description:
+      ru: "Убить 200 вредин"
+      en: "Kill 200 vexes"
+
+  # === Slimes (730-739) ===
+  730:
+    name:
+      ru: "Слизнебой"
+      en: "Slime Slayer"
+    color: "gray"
+    description:
+      ru: "Убить 10 слизней"
+      en: "Kill 10 slimes"
+  731:
+    name:
+      ru: "Месильщик"
+      en: "Squisher"
+    color: "green"
+    description:
+      ru: "Убить 100 слизней"
+      en: "Kill 100 slimes"
+  732:
+    name:
+      ru: "Властелин Болот"
+      en: "Swamp Lord"
+    color: "dark_green"
+    description:
+      ru: "Убить 500 слизней"
+      en: "Kill 500 slimes"
+
+  # === Striders (740-749) ===
+  740:
+    name:
+      ru: "Ловец Странников"
+      en: "Strider Catcher"
+    color: "gray"
+    description:
+      ru: "Убить 10 странников"
+      en: "Kill 10 striders"
+  741:
+    name:
+      ru: "Вечный Скиталец"
+      en: "Eternal Drifter"
+    color: "dark_aqua"
+    description:
+      ru: "Убить 50 странников"
+      en: "Kill 50 striders"
+  742:
+    name:
+      ru: "Повелитель Странников"
+      en: "Strider Lord"
+    color: "aqua"
+    description:
+      ru: "Убить 200 странников"
+      en: "Kill 200 striders"
+
+  # === Breezes (750-759) ===
+  750:
+    name:
+      ru: "Ветролов"
+      en: "Wind Catcher"
+    color: "aqua"
+    description:
+      ru: "Убить 1 бриз"
+      en: "Kill 1 breeze"
+  751:
+    name:
+      ru: "Повелитель Ветров"
+      en: "Wind Lord"
+    color: "aqua"
+    description:
+      ru: "Убить 30 бризов"
+      en: "Kill 30 breezes"
+  752:
+    name:
+      ru: "Ураган"
+      en: "Hurricane"
+    color: "light_purple"
+    description:
+      ru: "Убить 100 бризов"
+      en: "Kill 100 breezes"
+
+  # === Bosses (800-899) ===
+  800:
+    name:
+      ru: "Драконоборец"
+      en: "Dragonslayer"
+    color: "light_purple"
+    description:
+      ru: "Убить Дракона Края"
+      en: "Kill the Ender Dragon"
+  801:
+    name:
+      ru: "Погибель Драконов"
+      en: "Dragon's Bane"
+    color: "dark_purple"
+    description:
+      ru: "Убить Дракона 5 раз"
+      en: "Kill the Ender Dragon 5 times"
+  802:
+    name:
+      ru: "Покоритель Визера"
+      en: "Wither Conqueror"
+    color: "dark_gray"
+    description:
+      ru: "Убить Визера"
+      en: "Kill the Wither"
+  803:
+    name:
+      ru: "Тёмный Властелин"
+      en: "Dark Lord"
+    color: "dark_red"
+    description:
+      ru: "Убить Визера 5 раз"
+      en: "Kill the Wither 5 times"
+  804:
+    name:
+      ru: "Властелин Монумента"
+      en: "Monument Overlord"
+    color: "dark_aqua"
+    description:
+      ru: "Убить Старшего Стража"
+      en: "Kill an Elder Guardian"
+  805:
+    name:
+      ru: "Убийца Богов"
+      en: "Godslayer"
+    color: "dark_red"
+    description:
+      ru: "Убить Дракона и Визера"
+      en: "Kill the Ender Dragon and the Wither"
+
+  # === Mining & Resources (900-999) ===
+  900:
+    name:
+      ru: "Искатель"
+      en: "Seeker"
+    color: "aqua"
+    description:
+      ru: "Добыть 100 алмазов"
+      en: "Mine 100 diamonds"
+  901:
+    name:
+      ru: "Старатель"
+      en: "Prospector"
+    color: "aqua"
+    description:
+      ru: "Добыть 1000 алмазов"
+      en: "Mine 1000 diamonds"
+  902:
+    name:
+      ru: "Алмазный Барон"
+      en: "Diamond Baron"
+    color: "aqua"
+    description:
+      ru: "Добыть 5000 алмазов"
+      en: "Mine 5000 diamonds"
+  903:
+    name:
+      ru: "Незеритовый Кузнец"
+      en: "Netherite Smith"
+    color: "dark_gray"
+    description:
+      ru: "Добыть 100 незерита (древний обломок)"
+      en: "Mine 100 ancient debris"
+  904:
+    name:
+      ru: "Ювелир"
+      en: "Jeweler"
+    color: "green"
+    description:
+      ru: "Добыть 500 изумрудов"
+      en: "Mine 500 emeralds"
+  905:
+    name:
+      ru: "Каменотёс"
+      en: "Stonecutter"
+    color: "gray"
+    description:
+      ru: "Добыть 10000 камня"
+      en: "Mine 10000 stone"
+  906:
+    name:
+      ru: "Горный Король"
+      en: "Mountain King"
+    color: "dark_gray"
+    description:
+      ru: "Добыть 50000 камня"
+      en: "Mine 50000 stone"
+  907:
+    name:
+      ru: "Углежог"
+      en: "Charburner"
+    color: "dark_gray"
+    description:
+      ru: "Добыть 1000 угля"
+      en: "Mine 1000 coal"
+  908:
+    name:
+      ru: "Рудокоп"
+      en: "Ore Miner"
+    color: "white"
+    description:
+      ru: "Добыть 1000 железа"
+      en: "Mine 1000 iron"
+  909:
+    name:
+      ru: "Стальной Магнат"
+      en: "Steel Magnate"
+    color: "white"
+    description:
+      ru: "Добыть 5000 железа"
+      en: "Mine 5000 iron"
+  910:
+    name:
+      ru: "Золотоискатель"
+      en: "Gold Digger"
+    color: "gold"
+    description:
+      ru: "Добыть 1000 золота"
+      en: "Mine 1000 gold"
+  911:
+    name:
+      ru: "Синий Маг"
+      en: "Blue Mage"
+    color: "blue"
+    description:
+      ru: "Добыть 1000 лазурита"
+      en: "Mine 1000 lapis lazuli"
+  912:
+    name:
+      ru: "Инженер"
+      en: "Engineer"
+    color: "red"
+    description:
+      ru: "Добыть 1000 редстоуна"
+      en: "Mine 1000 redstone"
+  913:
+    name:
+      ru: "Изобретатель"
+      en: "Inventor"
+    color: "red"
+    description:
+      ru: "Добыть 5000 редстоуна"
+      en: "Mine 5000 redstone"
+
+  # === Trading (1000-1099) ===
+  1000:
+    name:
+      ru: "Торговец"
+      en: "Trader"
+    color: "green"
+    description:
+      ru: "10 сделок с жителями"
+      en: "Complete 10 trades with villagers"
+  1001:
+    name:
+      ru: "Купец"
+      en: "Merchant"
+    color: "gold"
+    description:
+      ru: "100 сделок с жителями"
+      en: "Complete 100 trades with villagers"
+  1002:
+    name:
+      ru: "Торговый Магнат"
+      en: "Trade Magnate"
+    color: "gold"
+    description:
+      ru: "500 сделок с жителями"
+      en: "Complete 500 trades with villagers"
+  1003:
+    name:
+      ru: "Азартный"
+      en: "Gambler"
+    color: "gold"
+    description:
+      ru: "10 сделок с пиглинами"
+      en: "Complete 10 trades with piglins"
+  1004:
+    name:
+      ru: "Лудоман"
+      en: "Addict"
+    color: "gold"
+    description:
+      ru: "100 сделок с пиглинами"
+      en: "Complete 100 trades with piglins"
+  1005:
+    name:
+      ru: "Король Бартера"
+      en: "Barter King"
+    color: "light_purple"
+    description:
+      ru: "500 сделок с пиглинами"
+      en: "Complete 500 trades with piglins"
+  1006:
+    name:
+      ru: "Целитель"
+      en: "Healer"
+    color: "green"
+    description:
+      ru: "Вылечить 1 зомби-жителя"
+      en: "Cure 1 zombie villager"
+  1007:
+    name:
+      ru: "Доктор"
+      en: "Doctor"
+    color: "aqua"
+    description:
+      ru: "Вылечить 10 зомби-жителей"
+      en: "Cure 10 zombie villagers"
+  1008:
+    name:
+      ru: "Спаситель Деревень"
+      en: "Village Savior"
+    color: "light_purple"
+    description:
+      ru: "Вылечить 50 зомби-жителей"
+      en: "Cure 50 zombie villagers"
+
+  # === Travel & Exploration (1100-1199) ===
+  1100:
+    name:
+      ru: "Путник"
+      en: "Traveler"
+    color: "green"
+    description:
+      ru: "Пройти 10 км"
+      en: "Travel 10 km"
+  1101:
+    name:
+      ru: "Странник"
+      en: "Wanderer"
+    color: "aqua"
+    description:
+      ru: "Пройти 100 км"
+      en: "Travel 100 km"
+  1102:
+    name:
+      ru: "Марафонец"
+      en: "Marathon Runner"
+    color: "light_purple"
+    description:
+      ru: "Пройти 500 км"
+      en: "Travel 500 km"
+  1103:
+    name:
+      ru: "Покоритель Мира"
+      en: "World Conqueror"
+    color: "gold"
+    description:
+      ru: "Пройти 1000 км"
+      en: "Travel 1000 km"
+  1104:
+    name:
+      ru: "Адский Турист"
+      en: "Nether Tourist"
+    color: "red"
+    description:
+      ru: "Посетить Незер"
+      en: "Visit the Nether"
+  1105:
+    name:
+      ru: "Пустотный Путник"
+      en: "Void Traveler"
+    color: "dark_purple"
+    description:
+      ru: "Посетить Энд"
+      en: "Visit the End"
+  1106:
+    name:
+      ru: "Межмировой Путник"
+      en: "Dimensional Traveler"
+    color: "light_purple"
+    description:
+      ru: "Посетить все 3 измерения"
+      en: "Visit all 3 dimensions"
+  1107:
+    name:
+      ru: "Следопыт"
+      en: "Pathfinder"
+    color: "green"
+    description:
+      ru: "Найти 10 различных биомов"
+      en: "Discover 10 different biomes"
+  1108:
+    name:
+      ru: "Картограф"
+      en: "Cartographer"
+    color: "gold"
+    description:
+      ru: "Найти 30 различных биомов"
+      en: "Discover 30 different biomes"
+  1109:
+    name:
+      ru: "Первооткрыватель"
+      en: "Explorer"
+    color: "light_purple"
+    description:
+      ru: "Найти все биомы"
+      en: "Discover all biomes"
+
+  # === Farming & Animals (1200-1299) ===
+  1200:
+    name:
+      ru: "Собачник"
+      en: "Dog Lover"
+    color: "white"
+    description:
+      ru: "Приручить 1 волка"
+      en: "Tame 1 wolf"
+  1201:
+    name:
+      ru: "Собаковод"
+      en: "Dog Breeder"
+    color: "white"
+    description:
+      ru: "Приручить 10 волков"
+      en: "Tame 10 wolves"
+  1202:
+    name:
+      ru: "Кошатник"
+      en: "Cat Lover"
+    color: "gold"
+    description:
+      ru: "Приручить 1 кота"
+      en: "Tame 1 cat"
+  1203:
+    name:
+      ru: "Кошатница"
+      en: "Cat Lady"
+    color: "gold"
+    description:
+      ru: "Приручить 10 котов"
+      en: "Tame 10 cats"
+  1204:
+    name:
+      ru: "Всадник"
+      en: "Rider"
+    color: "gold"
+    description:
+      ru: "Приручить лошадь"
+      en: "Tame a horse"
+  1205:
+    name:
+      ru: "Фермер"
+      en: "Farmer"
+    color: "green"
+    description:
+      ru: "Разводить 100 животных"
+      en: "Breed 100 animals"
+  1206:
+    name:
+      ru: "Скотовод"
+      en: "Rancher"
+    color: "dark_green"
+    description:
+      ru: "Разводить 500 животных"
+      en: "Breed 500 animals"
+  1207:
+    name:
+      ru: "Пасечник"
+      en: "Beekeeper"
+    color: "yellow"
+    description:
+      ru: "Разводить 50 пчёл"
+      en: "Breed 50 bees"
+  1208:
+    name:
+      ru: "Садовод"
+      en: "Gardener"
+    color: "green"
+    description:
+      ru: "Посадить 1000 семян"
+      en: "Plant 1000 seeds"
+  1209:
+    name:
+      ru: "Агроном"
+      en: "Agronomist"
+    color: "dark_green"
+    description:
+      ru: "Собрать 5000 урожая"
+      en: "Harvest 5000 crops"
+
+  # === Fishing (1300-1399) ===
+  1300:
+    name:
+      ru: "Рыбак"
+      en: "Fisherman"
+    color: "aqua"
+    description:
+      ru: "Поймать 50 рыб"
+      en: "Catch 50 fish"
+  1301:
+    name:
+      ru: "Рыболов"
+      en: "Angler"
+    color: "dark_aqua"
+    description:
+      ru: "Поймать 200 рыб"
+      en: "Catch 200 fish"
+  1302:
+    name:
+      ru: "Морской Волк"
+      en: "Sea Wolf"
+    color: "dark_aqua"
+    description:
+      ru: "Поймать 1000 рыб"
+      en: "Catch 1000 fish"
+  1303:
+    name:
+      ru: "Кладоискатель"
+      en: "Treasure Hunter"
+    color: "gold"
+    description:
+      ru: "Поймать сокровище (удочкой)"
+      en: "Fish up a treasure"
+  1304:
+    name:
+      ru: "Ловец Удачи"
+      en: "Fortune Seeker"
+    color: "gold"
+    description:
+      ru: "Поймать 20 сокровищ"
+      en: "Fish up 20 treasures"
+
+  # === Crafting & Enchanting (1400-1499) ===
+  1400:
+    name:
+      ru: "Ремесленник"
+      en: "Craftsman"
+    color: "white"
+    description:
+      ru: "Скрафтить 100 предметов"
+      en: "Craft 100 items"
+  1401:
+    name:
+      ru: "Мастер На Все Руки"
+      en: "Jack of All Trades"
+    color: "gold"
+    description:
+      ru: "Скрафтить 1000 предметов"
+      en: "Craft 1000 items"
+  1402:
+    name:
+      ru: "Ученик Чародея"
+      en: "Sorcerer's Apprentice"
+    color: "blue"
+    description:
+      ru: "Зачаровать 10 предметов"
+      en: "Enchant 10 items"
+  1403:
+    name:
+      ru: "Чародей"
+      en: "Sorcerer"
+    color: "blue"
+    description:
+      ru: "Зачаровать 50 предметов"
+      en: "Enchant 50 items"
+  1404:
+    name:
+      ru: "Архимаг"
+      en: "Archmage"
+    color: "dark_purple"
+    description:
+      ru: "Зачаровать 200 предметов"
+      en: "Enchant 200 items"
+  1405:
+    name:
+      ru: "Алхимик"
+      en: "Alchemist"
+    color: "dark_purple"
+    description:
+      ru: "Сварить 50 зелий"
+      en: "Brew 50 potions"
+  1406:
+    name:
+      ru: "Мастер Зелий"
+      en: "Potion Master"
+    color: "dark_purple"
+    description:
+      ru: "Сварить 200 зелий"
+      en: "Brew 200 potions"
+  1407:
+    name:
+      ru: "Кузнец"
+      en: "Blacksmith"
+    color: "dark_gray"
+    description:
+      ru: "Использовать наковальню 100 раз"
+      en: "Use an anvil 100 times"
+
+  # === Deaths & Survival (1500-1599) ===
+  1500:
+    name:
+      ru: "Смертный"
+      en: "Mortal"
+    color: "gray"
+    description:
+      ru: "Умереть 1 раз"
+      en: "Die 1 time"
+  1501:
+    name:
+      ru: "Частый Гость"
+      en: "Frequent Visitor"
+    color: "gray"
+    description:
+      ru: "Умереть 50 раз"
+      en: "Die 50 times"
+  1502:
+    name:
+      ru: "Невезучий"
+      en: "Unlucky"
+    color: "dark_gray"
+    description:
+      ru: "Умереть 100 раз"
+      en: "Die 100 times"
+  1503:
+    name:
+      ru: "Бессмертный"
+      en: "Immortal"
+    color: "dark_red"
+    description:
+      ru: "Умереть 500 раз"
+      en: "Die 500 times"
+  1504:
+    name:
+      ru: "Икар"
+      en: "Icarus"
+    color: "yellow"
+    description:
+      ru: "Умереть от падения 20 раз"
+      en: "Die from falling 20 times"
+  1505:
+    name:
+      ru: "Огнеупорный"
+      en: "Fireproof"
+    color: "red"
+    description:
+      ru: "Умереть в лаве 10 раз"
+      en: "Die in lava 10 times"
+  1506:
+    name:
+      ru: "Голодающий"
+      en: "Starving"
+    color: "dark_green"
+    description:
+      ru: "Умереть от голода 10 раз"
+      en: "Die from starvation 10 times"
+  1507:
+    name:
+      ru: "Выживший"
+      en: "Survivor"
+    color: "green"
+    description:
+      ru: "Выжить 50 дней без смерти"
+      en: "Survive 50 days without dying"
+  1508:
+    name:
+      ru: "Стойкий"
+      en: "Steadfast"
+    color: "aqua"
+    description:
+      ru: "Выжить 100 дней без смерти"
+      en: "Survive 100 days without dying"
+  1509:
+    name:
+      ru: "Нерушимый"
+      en: "Unbreakable"
+    color: "gold"
+    description:
+      ru: "Выжить 365 дней без смерти"
+      en: "Survive 365 days without dying"
+  1510:
+    name:
+      ru: "На Волоске"
+      en: "By a Thread"
+    color: "red"
+    description:
+      ru: "Выжить на половине сердца"
+      en: "Survive at half a heart"
+
+  # === Building (1600-1699) ===
+  1600:
+    name:
+      ru: "Строитель"
+      en: "Builder"
+    color: "white"
+    description:
+      ru: "Разместить 10000 блоков"
+      en: "Place 10000 blocks"
+  1601:
+    name:
+      ru: "Архитектор"
+      en: "Architect"
+    color: "gold"
+    description:
+      ru: "Разместить 50000 блоков"
+      en: "Place 50000 blocks"
+  1602:
+    name:
+      ru: "Великий Зодчий"
+      en: "Grand Architect"
+    color: "light_purple"
+    description:
+      ru: "Разместить 100000 блоков"
+      en: "Place 100000 blocks"
+
+  # === Rare & Secret (1700-1799) ===
+  1700:
+    name:
+      ru: "Меломан"
+      en: "Audiophile"
+    color: "green"
+    description:
+      ru: "Убить крипера скелетом (получить пластинку)"
+      en: "Kill a creeper with a skeleton (get a disc)"
+  1701:
+    name:
+      ru: "Паркурщик"
+      en: "Parkourist"
+    color: "yellow"
+    description:
+      ru: "Упасть с высоты 100 блоков и выжить"
+      en: "Fall 100 blocks and survive"
+  1702:
+    name:
+      ru: "Изобретательный"
+      en: "Resourceful"
+    color: "gold"
+    description:
+      ru: "Убить моба наковальней"
+      en: "Kill a mob with an anvil"
+  1703:
+    name:
+      ru: "Барахольщик"
+      en: "Hoarder"
+    color: "dark_purple"
+    description:
+      ru: "Полностью заполнить эндер-сундук"
+      en: "Completely fill an ender chest"
+  1704:
+    name:
+      ru: "Дегустатор"
+      en: "Taster"
+    color: "green"
+    description:
+      ru: "Получить отравление от иглобрюха"
+      en: "Get poisoned by a pufferfish"
+  1705:
+    name:
+      ru: "Громоотвод"
+      en: "Lightning Rod"
+    color: "yellow"
+    description:
+      ru: "Попасть под молнию и выжить"
+      en: "Get struck by lightning and survive"
+  1706:
+    name:
+      ru: "Пиротехник"
+      en: "Pyrotechnic"
+    color: "red"
+    description:
+      ru: "Убить себя собственным фейерверком"
+      en: "Kill yourself with your own firework"
+  1707:
+    name:
+      ru: "Бедуин"
+      en: "Bedouin"
+    color: "yellow"
+    description:
+      ru: "Прожить всю ночь в пустыне без укрытия"
+      en: "Survive a full night in the desert without shelter"
+  1708:
+    name:
+      ru: "Герой Деревни"
+      en: "Hero of the Village"
+    color: "gold"
+    description:
+      ru: "Победить рейд"
+      en: "Win a raid"
+  1709:
+    name:
+      ru: "Несокрушимый"
+      en: "Indestructible"
+    color: "light_purple"
+    description:
+      ru: "Победить 10 рейдов"
+      en: "Win 10 raids"
+
+  # === References & Humor (1800-1899) ===
+  1800:
+    name:
+      ru: "Don't Blink"
+      en: "Don't Blink"
+    color: "dark_purple"
+    description:
+      ru: "Убить 100 эндерменов"
+      en: "Kill 100 endermen"
+  1801:
+    name:
+      ru: "There and Back Again"
+      en: "There and Back Again"
+    color: "dark_purple"
+    description:
+      ru: "Упасть в Пустоту и умереть"
+      en: "Fall into the Void and die"
+  1802:
+    name:
+      ru: "One Punch Man"
+      en: "One Punch Man"
+    color: "yellow"
+    description:
+      ru: "Убить Визера голыми руками"
+      en: "Kill the Wither bare-handed"
+  1803:
+    name:
+      ru: "Тут Был Крипер"
+      en: "Creeper Was Here"
+    color: "green"
+    description:
+      ru: "Умереть от собственного TNT"
+      en: "Die from your own TNT"
+  1804:
+    name:
+      ru: "I Am Inevitable"
+      en: "I Am Inevitable"
+    color: "dark_red"
+    description:
+      ru: "Полный незеритовый сет"
+      en: "Obtain a full netherite set"
+  1805:
+    name:
+      ru: "Order 66"
+      en: "Order 66"
+    color: "red"
+    description:
+      ru: "Убить 66 мобов за одну сессию"
+      en: "Kill 66 mobs in one session"
+  1806:
+    name:
+      ru: "You Were My Brother"
+      en: "You Were My Brother"
+    color: "gold"
+    description:
+      ru: "Убить друга"
+      en: "Kill a friend"
+  1807:
+    name:
+      ru: "Хлебушек"
+      en: "Bread Lord"
+    color: "yellow"
+    description:
+      ru: "Иметь 64 стака хлеба"
+      en: "Have 64 stacks of bread"
+  1808:
+    name:
+      ru: "Всё Было Зря"
+      en: "All For Nothing"
+    color: "dark_red"
+    description:
+      ru: "Умереть в лаве с полным инвентарём"
+      en: "Die in lava with a full inventory"
+  1809:
+    name:
+      ru: "Prickly Ending"
+      en: "Prickly Ending"
+    color: "green"
+    description:
+      ru: "Умереть от кактуса"
+      en: "Die from a cactus"
+  1810:
+    name:
+      ru: "Aquaman"
+      en: "Aquaman"
+    color: "aqua"
+    description:
+      ru: "Провести 24 реальных часа под водой"
+      en: "Spend 24 real hours underwater"
+  1811:
+    name:
+      ru: "John Wick"
+      en: "John Wick"
+    color: "dark_gray"
+    description:
+      ru: "Приручить 50 волков"
+      en: "Tame 50 wolves"
+  1812:
+    name:
+      ru: "Соня"
+      en: "Sleepyhead"
+    color: "gray"
+    description:
+      ru: "Поспать 100 раз"
+      en: "Sleep 100 times"
+  1813:
+    name:
+      ru: "Friendly Fire"
+      en: "Friendly Fire"
+    color: "green"
+    description:
+      ru: "Убить моба взрывом крипера"
+      en: "Kill a mob with a creeper explosion"
+  1814:
+    name:
+      ru: "Looney Tunes"
+      en: "Looney Tunes"
+    color: "yellow"
+    description:
+      ru: "Умереть от наковальни"
+      en: "Die from an anvil"
+  1815:
+    name:
+      ru: "This Is Sparta"
+      en: "This Is Sparta"
+    color: "red"
+    description:
+      ru: "Умереть от падения в пещеру"
+      en: "Die from falling into a cave"
+  1816:
+    name:
+      ru: "Crazy Cat Lady"
+      en: "Crazy Cat Lady"
+    color: "gold"
+    description:
+      ru: "Иметь 10 кошек одновременно"
+      en: "Have 10 cats at the same time"
+  1817:
+    name:
+      ru: "Steve Jobs"
+      en: "Steve Jobs"
+    color: "gold"
+    description:
+      ru: "Съесть 1000 золотых яблок"
+      en: "Eat 1000 golden apples"
+  1818:
+    name:
+      ru: "Insomnia"
+      en: "Insomnia"
+    color: "gray"
+    description:
+      ru: "Сломать 1000 кроватей"
+      en: "Break 1000 beds"
+  1819:
+    name:
+      ru: "Speedrunner"
+      en: "Speedrunner"
+    color: "light_purple"
+    description:
+      ru: "Убить дракона кроватью"
+      en: "Kill the dragon with a bed"
+  1820:
+    name:
+      ru: "Бережливый"
+      en: "Thrifty"
+    color: "aqua"
+    description:
+      ru: "Сломать алмазную кирку полностью"
+      en: "Fully break a diamond pickaxe"
+  1821:
+    name:
+      ru: "Статуя"
+      en: "Statue"
+    color: "gray"
+    description:
+      ru: "Провести 1 час на одном месте AFK"
+      en: "Stand AFK in one spot for 1 hour"
+  1822:
+    name:
+      ru: "Return to Sender"
+      en: "Return to Sender"
+    color: "dark_purple"
+    description:
+      ru: "Умереть от телепортации жемчугом эндера"
+      en: "Die from ender pearl teleportation"
+  1823:
+    name:
+      ru: "Дрейк"
+      en: "Drake"
+    color: "gold"
+    description:
+      ru: "Полный набор золотой брони"
+      en: "Obtain a full set of gold armor"
+  1824:
+    name:
+      ru: "Gotta Catch 'Em All"
+      en: "Gotta Catch 'Em All"
+    color: "light_purple"
+    description:
+      ru: "Открыть 100 титулов"
+      en: "Unlock 100 titles"
+  1825:
+    name:
+      ru: "Completionist"
+      en: "Completionist"
+    color: "light_purple"
+    description:
+      ru: "Открыть все титулы"
+      en: "Unlock all titles"
+  1826:
+    name:
+      ru: "It's Personal"
+      en: "It's Personal"
+    color: "dark_red"
+    description:
+      ru: "Умереть 100 раз от одного игрока"
+      en: "Die 100 times to the same player"
+  1827:
+    name:
+      ru: "Clutch"
+      en: "Clutch"
+    color: "yellow"
+    description:
+      ru: "Убить моб на 1 HP"
+      en: "Kill a mob at 1 HP"
+  1828:
+    name:
+      ru: "Bear Grylls"
+      en: "Bear Grylls"
+    color: "dark_green"
+    description:
+      ru: "Съесть гнилую плоть 100 раз"
+      en: "Eat rotten flesh 100 times"
+  1829:
+    name:
+      ru: "360 No Scope"
+      en: "360 No Scope"
+    color: "gold"
+    description:
+      ru: "Попасть стрелой в крипера с 50+ блоков"
+      en: "Hit a creeper with an arrow from 50+ blocks"
+  1830:
+    name:
+      ru: "Touch Grass"
+      en: "Touch Grass"
+    color: "green"
+    description:
+      ru: "Иметь полный инвентарь только из земли"
+      en: "Have a full inventory of only dirt"
+  1831:
+    name:
+      ru: "Floor Is Lava"
+      en: "Floor Is Lava"
+    color: "red"
+    description:
+      ru: "Прожить 100 дней только в Незере"
+      en: "Survive 100 days only in the Nether"
+  1832:
+    name:
+      ru: "It's Over 9000!"
+      en: "It's Over 9000!"
+    color: "yellow"
+    description:
+      ru: "Убить 1000 мобов за всё время"
+      en: "Kill 1000 mobs total"
+  1833:
+    name:
+      ru: "Dark Souls"
+      en: "Dark Souls"
+    color: "dark_red"
+    description:
+      ru: "Умереть 10 раз подряд за 10 минут"
+      en: "Die 10 times in a row within 10 minutes"
+  1834:
+    name:
+      ru: "Wait, That's Illegal"
+      en: "Wait, That's Illegal"
+    color: "aqua"
+    description:
+      ru: "Добыть 1 алмаз деревянной киркой"
+      en: "Mine 1 diamond with a wooden pickaxe"
+  1835:
+    name:
+      ru: "Rampage"
+      en: "Rampage"
+    color: "red"
+    description:
+      ru: "Убить 5 мобов за 5 секунд"
+      en: "Kill 5 mobs within 5 seconds"
+  1836:
+    name:
+      ru: "To Infinity"
+      en: "To Infinity"
+    color: "yellow"
+    description:
+      ru: "Построить столб в 256 блоков"
+      en: "Build a pillar 256 blocks tall"
+  1837:
+    name:
+      ru: "MLG Water Bucket"
+      en: "MLG Water Bucket"
+    color: "aqua"
+    description:
+      ru: "Использовать ведро воды при падении"
+      en: "Use a water bucket while falling"
+  1838:
+    name:
+      ru: "Troll Face"
+      en: "Troll Face"
+    color: "gold"
+    description:
+      ru: "Убить эндермена тыквой на голове"
+      en: "Kill an enderman while wearing a pumpkin"
+  1839:
+    name:
+      ru: "An Apple a Day"
+      en: "An Apple a Day"
+    color: "gold"
+    description:
+      ru: "Сделать 100 золотых яблок"
+      en: "Craft 100 golden apples"
+  1840:
+    name:
+      ru: "Speed Run"
+      en: "Speed Run"
+    color: "yellow"
+    description:
+      ru: "Умереть и вернуться за вещами за <30 сек"
+      en: "Die and retrieve items within 30 seconds"
+  1841:
+    name:
+      ru: "Это Нормально"
+      en: "This Is Fine"
+    color: "dark_red"
+    description:
+      ru: "Выкинуть алмаз в лаву"
+      en: "Throw a diamond into lava"
+  1842:
+    name:
+      ru: "Bomb Defused"
+      en: "Bomb Defused"
+    color: "green"
+    description:
+      ru: "Убить крипера до взрыва в упор"
+      en: "Kill a creeper up close before it explodes"
+  1843:
+    name:
+      ru: "Excalibur"
+      en: "Excalibur"
+    color: "gold"
+    description:
+      ru: "Переименовать предмет на наковальне в «Экскалибур»"
+      en: "Rename an item to 'Excalibur' on an anvil"
+  1844:
+    name:
+      ru: "Первый Дом"
+      en: "First House"
+    color: "green"
+    description:
+      ru: "Построить дом из земли"
+      en: "Build a house out of dirt"
+  1845:
+    name:
+      ru: "Not Today"
+      en: "Not Today"
+    color: "dark_red"
+    description:
+      ru: "Выжить на хардкоре 100 дней"
+      en: "Survive 100 days on hardcore"

@@ -1,0 +1,31 @@
+# Russian localization
+
+command:
+  no-permission: "§cУ вас нет прав на использование этой команды."
+  reload-success: "§aКонфигурация успешно перезагружена."
+
+karma:
+  display: "§6Карма §7{player}: §f{karma} {bar}{title}"
+  player-only: "§cЭта команда доступна только игрокам."
+  player-not-found: "§cИгрок {player} не найден."
+  trade-blocked: "§cЖители отказываются торговать с вами из-за вашей дурной славы."
+  change-positive: "§a+{amount} кармы"
+  change-negative: "§c{amount} кармы"
+  set-usage: "§cИспользование: /karma set <игрок> <значение>"
+  set-success: "§aКарма игрока {player} установлена на {karma}."
+  invalid-number: "§cНеверное число."
+
+title:
+  no-titles: "§7У вас нет открытых титулов."
+  list-header: "§6Ваши титулы:"
+  selected: "§aТитул «{title}» установлен."
+  not-unlocked: "§cЭтот титул не открыт."
+  not-found: "§cТитул не найден."
+  invalid-id: "§cНеверный ID титула."
+  reset: "§aТитул снят."
+  status: "Статус"
+  info-header: "§6Информация о титуле:"
+  give-usage: "§cИспользование: /dt give <игрок> <id>"
+  give-success: "§aТитул «{title}» выдан игроку {player}."
+  unlock-broadcast: "§e{player} §6открыл(а) титул §e«{title}»§6!"
+  unlock-hint: "§7Напечатайте §f/dt§7, чтобы выбрать титул."
