@@ -55,14 +55,16 @@ public class BuffConfig {
             List<EffectEntry> effects = loadEffects(tierSection);
             double pvpDamagePenalty = tierSection.getDouble("pvp-damage-penalty", 0);
             double xpBonus = tierSection.getDouble("xp-bonus", 0);
+            double mobDamageBonus = tierSection.getDouble("mob-damage-bonus", 0);
+            double speedBonus = tierSection.getDouble("speed-bonus", 0);
+            int tradePriceIncrease = tierSection.getInt("trade-price-increase", 0);
             boolean blockTrading = tierSection.getBoolean("block-trading", false);
             boolean golemAggro = tierSection.getBoolean("golem-aggro", false);
             double golemAggroRange = tierSection.getDouble("golem-aggro-range", 16.0);
-            boolean noFirstStrike = tierSection.getBoolean("no-first-strike", false);
-            long firstStrikeCooldownMs = tierSection.getLong("first-strike-cooldown-seconds", 5) * 1000L;
 
             tiers.add(new BuffTier(threshold, effects, pvpDamagePenalty, xpBonus,
-                    blockTrading, golemAggro, golemAggroRange, noFirstStrike, firstStrikeCooldownMs));
+                    mobDamageBonus, speedBonus, tradePriceIncrease, blockTrading,
+                    golemAggro, golemAggroRange));
         }
 
         if (negative) {
@@ -73,7 +75,6 @@ public class BuffConfig {
         return tiers;
     }
 
-    @SuppressWarnings("unchecked")
     private List<EffectEntry> loadEffects(ConfigurationSection tierSection) {
         List<EffectEntry> effects = new ArrayList<>();
         List<Map<?, ?>> effectList = tierSection.getMapList("effects");
@@ -130,24 +131,29 @@ public class BuffConfig {
         return tier != null ? tier.pvpDamagePenalty() : 0;
     }
 
-    public boolean isNoFirstStrike(int karma) {
-        BuffTier tier = findPositiveTier(karma);
-        return tier != null && tier.noFirstStrike();
-    }
-
-    public long getFirstStrikeCooldownMs(int karma) {
-        BuffTier tier = findPositiveTier(karma);
-        return tier != null ? tier.firstStrikeCooldownMs() : 5000L;
-    }
-
     public double getXpBonus(int karma) {
-        BuffTier tier = findPositiveTier(karma);
+        BuffTier tier = karma > 0 ? findPositiveTier(karma) : null;
         return tier != null ? tier.xpBonus() : 0;
+    }
+
+    public double getMobDamageBonus(int karma) {
+        BuffTier tier = findNegativeTier(karma);
+        return tier != null ? tier.mobDamageBonus() : 0;
+    }
+
+    public double getSpeedBonus(int karma) {
+        BuffTier tier = findNegativeTier(karma);
+        return tier != null ? tier.speedBonus() : 0;
     }
 
     public boolean isTradeBlocked(int karma) {
         BuffTier tier = findNegativeTier(karma);
         return tier != null && tier.blockTrading();
+    }
+
+    public int getTradePriceIncrease(int karma) {
+        BuffTier tier = findNegativeTier(karma);
+        return tier != null ? tier.tradePriceIncrease() : 0;
     }
 
     public boolean isGolemAggro(int karma) {

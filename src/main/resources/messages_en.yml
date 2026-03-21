@@ -14,6 +14,17 @@ karma:
   set-usage: "§cUsage: /karma set <player> <value>"
   set-success: "§aKarma of {player} set to {karma}."
   invalid-number: "§cInvalid number."
+  buff:
+    mob-damage: "mob damage"
+    speed: "speed"
+    xp: "XP"
+    trade-discount: "Villager discounts"
+    luck: "Luck"
+  debuff:
+    trade-prices: "Villager prices increased (+{level})"
+    trade-blocked: "Villagers won't trade"
+    golem-aggro: "Golems are hostile"
+    pvp-damage: "PvP damage"
 
 title:
   no-titles: "§7You have no unlocked titles."

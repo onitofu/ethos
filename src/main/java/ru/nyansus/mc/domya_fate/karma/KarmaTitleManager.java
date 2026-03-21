@@ -21,22 +21,18 @@ public class KarmaTitleManager {
         if (section == null) {
             return;
         }
-        int id = 1;
         for (String key : section.getKeys(false)) {
-            ConfigurationSection entry = section.getConfigurationSection(key);
-            if (entry == null) {
+            int id;
+            try {
+                id = Integer.parseInt(key);
+            } catch (NumberFormatException e) {
                 continue;
             }
-            List<Integer> range = entry.getIntegerList("range");
+            List<Integer> range = section.getIntegerList(key);
             if (range.size() != 2) {
                 continue;
             }
-            ConfigurationSection nameSection = entry.getConfigurationSection("name");
-            String nameRu = nameSection != null ? nameSection.getString("ru", key) : key;
-            String nameEn = nameSection != null ? nameSection.getString("en", key) : key;
-            String color = entry.getString("color", "white");
-
-            titles.add(new KarmaTitle(id++, range.get(0), range.get(1), nameRu, nameEn, color));
+            titles.add(new KarmaTitle(id, range.get(0), range.get(1)));
         }
     }
 

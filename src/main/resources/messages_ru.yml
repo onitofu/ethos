@@ -14,6 +14,17 @@ karma:
   set-usage: "§cИспользование: /karma set <игрок> <значение>"
   set-success: "§aКарма игрока {player} установлена на {karma}."
   invalid-number: "§cНеверное число."
+  buff:
+    mob-damage: "урон по мобам"
+    speed: "скорость"
+    xp: "опыт"
+    trade-discount: "Скидки у жителей"
+    luck: "Удача"
+  debuff:
+    trade-prices: "Цены жителей повышены (+{level})"
+    trade-blocked: "Жители не торгуют"
+    golem-aggro: "Големы враждебны"
+    pvp-damage: "урон по игрокам"
 
 title:
   no-titles: "§7У вас нет открытых титулов."

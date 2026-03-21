@@ -5,8 +5,6 @@ import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.OfflinePlayer;
 import org.jetbrains.annotations.NotNull;
 import ru.nyansus.mc.domya_fate.DomyaFate;
-import ru.nyansus.mc.domya_fate.karma.KarmaTitle;
-import ru.nyansus.mc.domya_fate.karma.KarmaTitleManager;
 import ru.nyansus.mc.domya_fate.title.Title;
 
 public class DomyaFatePlaceholders extends PlaceholderExpansion {
@@ -66,8 +64,8 @@ public class DomyaFatePlaceholders extends PlaceholderExpansion {
                 .map(title -> {
                     String name = resolveName(title, player);
                     String[] gradient = buildGradient(title.color());
-                    return "<gray>[<gradient:" + gradient[0] + ":" + gradient[1] + ">"
-                            + name + "</gradient><gray>]";
+                    return "<dark_gray>[<gradient:" + gradient[0] + ":" + gradient[1] + ">"
+                            + name + "</gradient><dark_gray>]";
                 })
                 .orElse("");
     }
@@ -80,9 +78,9 @@ public class DomyaFatePlaceholders extends PlaceholderExpansion {
 
     private String getKarmaTitleName(OfflinePlayer player) {
         int karma = plugin.getKarmaManager().getKarma(player.getUniqueId());
-        KarmaTitleManager ktm = plugin.getKarmaTitleManager();
-        return ktm.getTitle(karma)
-                .map(KarmaTitle::nameRu)
+        return plugin.getKarmaTitleManager().getTitle(karma)
+                .flatMap(kt -> plugin.getTitleManager().getRegistry().getTitle(kt.id()))
+                .map(t -> resolveName(t, player))
                 .orElse("");
     }
 

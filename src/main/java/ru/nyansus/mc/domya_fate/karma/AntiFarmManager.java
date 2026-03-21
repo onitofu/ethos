@@ -1,6 +1,8 @@
 package ru.nyansus.mc.domya_fate.karma;
 
+import org.bukkit.Location;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.entity.Player;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -12,15 +14,52 @@ public class AntiFarmManager {
     private final long mutualKillWindowMs;
     private final double spawnerKarmaMultiplier;
     private final boolean spawnerCountsForTitles;
+    private final long afkThresholdMs;
+    private final double afkMoveDistance;
 
     private final Map<UUID, Map<UUID, Long>> pvpKills = new HashMap<>();
     private final Map<UUID, Map<UUID, Long>> mutualKills = new HashMap<>();
+    private final Map<UUID, LocationSnapshot> lastPositions = new HashMap<>();
 
     public AntiFarmManager(FileConfiguration config) {
         this.pvpCooldownMs = config.getLong("anti-farm.pvp-cooldown-minutes", 30) * 60_000L;
         this.mutualKillWindowMs = config.getLong("anti-farm.mutual-kill-window-minutes", 5) * 60_000L;
         this.spawnerKarmaMultiplier = config.getDouble("anti-farm.spawner-karma-multiplier", 0.5);
         this.spawnerCountsForTitles = config.getBoolean("anti-farm.spawner-counts-for-titles", false);
+        this.afkThresholdMs = config.getLong("anti-farm.afk-threshold-seconds", 120) * 1000L;
+        this.afkMoveDistance = config.getDouble("anti-farm.afk-move-distance", 5.0);
+    }
+
+    public boolean isAfk(Player player) {
+        UUID uuid = player.getUniqueId();
+        Location current = player.getLocation();
+        long now = System.currentTimeMillis();
+
+        LocationSnapshot last = lastPositions.get(uuid);
+        if (last == null) {
+            lastPositions.put(uuid, new LocationSnapshot(current, now));
+            return false;
+        }
+
+        if (last.location().getWorld().equals(current.getWorld())
+                && last.location().distance(current) < afkMoveDistance) {
+            return now - last.timestamp() > afkThresholdMs;
+        }
+
+        lastPositions.put(uuid, new LocationSnapshot(current, now));
+        return false;
+    }
+
+    public void updatePosition(Player player) {
+        UUID uuid = player.getUniqueId();
+        Location current = player.getLocation();
+        long now = System.currentTimeMillis();
+
+        LocationSnapshot last = lastPositions.get(uuid);
+        if (last == null || !last.location().getWorld().equals(current.getWorld())
+                || last.location().distance(current) >= afkMoveDistance) {
+            lastPositions.put(uuid, new LocationSnapshot(current, now));
+        }
     }
 
     public boolean isPvpOnCooldown(UUID killer, UUID victim) {
@@ -54,6 +93,7 @@ public class AntiFarmManager {
 
     public void clearPlayer(UUID player) {
         pvpKills.remove(player);
+        lastPositions.remove(player);
     }
 
     public int applySpawnerMultiplier(int karma) {
@@ -62,5 +102,8 @@ public class AntiFarmManager {
 
     public boolean doesSpawnerCountForTitles() {
         return spawnerCountsForTitles;
+    }
+
+    private record LocationSnapshot(Location location, long timestamp) {
     }
 }

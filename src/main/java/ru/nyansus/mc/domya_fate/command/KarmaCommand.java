@@ -7,6 +7,8 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
 import ru.nyansus.mc.domya_fate.DomyaFate;
+import ru.nyansus.mc.domya_fate.buff.BuffConfig;
+import ru.nyansus.mc.domya_fate.buff.BuffTier;
 import ru.nyansus.mc.domya_fate.karma.KarmaTitle;
 
 import java.util.ArrayList;
@@ -93,10 +95,12 @@ public class KarmaCommand implements CommandExecutor, TabCompleter {
 
     private void showKarma(Player viewer, UUID targetUuid, String targetName) {
         int karma = plugin.getKarmaManager().getKarma(targetUuid);
-        Optional<KarmaTitle> title = plugin.getKarmaTitleManager().getTitle(karma);
+        Optional<KarmaTitle> karmaTitle = plugin.getKarmaTitleManager().getTitle(karma);
 
         String bar = buildBar(karma);
-        String titleStr = title.map(t -> " §7[" + colorCode(t.color()) + t.nameRu() + "§7]")
+        String titleStr = karmaTitle
+                .flatMap(kt -> plugin.getTitleManager().getRegistry().getTitle(kt.id()))
+                .map(t -> " §7[" + colorCode(t.color()) + t.nameRu() + "§7]")
                 .orElse("");
 
         viewer.sendMessage(plugin.getMessages().get(viewer, "karma.display",
@@ -104,6 +108,69 @@ public class KarmaCommand implements CommandExecutor, TabCompleter {
                 "{karma}", String.valueOf(karma),
                 "{bar}", bar,
                 "{title}", titleStr));
+
+        showEffects(viewer, karma);
+    }
+
+    private void showEffects(Player viewer, int karma) {
+        BuffConfig config = plugin.getBuffConfig();
+        List<String> buffs = new ArrayList<>();
+        List<String> debuffs = new ArrayList<>();
+
+        if (karma < 0) {
+            BuffTier tier = config.findNegativeTier(karma);
+            if (tier != null) {
+                if (tier.mobDamageBonus() > 0) {
+                    buffs.add("+" + pct(tier.mobDamageBonus())
+                            + " " + plugin.getMessages().get(viewer, "karma.buff.mob-damage"));
+                }
+                if (tier.speedBonus() > 0) {
+                    buffs.add("+" + pct(tier.speedBonus())
+                            + " " + plugin.getMessages().get(viewer, "karma.buff.speed"));
+                }
+                if (tier.tradePriceIncrease() > 0) {
+                    debuffs.add(plugin.getMessages().get(viewer, "karma.debuff.trade-prices",
+                            "{level}", String.valueOf(tier.tradePriceIncrease())));
+                }
+                if (tier.blockTrading()) {
+                    debuffs.add(plugin.getMessages().get(viewer, "karma.debuff.trade-blocked"));
+                }
+                if (tier.golemAggro()) {
+                    debuffs.add(plugin.getMessages().get(viewer, "karma.debuff.golem-aggro"));
+                }
+            }
+        } else if (karma > 0) {
+            BuffTier tier = config.findPositiveTier(karma);
+            if (tier != null) {
+                if (tier.xpBonus() > 0) {
+                    buffs.add("+" + pct(tier.xpBonus())
+                            + " " + plugin.getMessages().get(viewer, "karma.buff.xp"));
+                }
+                if (tier.effects().stream().anyMatch(e ->
+                        e.type().equals(org.bukkit.potion.PotionEffectType.HERO_OF_THE_VILLAGE))) {
+                    buffs.add(plugin.getMessages().get(viewer, "karma.buff.trade-discount"));
+                }
+                if (tier.effects().stream().anyMatch(e ->
+                        e.type().equals(org.bukkit.potion.PotionEffectType.LUCK))) {
+                    buffs.add(plugin.getMessages().get(viewer, "karma.buff.luck"));
+                }
+                if (tier.pvpDamagePenalty() > 0) {
+                    debuffs.add("-" + pct(tier.pvpDamagePenalty())
+                            + " " + plugin.getMessages().get(viewer, "karma.debuff.pvp-damage"));
+                }
+            }
+        }
+
+        for (String buff : buffs) {
+            viewer.sendMessage("  §a▲ " + buff);
+        }
+        for (String debuff : debuffs) {
+            viewer.sendMessage("  §c▼ " + debuff);
+        }
+    }
+
+    private String pct(double value) {
+        return (int) (value * 100) + "%";
     }
 
     private void showKarmaConsole(CommandSender sender, UUID targetUuid, String targetName) {

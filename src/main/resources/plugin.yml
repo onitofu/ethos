@@ -9,14 +9,25 @@ commands:
   karma:
     description: View or manage karma
     usage: /karma [player|set <player> <value>]
+    permission: domya.karma.view
   dt:
     description: Manage your titles
     usage: /dt [id|reset|info <id>|give <player> <id>]
+    permission: domya.title.use
 
 permissions:
+  domya.karma.view:
+    description: View your own karma
+    default: true
   domya.karma.view.others:
     description: View other players' karma
     default: true
   domya.karma.admin:
-    description: Admin commands for karma and titles
+    description: Set karma for other players
+    default: op
+  domya.title.use:
+    description: View and select titles
+    default: true
+  domya.title.admin:
+    description: Give titles to other players
     default: op

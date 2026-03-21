@@ -40,16 +40,16 @@ titles:
       en: "Karma from -400 to -200"
   5:
     name:
-      ru: "Защитник"
-      en: "Defender"
+      ru: "Святоша"
+      en: "Puritan"
     color: "green"
     description:
       ru: "Карма от 200 до 400"
       en: "Karma from 200 to 400"
   6:
     name:
-      ru: "Страж"
-      en: "Guardian"
+      ru: "Защитник"
+      en: "Defender"
     color: "green"
     description:
       ru: "Карма от 400 до 600"

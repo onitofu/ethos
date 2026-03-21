@@ -9,7 +9,7 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.scheduler.BukkitRunnable;
 import ru.nyansus.mc.domya_fate.DomyaFate;
 import ru.nyansus.mc.domya_fate.karma.KarmaManager;
-import ru.nyansus.mc.domya_fate.karma.KarmaTitle;
+import ru.nyansus.mc.domya_fate.title.Title;
 
 import java.util.Optional;
 
@@ -32,6 +32,7 @@ public class BuffApplyTask extends BukkitRunnable {
             player.setMetadata("domya_karma_cached",
                     new org.bukkit.metadata.FixedMetadataValue(plugin, karma));
 
+            plugin.getAntiFarmManager().updatePosition(player);
             applyEffects(player, karma, config);
             if (config.isGolemAggro(karma)) {
                 aggroNearbyGolems(player, config.getGolemAggroRange(karma));
@@ -43,15 +44,30 @@ public class BuffApplyTask extends BukkitRunnable {
     }
 
     private void applyEffects(Player player, int karma, BuffConfig config) {
-        BuffTier tier = karma < 0 ? config.findNegativeTier(karma) : config.findPositiveTier(karma);
-        if (tier == null) {
-            return;
-        }
+        BuffTier negativeTier = config.findNegativeTier(karma);
+        BuffTier positiveTier = config.findPositiveTier(karma);
+
         int duration = config.getEffectDuration();
-        for (EffectEntry entry : tier.effects()) {
-            player.addPotionEffect(
-                    new PotionEffect(entry.type(), duration, entry.amplifier(),
-                            entry.ambient(), !entry.ambient()));
+
+        if (negativeTier != null) {
+            for (EffectEntry entry : negativeTier.effects()) {
+                player.addPotionEffect(
+                        new PotionEffect(entry.type(), duration, entry.amplifier(),
+                                entry.ambient(), !entry.ambient()));
+            }
+            if (negativeTier.speedBonus() > 0) {
+                player.addPotionEffect(
+                        new PotionEffect(org.bukkit.potion.PotionEffectType.SPEED,
+                                duration, 0, true, false));
+            }
+        }
+
+        if (positiveTier != null) {
+            for (EffectEntry entry : positiveTier.effects()) {
+                player.addPotionEffect(
+                        new PotionEffect(entry.type(), duration, entry.amplifier(),
+                                entry.ambient(), !entry.ambient()));
+            }
         }
     }
 
@@ -67,7 +83,8 @@ public class BuffApplyTask extends BukkitRunnable {
         NamedTextColor karmaColor = karma > 0 ? NamedTextColor.GREEN
                 : karma < 0 ? NamedTextColor.RED : NamedTextColor.GRAY;
 
-        Optional<KarmaTitle> title = plugin.getKarmaTitleManager().getTitle(karma);
+        Optional<Title> title = plugin.getKarmaTitleManager().getTitle(karma)
+                .flatMap(kt -> plugin.getTitleManager().getRegistry().getTitle(kt.id()));
 
         Component name;
         if (title.isPresent()) {

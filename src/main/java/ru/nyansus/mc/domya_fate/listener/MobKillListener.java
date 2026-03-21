@@ -34,6 +34,10 @@ public class MobKillListener implements Listener {
             return;
         }
 
+        if (plugin.getAntiFarmManager().isAfk(killer)) {
+            return;
+        }
+
         int karmaChange = calculateKarmaChange(entity);
         if (karmaChange == 0) {
             return;

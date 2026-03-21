@@ -32,94 +32,67 @@ anti-farm:
   mutual-kill-window-minutes: 5
   spawner-karma-multiplier: 0.5
   spawner-counts-for-titles: false
+  # AFK detection: no karma from mob kills if player hasn't moved
+  afk-threshold-seconds: 30
+  afk-move-distance: 5.0
 
-# Karmic titles (auto-grant/revoke based on current karma)
+# Karmic titles — map title ID to karma range (names/colors are in titles.yml)
 karma-titles:
-  tyrant:
-    range: [-1000, -800]
-    color: "dark_red"
-    name: { en: "Tyrant", ru: "Тиран" }
-  punisher:
-    range: [-800, -600]
-    color: "red"
-    name: { en: "Punisher", ru: "Каратель" }
-  thug:
-    range: [-600, -400]
-    color: "red"
-    name: { en: "Thug", ru: "Головорез" }
-  bandit:
-    range: [-400, -200]
-    color: "gold"
-    name: { en: "Bandit", ru: "Разбойник" }
-  defender:
-    range: [200, 400]
-    color: "green"
-    name: { en: "Defender", ru: "Защитник" }
-  guardian:
-    range: [400, 600]
-    color: "green"
-    name: { en: "Guardian", ru: "Страж" }
-  hero:
-    range: [600, 800]
-    color: "aqua"
-    name: { en: "Hero", ru: "Герой" }
-  legend:
-    range: [800, 1000]
-    color: "light_purple"
-    name: { en: "Legend", ru: "Легенда" }
+  1: [-1000, -800]
+  2: [-800, -600]
+  3: [-600, -400]
+  4: [-400, -200]
+  5: [200, 400]
+  6: [400, 600]
+  7: [600, 800]
+  8: [800, 1000]
 
 # Buff system
 buffs:
   # Potion effect duration in ticks (should be slightly longer than check-interval)
   effect-duration: 1400
 
-  # Negative karma buffs
+  # Negative karma — better at combat, worse at economy
   negative:
     -200:
-      effects:
-        - { type: STRENGTH, amplifier: 0 }
+      mob-damage-bonus: 0.05
+      trade-price-increase: 1
     -400:
-      effects:
-        - { type: STRENGTH, amplifier: 0 }
+      mob-damage-bonus: 0.10
+      speed-bonus: 0.05
+      trade-price-increase: 2
     -600:
-      effects:
-        - { type: STRENGTH, amplifier: 1 }
+      mob-damage-bonus: 0.15
+      speed-bonus: 0.10
       block-trading: true
     -800:
-      effects:
-        - { type: STRENGTH, amplifier: 1 }
-        - { type: SPEED, amplifier: 0 }
+      mob-damage-bonus: 0.20
+      speed-bonus: 0.15
       block-trading: true
       golem-aggro: true
       golem-aggro-range: 16.0
 
-  # Positive karma buffs
+  # Positive karma — better at economy, slightly weaker in PvP
   positive:
     200:
-      effects:
-        - { type: REGENERATION, amplifier: 0, ambient: true }
+      xp-bonus: 0.05
     400:
-      effects:
-        - { type: REGENERATION, amplifier: 0 }
       xp-bonus: 0.10
-      pvp-damage-penalty: 0.05
     600:
+      xp-bonus: 0.15
       effects:
-        - { type: REGENERATION, amplifier: 0 }
         - { type: HERO_OF_THE_VILLAGE, amplifier: 0 }
-      pvp-damage-penalty: 0.10
+      pvp-damage-penalty: 0.05
     800:
+      xp-bonus: 0.20
       effects:
-        - { type: REGENERATION, amplifier: 1 }
         - { type: HERO_OF_THE_VILLAGE, amplifier: 1 }
         - { type: LUCK, amplifier: 0 }
-      pvp-damage-penalty: 0.15
-      no-first-strike: true
-      first-strike-cooldown-seconds: 5
+      pvp-damage-penalty: 0.10
 
 # Tab display
 tab:
-  enabled: true
+  enabled: false
 
 # Task intervals (ticks)
 buff-check-interval: 150

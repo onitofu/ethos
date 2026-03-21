@@ -4,7 +4,7 @@ import java.util.List;
 
 public record BuffTier(int threshold, List<EffectEntry> effects,
                        double pvpDamagePenalty, double xpBonus,
-                       boolean blockTrading, boolean golemAggro,
-                       double golemAggroRange, boolean noFirstStrike,
-                       long firstStrikeCooldownMs) {
+                       double mobDamageBonus, double speedBonus,
+                       int tradePriceIncrease, boolean blockTrading,
+                       boolean golemAggro, double golemAggroRange) {
 }
