@@ -36,6 +36,7 @@ public class PlayerKillListener implements Listener {
         }
 
         afm.recordPvpKill(killer.getUniqueId(), victim.getUniqueId());
+        plugin.getStatsStorage().incrementStat(killer.getUniqueId(), "pvp-kills");
 
         int victimKarma = km.getKarma(victim.getUniqueId());
         int karmaChange;

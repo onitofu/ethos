@@ -4,6 +4,7 @@ import org.bukkit.Material;
 import org.bukkit.Statistic;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
+import ru.nyansus.mc.domya_fate.karma.StatsStorage;
 
 import java.util.List;
 
@@ -21,15 +22,15 @@ public class UnlockCondition {
         this.materials = materials;
     }
 
-    public boolean isMet(Player player) {
-        return getProgress(player) >= value;
+    public boolean isMet(Player player, StatsStorage stats) {
+        return getProgress(player, stats) >= value;
     }
 
-    public int getProgress(Player player) {
+    public int getProgress(Player player, StatsStorage stats) {
         return switch (type) {
             case KILL_ENTITY -> sumEntityStats(player, Statistic.KILL_ENTITY);
             case MINE_BLOCK -> sumMaterialStats(player, Statistic.MINE_BLOCK);
-            case PLAYER_KILLS -> player.getStatistic(Statistic.PLAYER_KILLS);
+            case PLAYER_KILLS -> stats.getStat(player.getUniqueId(), "pvp-kills");
             case DEATHS -> player.getStatistic(Statistic.DEATHS);
             case FISH_CAUGHT -> player.getStatistic(Statistic.FISH_CAUGHT);
             case TRADED_WITH_VILLAGER -> player.getStatistic(Statistic.TRADED_WITH_VILLAGER);

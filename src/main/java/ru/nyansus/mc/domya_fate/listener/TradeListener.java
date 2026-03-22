@@ -7,9 +7,14 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.MerchantInventory;
 import ru.nyansus.mc.domya_fate.DomyaFate;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
+
 public class TradeListener implements Listener {
 
     private final DomyaFate plugin;
+    private final Map<UUID, Long> lastTradeKarma = new HashMap<>();
 
     public TradeListener(DomyaFate plugin) {
         this.plugin = plugin;
@@ -30,7 +35,16 @@ public class TradeListener implements Listener {
             return;
         }
 
-        int karmaChange = plugin.getConfig().getInt("karma-actions.villager-trade", 2);
+        long cooldownMs = plugin.getConfig().getLong("anti-farm.trade-cooldown-seconds", 60) * 1000L;
+        long now = System.currentTimeMillis();
+        Long lastTime = lastTradeKarma.get(player.getUniqueId());
+
+        if (lastTime != null && now - lastTime < cooldownMs) {
+            return;
+        }
+
+        lastTradeKarma.put(player.getUniqueId(), now);
+        int karmaChange = plugin.getConfig().getInt("karma-actions.villager-trade", 1);
         plugin.getKarmaManager().addKarma(player.getUniqueId(), karmaChange);
     }
 }

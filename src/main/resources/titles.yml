@@ -5,6 +5,16 @@
 # ============================================================
 
 titles:
+  # === Default ===
+  0:
+    name:
+      ru: "Новичок"
+      en: "Newbie"
+    color: "gray"
+    description:
+      ru: "Стартовый титул"
+      en: "Starting title"
+
   # === Karmic (1-8) ===
   1:
     name:

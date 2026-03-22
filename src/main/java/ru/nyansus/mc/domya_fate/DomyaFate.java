@@ -10,14 +10,17 @@ import ru.nyansus.mc.domya_fate.buff.GolemAggroListener;
 import ru.nyansus.mc.domya_fate.buff.PvpDamageListener;
 import ru.nyansus.mc.domya_fate.buff.TradeBlockListener;
 import ru.nyansus.mc.domya_fate.buff.XpBonusListener;
+import ru.nyansus.mc.domya_fate.command.DomyaFateCommand;
 import ru.nyansus.mc.domya_fate.command.KarmaCommand;
 import ru.nyansus.mc.domya_fate.command.TitleCommand;
 import ru.nyansus.mc.domya_fate.karma.AntiFarmManager;
 import ru.nyansus.mc.domya_fate.karma.KarmaManager;
 import ru.nyansus.mc.domya_fate.karma.KarmaTitleManager;
+import ru.nyansus.mc.domya_fate.karma.StatsStorage;
 import ru.nyansus.mc.domya_fate.karma.YamlKarmaStorage;
 import ru.nyansus.mc.domya_fate.listener.AnimalListener;
 import ru.nyansus.mc.domya_fate.listener.MobKillListener;
+import ru.nyansus.mc.domya_fate.listener.PlayerJoinListener;
 import ru.nyansus.mc.domya_fate.listener.PlayerKillListener;
 import ru.nyansus.mc.domya_fate.listener.TradeListener;
 import ru.nyansus.mc.domya_fate.listener.VillagerCureListener;
@@ -34,6 +37,7 @@ public class DomyaFate extends JavaPlugin {
     private AntiFarmManager antiFarmManager;
     private BuffConfig buffConfig;
     private TitleManager titleManager;
+    private StatsStorage statsStorage;
 
     @Override
     public void onEnable() {
@@ -47,6 +51,9 @@ public class DomyaFate extends JavaPlugin {
         karmaTitleManager = new KarmaTitleManager(getConfig());
         antiFarmManager = new AntiFarmManager(getConfig());
         buffConfig = new BuffConfig(getConfig());
+
+        statsStorage = new StatsStorage(getDataFolder());
+        statsStorage.load();
 
         TitleRegistry titleRegistry = new TitleRegistry(this);
         YamlTitleStorage titleStorage = new YamlTitleStorage(getDataFolder());
@@ -79,10 +86,14 @@ public class DomyaFate extends JavaPlugin {
         if (titleManager != null) {
             titleManager.saveAll();
         }
+        if (statsStorage != null) {
+            statsStorage.save();
+        }
     }
 
     private void registerListeners() {
         var pm = getServer().getPluginManager();
+        pm.registerEvents(new PlayerJoinListener(this), this);
         pm.registerEvents(new MobKillListener(this), this);
         pm.registerEvents(new PlayerKillListener(this), this);
         pm.registerEvents(new TradeListener(this), this);
@@ -106,6 +117,12 @@ public class DomyaFate extends JavaPlugin {
             TitleCommand titleCommand = new TitleCommand(this);
             dtCmd.setExecutor(titleCommand);
             dtCmd.setTabCompleter(titleCommand);
+        }
+        var fateCmd = getCommand("domyafate");
+        if (fateCmd != null) {
+            DomyaFateCommand fateCommand = new DomyaFateCommand(this);
+            fateCmd.setExecutor(fateCommand);
+            fateCmd.setTabCompleter(fateCommand);
         }
     }
 
@@ -146,6 +163,10 @@ public class DomyaFate extends JavaPlugin {
 
     public TitleManager getTitleManager() {
         return titleManager;
+    }
+
+    public StatsStorage getStatsStorage() {
+        return statsStorage;
     }
 
     public void syncKarmaTitles(Player player) {

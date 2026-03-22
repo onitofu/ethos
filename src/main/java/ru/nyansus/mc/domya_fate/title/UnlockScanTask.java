@@ -4,6 +4,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 import ru.nyansus.mc.domya_fate.DomyaFate;
 
+import ru.nyansus.mc.domya_fate.karma.StatsStorage;
+
 import java.util.Set;
 import java.util.UUID;
 
@@ -18,6 +20,7 @@ public class UnlockScanTask extends BukkitRunnable {
     @Override
     public void run() {
         TitleManager tm = plugin.getTitleManager();
+        StatsStorage stats = plugin.getStatsStorage();
         for (Player player : plugin.getServer().getOnlinePlayers()) {
             UUID uuid = player.getUniqueId();
             Set<Integer> unlocked = tm.getUnlockedTitles(uuid);
@@ -30,7 +33,7 @@ public class UnlockScanTask extends BukkitRunnable {
                 if (unlocked.contains(title.id())) {
                     continue;
                 }
-                if (title.unlockCondition().isMet(player)) {
+                if (title.unlockCondition().isMet(player, stats)) {
                     boolean isNew = tm.unlockTitle(uuid, title.id());
                     if (isNew) {
                         plugin.broadcastTitleUnlock(player, title);

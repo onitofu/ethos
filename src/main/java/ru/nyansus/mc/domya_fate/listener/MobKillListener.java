@@ -4,6 +4,7 @@ import org.bukkit.entity.Animals;
 import org.bukkit.entity.Enemy;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
+import org.bukkit.entity.IronGolem;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Tameable;
 import org.bukkit.entity.Villager;
@@ -56,6 +57,9 @@ public class MobKillListener implements Listener {
     private int calculateKarmaChange(Entity entity) {
         if (entity instanceof Villager) {
             return getConfig("kill-villager", -25);
+        }
+        if (entity instanceof IronGolem) {
+            return getConfig("kill-golem", -15);
         }
         if (entity instanceof Tameable tameable && tameable.isTamed()) {
             return getConfig("kill-tamed", -20);
