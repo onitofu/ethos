@@ -35,7 +35,9 @@ public enum EffectType {
     // Mob interaction
     HOSTILE_MOB_NEUTRAL,
     HOSTILE_MOB_REDUCED_RANGE,
+    HOSTILE_MOB_INCREASED_RANGE,
     PASSIVE_MOB_FLEE,
+    PASSIVE_MOB_HOSTILE,
     GOLEM_AGGRO,
 
     // Animal interaction

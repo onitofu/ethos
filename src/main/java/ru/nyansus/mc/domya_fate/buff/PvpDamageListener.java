@@ -34,15 +34,15 @@ public class PvpDamageListener implements Listener {
             if (multiplier != 1.0) {
                 event.setDamage(event.getDamage() * multiplier);
             }
-        } else if (event.getEntity() instanceof Animals) {
-            double bonus = config.getNumericEffect(karma, EffectType.PASSIVE_MOB_DAMAGE_BONUS);
-            if (bonus != 0) {
-                event.setDamage(event.getDamage() * (1.0 + bonus));
-            }
         } else if (event.getEntity() instanceof Mob) {
-            double bonus = config.getNumericEffect(karma, EffectType.MOB_DAMAGE_BONUS);
-            if (bonus != 0) {
-                event.setDamage(event.getDamage() * (1.0 + bonus));
+            double mobBonus = config.getNumericEffect(karma, EffectType.MOB_DAMAGE_BONUS);
+            if (event.getEntity() instanceof Animals) {
+                double passiveBonus = config.getNumericEffect(
+                        karma, EffectType.PASSIVE_MOB_DAMAGE_BONUS);
+                mobBonus += passiveBonus;
+            }
+            if (mobBonus != 0) {
+                event.setDamage(event.getDamage() * (1.0 + mobBonus));
             }
         }
     }

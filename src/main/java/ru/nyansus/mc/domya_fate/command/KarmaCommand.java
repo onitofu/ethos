@@ -127,6 +127,10 @@ public class KarmaCommand implements CommandExecutor, TabCompleter {
     }
 
     private String formatEffect(Player viewer, BuffEffect effect) {
+        if (effect.effectType() == ru.nyansus.mc.domya_fate.buff.EffectType.POTION_EFFECT) {
+            return formatPotionEffect(viewer, effect);
+        }
+
         String key = "karma.effect." + effect.effectType().name().toLowerCase();
         String msg = plugin.getMessages().get(viewer, key);
         if (msg.startsWith("[")) {
@@ -140,27 +144,42 @@ public class KarmaCommand implements CommandExecutor, TabCompleter {
         return prefix + (value.isEmpty() ? msg : value + " " + msg);
     }
 
+    private String formatPotionEffect(Player viewer, BuffEffect effect) {
+        String name = effect.potionType().translationKey();
+        int level = effect.amplifier() + 1;
+        String display = plugin.getMessages().get(viewer,
+                "karma.potion." + effect.potionType().getKey().getKey(),
+                "{level}", String.valueOf(level));
+        if (display.startsWith("[")) {
+            display = effect.potionType().getKey().getKey() + " " + level;
+        }
+        return "  §a▲ " + display;
+    }
+
     private boolean isBuff(BuffEffect effect) {
+        if (effect.effectType() == ru.nyansus.mc.domya_fate.buff.EffectType.PASSIVE_MOB_DAMAGE_BONUS
+                && effect.value() < 0) {
+            return false;
+        }
         return switch (effect.effectType()) {
             case PVP_DAMAGE_PENALTY, XP_PENALTY, XP_DEATH_PENALTY,
                     TRADE_PRICE_INCREASE, BLOCK_TRADING, GOLEM_AGGRO,
-                    PASSIVE_MOB_FLEE, BLOCK_TAMING, BLOCK_RIDING,
-                    GLOWING, HUNGER_RATE -> false;
+                    PASSIVE_MOB_FLEE, PASSIVE_MOB_HOSTILE, BLOCK_TAMING, BLOCK_RIDING,
+                    GLOWING, HUNGER_RATE, HOSTILE_MOB_INCREASED_RANGE -> false;
             default -> true;
         };
     }
 
     private String formatValue(BuffEffect effect) {
+        double val = effect.value();
         return switch (effect.effectType()) {
-            case MOB_DAMAGE_BONUS, PASSIVE_MOB_DAMAGE_BONUS,
-                    PVP_DAMAGE_BONUS, XP_BONUS, LOOT_BONUS,
-                    SPEED_BONUS, RESISTANCE, FALL_DAMAGE_REDUCTION,
-                    FIRE_RESISTANCE, DOUBLE_CROP_CHANCE,
-                    KEEP_INVENTORY_CHANCE -> "+" + pct(effect.value());
-            case PVP_DAMAGE_PENALTY, XP_PENALTY, XP_DEATH_PENALTY -> "-" + pct(effect.value());
-            case HEALTH_BONUS -> "+" + (int) (effect.value() / 2) + "❤";
-            case TRADE_PRICE_INCREASE -> "+" + (int) effect.value();
-            case TRADE_PRICE_DECREASE -> "-" + (int) effect.value();
+            case MOB_DAMAGE_BONUS, PVP_DAMAGE_BONUS, XP_BONUS, LOOT_BONUS,
+                    SPEED_BONUS, DOUBLE_CROP_CHANCE,
+                    KEEP_INVENTORY_CHANCE -> "+" + pct(val);
+            case RESISTANCE, FALL_DAMAGE_REDUCTION, FIRE_RESISTANCE -> "-" + pct(val);
+            case PASSIVE_MOB_DAMAGE_BONUS -> (val >= 0 ? "+" : "-") + pct(Math.abs(val));
+            case PVP_DAMAGE_PENALTY, XP_PENALTY, XP_DEATH_PENALTY -> "-" + pct(val);
+            case HEALTH_BONUS -> "+" + (int) (val / 2) + "❤";
             default -> "";
         };
     }

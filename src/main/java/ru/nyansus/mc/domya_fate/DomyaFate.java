@@ -10,6 +10,8 @@ import ru.nyansus.mc.domya_fate.buff.BlockRidingListener;
 import ru.nyansus.mc.domya_fate.buff.BlockTamingListener;
 import ru.nyansus.mc.domya_fate.buff.GolemAggroListener;
 import ru.nyansus.mc.domya_fate.buff.HostileMobListener;
+import ru.nyansus.mc.domya_fate.buff.MobBehaviorTask;
+import ru.nyansus.mc.domya_fate.buff.KarmaEffectsListener;
 import ru.nyansus.mc.domya_fate.buff.PvpDamageListener;
 import ru.nyansus.mc.domya_fate.buff.TradeBlockListener;
 import ru.nyansus.mc.domya_fate.buff.XpBonusListener;
@@ -24,6 +26,7 @@ import ru.nyansus.mc.domya_fate.storage.DatabaseManager;
 import ru.nyansus.mc.domya_fate.storage.SqliteKarmaStorage;
 import ru.nyansus.mc.domya_fate.storage.SqliteStatsStorage;
 import ru.nyansus.mc.domya_fate.storage.SqliteTitleStorage;
+import ru.nyansus.mc.domya_fate.storage.YamlMigrator;
 import ru.nyansus.mc.domya_fate.listener.AnimalListener;
 import ru.nyansus.mc.domya_fate.listener.MobKillListener;
 import ru.nyansus.mc.domya_fate.listener.PlayerJoinListener;
@@ -62,6 +65,11 @@ public class DomyaFate extends JavaPlugin {
             return;
         }
 
+        YamlMigrator migrator = new YamlMigrator(this, databaseManager);
+        if (migrator.needsMigration()) {
+            migrator.migrate();
+        }
+
         karmaManager = new KarmaManager(this, new SqliteKarmaStorage(databaseManager));
         karmaTitleManager = new KarmaTitleManager(getConfig());
         antiFarmManager = new AntiFarmManager(getConfig());
@@ -87,6 +95,8 @@ public class DomyaFate extends JavaPlugin {
 
         long unlockInterval = getConfig().getLong("unlock-check-interval", 6000L);
         new UnlockScanTask(this).runTaskTimer(this, 200L, unlockInterval);
+
+        new MobBehaviorTask(this).runTaskTimer(this, 20L, 20L);
     }
 
     @Override
@@ -112,6 +122,7 @@ public class DomyaFate extends JavaPlugin {
         pm.registerEvents(new HostileMobListener(this), this);
         pm.registerEvents(new BlockTamingListener(this), this);
         pm.registerEvents(new BlockRidingListener(this), this);
+        pm.registerEvents(new KarmaEffectsListener(this), this);
     }
 
     private void registerCommands() {

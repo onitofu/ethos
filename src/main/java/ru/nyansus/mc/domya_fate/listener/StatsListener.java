@@ -2,6 +2,7 @@ package ru.nyansus.mc.domya_fate.listener;
 
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.EntityTameEvent;
@@ -81,7 +82,7 @@ public class StatsListener implements Listener {
         plugin.getStatsStorage().incrementStat(closest.getUniqueId(), "piglin-barters");
     }
 
-    @EventHandler(ignoreCancelled = true)
+    @EventHandler(ignoreCancelled = true, priority = EventPriority.MONITOR)
     public void onEntityTame(EntityTameEvent event) {
         if (!(event.getOwner() instanceof Player player)) {
             return;
