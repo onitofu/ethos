@@ -23,7 +23,7 @@ public class GolemAggroListener implements Listener {
 
         if (event.getTarget() instanceof Player player) {
             int karma = plugin.getKarmaManager().getKarma(player.getUniqueId());
-            if (plugin.getBuffConfig().isGolemAggro(karma)) {
+            if (plugin.getBuffConfig().hasEffect(karma, EffectType.GOLEM_AGGRO)) {
                 return;
             }
         }
@@ -32,7 +32,7 @@ public class GolemAggroListener implements Listener {
             var golem = (org.bukkit.entity.IronGolem) event.getEntity();
             if (golem.getTarget() instanceof Player current) {
                 int karma = plugin.getKarmaManager().getKarma(current.getUniqueId());
-                if (plugin.getBuffConfig().isGolemAggro(karma)) {
+                if (plugin.getBuffConfig().hasEffect(karma, EffectType.GOLEM_AGGRO)) {
                     event.setCancelled(true);
                 }
             }

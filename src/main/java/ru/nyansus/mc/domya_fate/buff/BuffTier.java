@@ -2,9 +2,23 @@ package ru.nyansus.mc.domya_fate.buff;
 
 import java.util.List;
 
-public record BuffTier(int threshold, List<EffectEntry> effects,
-                       double pvpDamagePenalty, double xpBonus,
-                       double mobDamageBonus, double speedBonus,
-                       int tradePriceIncrease, boolean blockTrading,
-                       boolean golemAggro, double golemAggroRange) {
+public record BuffTier(int threshold, List<BuffEffect> effects) {
+
+    public double getNumeric(EffectType type) {
+        for (BuffEffect effect : effects) {
+            if (effect.effectType() == type) {
+                return effect.value();
+            }
+        }
+        return 0;
+    }
+
+    public boolean has(EffectType type) {
+        for (BuffEffect effect : effects) {
+            if (effect.effectType() == type && effect.isEnabled()) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

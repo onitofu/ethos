@@ -6,7 +6,10 @@ import org.bukkit.plugin.java.JavaPlugin;
 import ru.nyansus.mc.domya_fate.title.Title;
 import ru.nyansus.mc.domya_fate.buff.BuffApplyTask;
 import ru.nyansus.mc.domya_fate.buff.BuffConfig;
+import ru.nyansus.mc.domya_fate.buff.BlockRidingListener;
+import ru.nyansus.mc.domya_fate.buff.BlockTamingListener;
 import ru.nyansus.mc.domya_fate.buff.GolemAggroListener;
+import ru.nyansus.mc.domya_fate.buff.HostileMobListener;
 import ru.nyansus.mc.domya_fate.buff.PvpDamageListener;
 import ru.nyansus.mc.domya_fate.buff.TradeBlockListener;
 import ru.nyansus.mc.domya_fate.buff.XpBonusListener;
@@ -106,6 +109,9 @@ public class DomyaFate extends JavaPlugin {
         pm.registerEvents(new TradeBlockListener(this), this);
         pm.registerEvents(new GolemAggroListener(this), this);
         pm.registerEvents(new XpBonusListener(this), this);
+        pm.registerEvents(new HostileMobListener(this), this);
+        pm.registerEvents(new BlockTamingListener(this), this);
+        pm.registerEvents(new BlockRidingListener(this), this);
     }
 
     private void registerCommands() {

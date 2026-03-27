@@ -62,103 +62,179 @@ karma-titles:
   17: [8000, 9000]
   18: [9000, 10001]
 
-# Buff system
+# Buff system — unified modifier format
 buffs:
-  # Potion effect duration in ticks (should be slightly longer than check-interval)
   effect-duration: 1400
-
-  # Negative karma — better at combat, worse at economy
-  negative:
+  tiers:
+    # === Negative karma ===
     -1000:
-      mob-damage-bonus: 0.03
-      trade-price-increase: 1
+      effects:
+        - { type: MOB_DAMAGE_BONUS, value: 0.03 }
+        - { type: TRADE_PRICE_INCREASE, value: 1 }
     -2000:
-      mob-damage-bonus: 0.05
-      trade-price-increase: 1
+      effects:
+        - { type: MOB_DAMAGE_BONUS, value: 0.05 }
+        - { type: TRADE_PRICE_INCREASE, value: 1 }
     -3000:
-      mob-damage-bonus: 0.07
-      speed-bonus: 0.03
-      trade-price-increase: 2
+      effects:
+        - { type: MOB_DAMAGE_BONUS, value: 0.07 }
+        - { type: SPEED_BONUS, value: 0.03 }
+        - { type: TRADE_PRICE_INCREASE, value: 2 }
     -4000:
-      mob-damage-bonus: 0.10
-      speed-bonus: 0.05
-      trade-price-increase: 2
+      effects:
+        - { type: MOB_DAMAGE_BONUS, value: 0.10 }
+        - { type: SPEED_BONUS, value: 0.05 }
+        - { type: TRADE_PRICE_INCREASE, value: 2 }
+        - { type: NIGHT_VISION, value: true }
     -5000:
-      mob-damage-bonus: 0.12
-      speed-bonus: 0.07
-      block-trading: true
+      effects:
+        - { type: MOB_DAMAGE_BONUS, value: 0.12 }
+        - { type: SPEED_BONUS, value: 0.07 }
+        - { type: BLOCK_TRADING, value: true }
+        - { type: NIGHT_VISION, value: true }
+        - { type: LOOT_BONUS, value: 0.10 }
     -6000:
-      mob-damage-bonus: 0.15
-      speed-bonus: 0.10
-      block-trading: true
+      effects:
+        - { type: MOB_DAMAGE_BONUS, value: 0.15 }
+        - { type: SPEED_BONUS, value: 0.10 }
+        - { type: BLOCK_TRADING, value: true }
+        - { type: NIGHT_VISION, value: true }
+        - { type: LOOT_BONUS, value: 0.15 }
+        - { type: HOSTILE_MOB_REDUCED_RANGE, value: 8.0 }
+        - { type: FIRE_RESISTANCE, value: 0.15 }
+        - { type: GLOWING, value: true }
     -7000:
-      mob-damage-bonus: 0.17
-      speed-bonus: 0.12
-      block-trading: true
-      golem-aggro: true
-      golem-aggro-range: 16.0
+      effects:
+        - { type: MOB_DAMAGE_BONUS, value: 0.17 }
+        - { type: SPEED_BONUS, value: 0.12 }
+        - { type: BLOCK_TRADING, value: true }
+        - { type: NIGHT_VISION, value: true }
+        - { type: LOOT_BONUS, value: 0.17 }
+        - { type: HOSTILE_MOB_REDUCED_RANGE, value: 6.0 }
+        - { type: FIRE_RESISTANCE, value: 0.20 }
+        - { type: GOLEM_AGGRO, value: 16.0 }
+        - { type: PASSIVE_MOB_FLEE, value: true }
+        - { type: GLOWING, value: true }
     -8000:
-      mob-damage-bonus: 0.20
-      speed-bonus: 0.15
-      block-trading: true
-      golem-aggro: true
-      golem-aggro-range: 20.0
+      effects:
+        - { type: MOB_DAMAGE_BONUS, value: 0.20 }
+        - { type: SPEED_BONUS, value: 0.15 }
+        - { type: BLOCK_TRADING, value: true }
+        - { type: NIGHT_VISION, value: true }
+        - { type: LOOT_BONUS, value: 0.20 }
+        - { type: HOSTILE_MOB_NEUTRAL, value: true }
+        - { type: FIRE_RESISTANCE, value: 0.25 }
+        - { type: FALL_DAMAGE_REDUCTION, value: 0.20 }
+        - { type: GOLEM_AGGRO, value: 20.0 }
+        - { type: PASSIVE_MOB_FLEE, value: true }
+        - { type: BLOCK_TAMING, value: true }
+        - { type: GLOWING, value: true }
     -9000:
-      mob-damage-bonus: 0.22
-      speed-bonus: 0.17
-      block-trading: true
-      golem-aggro: true
-      golem-aggro-range: 24.0
+      effects:
+        - { type: MOB_DAMAGE_BONUS, value: 0.22 }
+        - { type: SPEED_BONUS, value: 0.17 }
+        - { type: BLOCK_TRADING, value: true }
+        - { type: NIGHT_VISION, value: true }
+        - { type: LOOT_BONUS, value: 0.22 }
+        - { type: HOSTILE_MOB_NEUTRAL, value: true }
+        - { type: FIRE_RESISTANCE, value: 0.30 }
+        - { type: FALL_DAMAGE_REDUCTION, value: 0.25 }
+        - { type: GOLEM_AGGRO, value: 24.0 }
+        - { type: PASSIVE_MOB_FLEE, value: true }
+        - { type: BLOCK_TAMING, value: true }
+        - { type: BLOCK_RIDING, value: true }
+        - { type: GLOWING, value: true }
     -10000:
-      mob-damage-bonus: 0.25
-      speed-bonus: 0.20
-      block-trading: true
-      golem-aggro: true
-      golem-aggro-range: 32.0
+      effects:
+        - { type: MOB_DAMAGE_BONUS, value: 0.25 }
+        - { type: SPEED_BONUS, value: 0.20 }
+        - { type: BLOCK_TRADING, value: true }
+        - { type: NIGHT_VISION, value: true }
+        - { type: LOOT_BONUS, value: 0.25 }
+        - { type: HOSTILE_MOB_NEUTRAL, value: true }
+        - { type: FIRE_RESISTANCE, value: 0.35 }
+        - { type: FALL_DAMAGE_REDUCTION, value: 0.30 }
+        - { type: GOLEM_AGGRO, value: 32.0 }
+        - { type: PASSIVE_MOB_FLEE, value: true }
+        - { type: BLOCK_TAMING, value: true }
+        - { type: BLOCK_RIDING, value: true }
+        - { type: GLOWING, value: true }
 
-  # Positive karma — better at economy, slightly weaker in PvP
-  positive:
+    # === Positive karma ===
     1000:
-      xp-bonus: 0.03
+      effects:
+        - { type: XP_BONUS, value: 0.03 }
     2000:
-      xp-bonus: 0.05
+      effects:
+        - { type: XP_BONUS, value: 0.05 }
+        - { type: DOUBLE_CROP_CHANCE, value: 0.05 }
     3000:
-      xp-bonus: 0.07
+      effects:
+        - { type: XP_BONUS, value: 0.07 }
+        - { type: DOUBLE_CROP_CHANCE, value: 0.07 }
     4000:
-      xp-bonus: 0.10
+      effects:
+        - { type: XP_BONUS, value: 0.10 }
+        - { type: DOUBLE_CROP_CHANCE, value: 0.10 }
+        - { type: REGENERATION_BONUS, value: 0 }
     5000:
-      xp-bonus: 0.12
       effects:
-        - { type: HERO_OF_THE_VILLAGE, amplifier: 0 }
-      pvp-damage-penalty: 0.03
+        - { type: XP_BONUS, value: 0.12 }
+        - { type: DOUBLE_CROP_CHANCE, value: 0.12 }
+        - { type: REGENERATION_BONUS, value: 0 }
+        - { type: POTION_EFFECT, potion: HERO_OF_THE_VILLAGE, amplifier: 0 }
+        - { type: PVP_DAMAGE_PENALTY, value: 0.03 }
     6000:
-      xp-bonus: 0.15
       effects:
-        - { type: HERO_OF_THE_VILLAGE, amplifier: 0 }
-      pvp-damage-penalty: 0.05
+        - { type: XP_BONUS, value: 0.15 }
+        - { type: DOUBLE_CROP_CHANCE, value: 0.15 }
+        - { type: REGENERATION_BONUS, value: 0 }
+        - { type: POTION_EFFECT, potion: HERO_OF_THE_VILLAGE, amplifier: 0 }
+        - { type: PVP_DAMAGE_PENALTY, value: 0.05 }
+        - { type: RESISTANCE, value: 0.05 }
+        - { type: KEEP_INVENTORY_CHANCE, value: 0.10 }
     7000:
-      xp-bonus: 0.17
       effects:
-        - { type: HERO_OF_THE_VILLAGE, amplifier: 1 }
-      pvp-damage-penalty: 0.07
+        - { type: XP_BONUS, value: 0.17 }
+        - { type: DOUBLE_CROP_CHANCE, value: 0.17 }
+        - { type: REGENERATION_BONUS, value: 0 }
+        - { type: POTION_EFFECT, potion: HERO_OF_THE_VILLAGE, amplifier: 1 }
+        - { type: PVP_DAMAGE_PENALTY, value: 0.07 }
+        - { type: RESISTANCE, value: 0.07 }
+        - { type: KEEP_INVENTORY_CHANCE, value: 0.15 }
     8000:
-      xp-bonus: 0.20
       effects:
-        - { type: HERO_OF_THE_VILLAGE, amplifier: 1 }
-        - { type: LUCK, amplifier: 0 }
-      pvp-damage-penalty: 0.10
+        - { type: XP_BONUS, value: 0.20 }
+        - { type: DOUBLE_CROP_CHANCE, value: 0.20 }
+        - { type: REGENERATION_BONUS, value: 1 }
+        - { type: POTION_EFFECT, potion: HERO_OF_THE_VILLAGE, amplifier: 1 }
+        - { type: POTION_EFFECT, potion: LUCK, amplifier: 0 }
+        - { type: PVP_DAMAGE_PENALTY, value: 0.10 }
+        - { type: RESISTANCE, value: 0.10 }
+        - { type: KEEP_INVENTORY_CHANCE, value: 0.20 }
+        - { type: HEALTH_BONUS, value: 2.0 }
     9000:
-      xp-bonus: 0.22
       effects:
-        - { type: HERO_OF_THE_VILLAGE, amplifier: 1 }
-        - { type: LUCK, amplifier: 0 }
-      pvp-damage-penalty: 0.12
+        - { type: XP_BONUS, value: 0.22 }
+        - { type: DOUBLE_CROP_CHANCE, value: 0.22 }
+        - { type: REGENERATION_BONUS, value: 1 }
+        - { type: POTION_EFFECT, potion: HERO_OF_THE_VILLAGE, amplifier: 1 }
+        - { type: POTION_EFFECT, potion: LUCK, amplifier: 0 }
+        - { type: PVP_DAMAGE_PENALTY, value: 0.12 }
+        - { type: RESISTANCE, value: 0.12 }
+        - { type: KEEP_INVENTORY_CHANCE, value: 0.22 }
+        - { type: HEALTH_BONUS, value: 4.0 }
     10000:
-      xp-bonus: 0.25
       effects:
-        - { type: HERO_OF_THE_VILLAGE, amplifier: 2 }
-        - { type: LUCK, amplifier: 0 }
-      pvp-damage-penalty: 0.15
+        - { type: XP_BONUS, value: 0.25 }
+        - { type: DOUBLE_CROP_CHANCE, value: 0.25 }
+        - { type: REGENERATION_BONUS, value: 1 }
+        - { type: POTION_EFFECT, potion: HERO_OF_THE_VILLAGE, amplifier: 2 }
+        - { type: POTION_EFFECT, potion: LUCK, amplifier: 0 }
+        - { type: PVP_DAMAGE_PENALTY, value: 0.15 }
+        - { type: RESISTANCE, value: 0.15 }
+        - { type: KEEP_INVENTORY_CHANCE, value: 0.25 }
+        - { type: HEALTH_BONUS, value: 4.0 }
 
 # Tab display
 tab:

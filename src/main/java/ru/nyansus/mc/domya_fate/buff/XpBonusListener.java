@@ -16,10 +16,14 @@ public class XpBonusListener implements Listener {
     @EventHandler
     public void onExpChange(PlayerExpChangeEvent event) {
         int karma = plugin.getKarmaManager().getKarma(event.getPlayer().getUniqueId());
-        double bonus = plugin.getBuffConfig().getXpBonus(karma);
-        if (bonus > 0) {
-            int extra = (int) (event.getAmount() * bonus);
-            event.setAmount(event.getAmount() + extra);
+        BuffConfig config = plugin.getBuffConfig();
+
+        double bonus = config.getNumericEffect(karma, EffectType.XP_BONUS);
+        double penalty = config.getNumericEffect(karma, EffectType.XP_PENALTY);
+        double multiplier = 1.0 + bonus - penalty;
+
+        if (multiplier != 1.0) {
+            event.setAmount((int) (event.getAmount() * multiplier));
         }
     }
 }

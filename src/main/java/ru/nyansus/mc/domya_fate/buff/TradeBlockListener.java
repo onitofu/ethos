@@ -31,7 +31,7 @@ public class TradeBlockListener implements Listener {
         }
 
         int karma = plugin.getKarmaManager().getKarma(player.getUniqueId());
-        if (plugin.getBuffConfig().isTradeBlocked(karma)) {
+        if (plugin.getBuffConfig().hasEffect(karma, EffectType.BLOCK_TRADING)) {
             event.setCancelled(true);
             player.sendMessage(plugin.getMessages().get(player, "karma.trade-blocked"));
         }
@@ -47,19 +47,22 @@ public class TradeBlockListener implements Listener {
         int karma = plugin.getKarmaManager().getKarma(player.getUniqueId());
         BuffConfig config = plugin.getBuffConfig();
 
-        if (config.isTradeBlocked(karma)) {
+        if (config.hasEffect(karma, EffectType.BLOCK_TRADING)) {
             event.setCancelled(true);
             player.sendMessage(plugin.getMessages().get(player, "karma.trade-blocked"));
             return;
         }
 
-        int priceIncrease = config.getTradePriceIncrease(karma);
-        if (priceIncrease > 0) {
-            adjustPrices(villager, priceIncrease);
+        int priceIncrease = (int) config.getNumericEffect(karma, EffectType.TRADE_PRICE_INCREASE);
+        int priceDecrease = (int) config.getNumericEffect(karma, EffectType.TRADE_PRICE_DECREASE);
+        int priceChange = priceIncrease - priceDecrease;
+
+        if (priceChange != 0) {
+            adjustPrices(villager, priceChange);
         }
     }
 
-    private void adjustPrices(Villager villager, int levels) {
+    private void adjustPrices(Villager villager, int change) {
         List<MerchantRecipe> recipes = new ArrayList<>();
         for (MerchantRecipe original : villager.getRecipes()) {
             MerchantRecipe modified = new MerchantRecipe(
@@ -70,7 +73,7 @@ public class TradeBlockListener implements Listener {
                     original.getVillagerExperience(),
                     original.getPriceMultiplier(),
                     original.getDemand(),
-                    original.getSpecialPrice() + levels);
+                    original.getSpecialPrice() + change);
             modified.setIngredients(original.getIngredients());
             recipes.add(modified);
         }

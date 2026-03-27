@@ -7,7 +7,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
 import ru.nyansus.mc.domya_fate.DomyaFate;
-import ru.nyansus.mc.domya_fate.buff.BuffConfig;
+import ru.nyansus.mc.domya_fate.buff.BuffEffect;
 import ru.nyansus.mc.domya_fate.buff.BuffTier;
 import ru.nyansus.mc.domya_fate.karma.KarmaTitle;
 
@@ -113,60 +113,56 @@ public class KarmaCommand implements CommandExecutor, TabCompleter {
     }
 
     private void showEffects(Player viewer, int karma) {
-        BuffConfig config = plugin.getBuffConfig();
-        List<String> buffs = new ArrayList<>();
-        List<String> debuffs = new ArrayList<>();
-
-        if (karma < 0) {
-            BuffTier tier = config.findNegativeTier(karma);
-            if (tier != null) {
-                if (tier.mobDamageBonus() > 0) {
-                    buffs.add("+" + pct(tier.mobDamageBonus())
-                            + " " + plugin.getMessages().get(viewer, "karma.buff.mob-damage"));
-                }
-                if (tier.speedBonus() > 0) {
-                    buffs.add("+" + pct(tier.speedBonus())
-                            + " " + plugin.getMessages().get(viewer, "karma.buff.speed"));
-                }
-                if (tier.tradePriceIncrease() > 0) {
-                    debuffs.add(plugin.getMessages().get(viewer, "karma.debuff.trade-prices",
-                            "{level}", String.valueOf(tier.tradePriceIncrease())));
-                }
-                if (tier.blockTrading()) {
-                    debuffs.add(plugin.getMessages().get(viewer, "karma.debuff.trade-blocked"));
-                }
-                if (tier.golemAggro()) {
-                    debuffs.add(plugin.getMessages().get(viewer, "karma.debuff.golem-aggro"));
-                }
-            }
-        } else if (karma > 0) {
-            BuffTier tier = config.findPositiveTier(karma);
-            if (tier != null) {
-                if (tier.xpBonus() > 0) {
-                    buffs.add("+" + pct(tier.xpBonus())
-                            + " " + plugin.getMessages().get(viewer, "karma.buff.xp"));
-                }
-                if (tier.effects().stream().anyMatch(e ->
-                        e.type().equals(org.bukkit.potion.PotionEffectType.HERO_OF_THE_VILLAGE))) {
-                    buffs.add(plugin.getMessages().get(viewer, "karma.buff.trade-discount"));
-                }
-                if (tier.effects().stream().anyMatch(e ->
-                        e.type().equals(org.bukkit.potion.PotionEffectType.LUCK))) {
-                    buffs.add(plugin.getMessages().get(viewer, "karma.buff.luck"));
-                }
-                if (tier.pvpDamagePenalty() > 0) {
-                    debuffs.add("-" + pct(tier.pvpDamagePenalty())
-                            + " " + plugin.getMessages().get(viewer, "karma.debuff.pvp-damage"));
-                }
-            }
+        BuffTier tier = plugin.getBuffConfig().findTier(karma);
+        if (tier == null) {
+            return;
         }
 
-        for (String buff : buffs) {
-            viewer.sendMessage("  §a▲ " + buff);
+        for (BuffEffect effect : tier.effects()) {
+            String line = formatEffect(viewer, effect);
+            if (line != null) {
+                viewer.sendMessage(line);
+            }
         }
-        for (String debuff : debuffs) {
-            viewer.sendMessage("  §c▼ " + debuff);
+    }
+
+    private String formatEffect(Player viewer, BuffEffect effect) {
+        String key = "karma.effect." + effect.effectType().name().toLowerCase();
+        String msg = plugin.getMessages().get(viewer, key);
+        if (msg.startsWith("[")) {
+            return null;
         }
+
+        boolean isBuff = isBuff(effect);
+        String prefix = isBuff ? "  §a▲ " : "  §c▼ ";
+        String value = formatValue(effect);
+
+        return prefix + (value.isEmpty() ? msg : value + " " + msg);
+    }
+
+    private boolean isBuff(BuffEffect effect) {
+        return switch (effect.effectType()) {
+            case PVP_DAMAGE_PENALTY, XP_PENALTY, XP_DEATH_PENALTY,
+                    TRADE_PRICE_INCREASE, BLOCK_TRADING, GOLEM_AGGRO,
+                    PASSIVE_MOB_FLEE, BLOCK_TAMING, BLOCK_RIDING,
+                    GLOWING, HUNGER_RATE -> false;
+            default -> true;
+        };
+    }
+
+    private String formatValue(BuffEffect effect) {
+        return switch (effect.effectType()) {
+            case MOB_DAMAGE_BONUS, PASSIVE_MOB_DAMAGE_BONUS,
+                    PVP_DAMAGE_BONUS, XP_BONUS, LOOT_BONUS,
+                    SPEED_BONUS, RESISTANCE, FALL_DAMAGE_REDUCTION,
+                    FIRE_RESISTANCE, DOUBLE_CROP_CHANCE,
+                    KEEP_INVENTORY_CHANCE -> "+" + pct(effect.value());
+            case PVP_DAMAGE_PENALTY, XP_PENALTY, XP_DEATH_PENALTY -> "-" + pct(effect.value());
+            case HEALTH_BONUS -> "+" + (int) (effect.value() / 2) + "❤";
+            case TRADE_PRICE_INCREASE -> "+" + (int) effect.value();
+            case TRADE_PRICE_DECREASE -> "-" + (int) effect.value();
+            default -> "";
+        };
     }
 
     private String pct(double value) {
