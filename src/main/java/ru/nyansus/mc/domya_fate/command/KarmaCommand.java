@@ -250,7 +250,7 @@ public class KarmaCommand implements CommandExecutor, TabCompleter {
         }
         if (args.length == 3 && args[0].equalsIgnoreCase("set")
                 && sender.hasPermission("domya.karma.admin")) {
-            return List.of("-1000", "-500", "0", "500", "1000");
+            return List.of("-10000", "-5000", "0", "5000", "10000");
         }
         return List.of();
     }

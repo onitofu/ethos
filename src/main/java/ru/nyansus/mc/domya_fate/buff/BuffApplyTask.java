@@ -15,11 +15,8 @@ import java.util.Optional;
 
 public class BuffApplyTask extends BukkitRunnable {
 
-    private static final int SAVE_EVERY_N_CYCLES = 5;
-
     private final DomyaFate plugin;
     private final KarmaManager karmaManager;
-    private int cycleCount;
 
     public BuffApplyTask(DomyaFate plugin, KarmaManager karmaManager) {
         this.plugin = plugin;
@@ -28,12 +25,6 @@ public class BuffApplyTask extends BukkitRunnable {
 
     @Override
     public void run() {
-        cycleCount++;
-        if (cycleCount % SAVE_EVERY_N_CYCLES == 0) {
-            karmaManager.saveAll();
-            plugin.getTitleManager().saveAll();
-            plugin.getStatsStorage().save();
-        }
 
         BuffConfig config = plugin.getBuffConfig();
         for (var player : plugin.getServer().getOnlinePlayers()) {

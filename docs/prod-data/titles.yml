@@ -15,153 +15,71 @@ titles:
       ru: "Стартовый титул"
       en: "Starting title"
 
-  # === Karmic: Negative (1-9) ===
+  # === Karmic (1-8) ===
   1:
-    name:
-      ru: "Тёмный Лорд"
-      en: "Dark Lord"
-    color: "dark_red"
-    description:
-      ru: "Карма от -10000 до -9000"
-      en: "Karma from -10000 to -9000"
-  2:
     name:
       ru: "Тиран"
       en: "Tyrant"
     color: "dark_red"
     description:
-      ru: "Карма от -9000 до -8000"
-      en: "Karma from -9000 to -8000"
-  3:
-    name:
-      ru: "Палач"
-      en: "Executioner"
-    color: "dark_red"
-    description:
-      ru: "Карма от -8000 до -7000"
-      en: "Karma from -8000 to -7000"
-  4:
-    name:
-      ru: "Безжалостный"
-      en: "Ruthless"
-    color: "dark_red"
-    description:
-      ru: "Карма от -7000 до -6000"
-      en: "Karma from -7000 to -6000"
-  5:
+      ru: "Карма от -1000 до -800"
+      en: "Karma from -1000 to -800"
+  2:
     name:
       ru: "Каратель"
       en: "Punisher"
     color: "red"
     description:
-      ru: "Карма от -6000 до -5000"
-      en: "Karma from -6000 to -5000"
-  6:
+      ru: "Карма от -800 до -600"
+      en: "Karma from -800 to -600"
+  3:
     name:
       ru: "Головорез"
       en: "Thug"
     color: "red"
     description:
-      ru: "Карма от -5000 до -4000"
-      en: "Karma from -5000 to -4000"
-  7:
-    name:
-      ru: "Сталкер"
-      en: "Stalker"
-    color: "red"
-    description:
-      ru: "Карма от -4000 до -3000"
-      en: "Karma from -4000 to -3000"
-  8:
-    name:
-      ru: "Хулиган"
-      en: "Hooligan"
-    color: "gold"
-    description:
-      ru: "Карма от -3000 до -2000"
-      en: "Karma from -3000 to -2000"
-  9:
+      ru: "Карма от -600 до -400"
+      en: "Karma from -600 to -400"
+  4:
     name:
       ru: "Разбойник"
       en: "Bandit"
     color: "gold"
     description:
-      ru: "Карма от -2000 до -1000"
-      en: "Karma from -2000 to -1000"
-
-  # === Karmic: Positive (10-18) ===
-  10:
+      ru: "Карма от -400 до -200"
+      en: "Karma from -400 to -200"
+  5:
+    name:
+      ru: "Святоша"
+      en: "Puritan"
+    color: "green"
+    description:
+      ru: "Карма от 200 до 400"
+      en: "Karma from 200 to 400"
+  6:
     name:
       ru: "Защитник"
       en: "Defender"
     color: "green"
     description:
-      ru: "Карма от 1000 до 2000"
-      en: "Karma from 1000 to 2000"
-  11:
-    name:
-      ru: "Добряк"
-      en: "Kind Soul"
-    color: "green"
-    description:
-      ru: "Карма от 2000 до 3000"
-      en: "Karma from 2000 to 3000"
-  12:
-    name:
-      ru: "Страж"
-      en: "Guardian"
-    color: "green"
-    description:
-      ru: "Карма от 3000 до 4000"
-      en: "Karma from 3000 to 4000"
-  13:
-    name:
-      ru: "На Кураже"
-      en: "On a Roll"
-    color: "aqua"
-    description:
-      ru: "Карма от 4000 до 5000"
-      en: "Karma from 4000 to 5000"
-  14:
-    name:
-      ru: "Святоша"
-      en: "Puritan"
-    color: "aqua"
-    description:
-      ru: "Карма от 5000 до 6000"
-      en: "Karma from 5000 to 6000"
-  15:
+      ru: "Карма от 400 до 600"
+      en: "Karma from 400 to 600"
+  7:
     name:
       ru: "Герой"
       en: "Hero"
     color: "aqua"
     description:
-      ru: "Карма от 6000 до 7000"
-      en: "Karma from 6000 to 7000"
-  16:
-    name:
-      ru: "Паладин"
-      en: "Paladin"
-    color: "light_purple"
-    description:
-      ru: "Карма от 7000 до 8000"
-      en: "Karma from 7000 to 8000"
-  17:
+      ru: "Карма от 600 до 800"
+      en: "Karma from 600 to 800"
+  8:
     name:
       ru: "Легенда"
       en: "Legend"
     color: "light_purple"
     description:
-      ru: "Карма от 8000 до 9000"
-      en: "Karma from 8000 to 9000"
-  18:
-    name:
-      ru: "Избранный"
-      en: "The Chosen One"
-    color: "light_purple"
-    description:
-      ru: "Карма от 9000 до 10000"
-      en: "Karma from 9000 to 10000"
+      ru: "Карма от 800 до 1000"
+      en: "Karma from 800 to 1000"
 
   # === PvP (100-199) ===
   100:

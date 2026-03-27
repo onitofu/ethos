@@ -17,7 +17,10 @@ import ru.nyansus.mc.domya_fate.karma.AntiFarmManager;
 import ru.nyansus.mc.domya_fate.karma.KarmaManager;
 import ru.nyansus.mc.domya_fate.karma.KarmaTitleManager;
 import ru.nyansus.mc.domya_fate.karma.StatsStorage;
-import ru.nyansus.mc.domya_fate.karma.YamlKarmaStorage;
+import ru.nyansus.mc.domya_fate.storage.DatabaseManager;
+import ru.nyansus.mc.domya_fate.storage.SqliteKarmaStorage;
+import ru.nyansus.mc.domya_fate.storage.SqliteStatsStorage;
+import ru.nyansus.mc.domya_fate.storage.SqliteTitleStorage;
 import ru.nyansus.mc.domya_fate.listener.AnimalListener;
 import ru.nyansus.mc.domya_fate.listener.MobKillListener;
 import ru.nyansus.mc.domya_fate.listener.PlayerJoinListener;
@@ -28,7 +31,8 @@ import ru.nyansus.mc.domya_fate.listener.VillagerCureListener;
 import ru.nyansus.mc.domya_fate.title.TitleManager;
 import ru.nyansus.mc.domya_fate.title.TitleRegistry;
 import ru.nyansus.mc.domya_fate.title.UnlockScanTask;
-import ru.nyansus.mc.domya_fate.title.YamlTitleStorage;
+
+import java.sql.SQLException;
 
 public class DomyaFate extends JavaPlugin {
 
@@ -39,27 +43,30 @@ public class DomyaFate extends JavaPlugin {
     private BuffConfig buffConfig;
     private TitleManager titleManager;
     private StatsStorage statsStorage;
+    private DatabaseManager databaseManager;
 
     @Override
     public void onEnable() {
         saveDefaultConfig();
         messages = new Messages(this);
 
-        YamlKarmaStorage karmaStorage = new YamlKarmaStorage(getDataFolder());
-        karmaStorage.load();
+        databaseManager = new DatabaseManager(getDataFolder());
+        try {
+            databaseManager.initialize();
+        } catch (SQLException e) {
+            getLogger().severe("Failed to initialize database: " + e.getMessage());
+            getServer().getPluginManager().disablePlugin(this);
+            return;
+        }
 
-        karmaManager = new KarmaManager(this, karmaStorage);
+        karmaManager = new KarmaManager(this, new SqliteKarmaStorage(databaseManager));
         karmaTitleManager = new KarmaTitleManager(getConfig());
         antiFarmManager = new AntiFarmManager(getConfig());
         buffConfig = new BuffConfig(getConfig());
-
-        statsStorage = new StatsStorage(getDataFolder());
-        statsStorage.load();
+        statsStorage = new SqliteStatsStorage(databaseManager);
 
         TitleRegistry titleRegistry = new TitleRegistry(this);
-        YamlTitleStorage titleStorage = new YamlTitleStorage(getDataFolder());
-        titleStorage.load();
-        titleManager = new TitleManager(titleRegistry, titleStorage);
+        titleManager = new TitleManager(titleRegistry, new SqliteTitleStorage(databaseManager));
 
         karmaManager.setOnKarmaChange((uuid, karma) -> {
             Player player = Bukkit.getPlayer(uuid);
@@ -81,14 +88,8 @@ public class DomyaFate extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        if (karmaManager != null) {
-            karmaManager.saveAll();
-        }
-        if (titleManager != null) {
-            titleManager.saveAll();
-        }
-        if (statsStorage != null) {
-            statsStorage.save();
+        if (databaseManager != null) {
+            databaseManager.close();
         }
     }
 
