@@ -1850,6 +1850,10 @@ titles:
     description:
       ru: "10 сделок с пиглинами"
       en: "10 trades with piglins"
+    unlock:
+      type: CUSTOM_STAT
+      stat-key: piglin-barters
+      value: 10
   1006:
     name:
       ru: "Лудоман"
@@ -1858,6 +1862,10 @@ titles:
     description:
       ru: "100 сделок с пиглинами"
       en: "100 trades with piglins"
+    unlock:
+      type: CUSTOM_STAT
+      stat-key: piglin-barters
+      value: 100
   1007:
     name:
       ru: "Казино Всегда Выигрывает"
@@ -1866,6 +1874,10 @@ titles:
     description:
       ru: "500 сделок с пиглинами"
       en: "500 trades with piglins"
+    unlock:
+      type: CUSTOM_STAT
+      stat-key: piglin-barters
+      value: 500
   1008:
     name:
       ru: "Доктор"
@@ -1874,6 +1886,10 @@ titles:
     description:
       ru: "Вылечить 1 зомби-жителя"
       en: "Cure 1 zombie villager"
+    unlock:
+      type: CUSTOM_STAT
+      stat-key: zombie-villager-cures
+      value: 1
   1009:
     name:
       ru: "Реаниматолог"
@@ -1882,6 +1898,10 @@ titles:
     description:
       ru: "Вылечить 10 зомби-жителей"
       en: "Cure 10 zombie villagers"
+    unlock:
+      type: CUSTOM_STAT
+      stat-key: zombie-villager-cures
+      value: 10
   1010:
     name:
       ru: "Зомби? Какие Зомби?"
@@ -1890,6 +1910,10 @@ titles:
     description:
       ru: "Вылечить 50 зомби-жителей"
       en: "Cure 50 zombie villagers"
+    unlock:
+      type: CUSTOM_STAT
+      stat-key: zombie-villager-cures
+      value: 50
 
   # === Travel and Exploration (1100-1199) ===
   1100:
@@ -1955,6 +1979,10 @@ titles:
     description:
       ru: "Посетить Незер"
       en: "Visit the Nether"
+    unlock:
+      type: CUSTOM_STAT
+      stat-key: visited-nether
+      value: 1
   1106:
     name:
       ru: "А Тут Пусто"
@@ -1963,6 +1991,10 @@ titles:
     description:
       ru: "Посетить Энд"
       en: "Visit the End"
+    unlock:
+      type: CUSTOM_STAT
+      stat-key: visited-the_end
+      value: 1
   1107:
     name:
       ru: "Мультивселенная"
@@ -1971,6 +2003,9 @@ titles:
     description:
       ru: "Посетить все 3 измерения"
       en: "Visit all 3 dimensions"
+    unlock:
+      type: VISITED_DIMENSIONS
+      value: 3
   1108:
     name:
       ru: "Следопыт"
@@ -2005,6 +2040,10 @@ titles:
     description:
       ru: "Приручить 1 волка"
       en: "Tame 1 wolf"
+    unlock:
+      type: CUSTOM_STAT
+      stat-key: tamed-wolf
+      value: 1
   1201:
     name:
       ru: "Стая"
@@ -2013,6 +2052,10 @@ titles:
     description:
       ru: "Приручить 10 волков"
       en: "Tame 10 wolves"
+    unlock:
+      type: CUSTOM_STAT
+      stat-key: tamed-wolf
+      value: 10
   1202:
     name:
       ru: "Мяу"
@@ -2021,6 +2064,10 @@ titles:
     description:
       ru: "Приручить 1 кота"
       en: "Tame 1 cat"
+    unlock:
+      type: CUSTOM_STAT
+      stat-key: tamed-cat
+      value: 1
   1203:
     name:
       ru: "Crazy Cat Lady"
@@ -2029,6 +2076,10 @@ titles:
     description:
       ru: "Приручить 10 котов"
       en: "Tame 10 cats"
+    unlock:
+      type: CUSTOM_STAT
+      stat-key: tamed-cat
+      value: 10
   1204:
     name:
       ru: "Ковбой"
@@ -2037,6 +2088,10 @@ titles:
     description:
       ru: "Приручить лошадь"
       en: "Tame a horse"
+    unlock:
+      type: CUSTOM_STAT
+      stat-key: tamed-horse
+      value: 1
   1205:
     name:
       ru: "Пшеница"
@@ -2185,6 +2240,10 @@ titles:
     description:
       ru: "Скрафтить 100 предметов"
       en: "Craft 100 items"
+    unlock:
+      type: CUSTOM_STAT
+      stat-key: items-crafted
+      value: 100
   1401:
     name:
       ru: "Конвейер"
@@ -2193,6 +2252,10 @@ titles:
     description:
       ru: "Скрафтить 500 предметов"
       en: "Craft 500 items"
+    unlock:
+      type: CUSTOM_STAT
+      stat-key: items-crafted
+      value: 500
   1402:
     name:
       ru: "Фабрика"
@@ -2201,6 +2264,10 @@ titles:
     description:
       ru: "Скрафтить 2000 предметов"
       en: "Craft 2000 items"
+    unlock:
+      type: CUSTOM_STAT
+      stat-key: items-crafted
+      value: 2000
   1403:
     name:
       ru: "Блестит!"
@@ -2331,6 +2398,10 @@ titles:
     description:
       ru: "Умереть от падения 20 раз"
       en: "Die from falling 20 times"
+    unlock:
+      type: CUSTOM_STAT
+      stat-key: fall-deaths
+      value: 20
   1506:
     name:
       ru: "Самородок"
@@ -2339,6 +2410,10 @@ titles:
     description:
       ru: "Умереть в лаве 10 раз"
       en: "Die in lava 10 times"
+    unlock:
+      type: CUSTOM_STAT
+      stat-key: lava-deaths
+      value: 10
   1507:
     name:
       ru: "Диета"
@@ -2347,6 +2422,10 @@ titles:
     description:
       ru: "Умереть от голода 10 раз"
       en: "Die from starvation 10 times"
+    unlock:
+      type: CUSTOM_STAT
+      stat-key: starvation-deaths
+      value: 10
   1508:
     name:
       ru: "Буль-Буль"
@@ -2355,6 +2434,10 @@ titles:
     description:
       ru: "Умереть от утопления 10 раз"
       en: "Die from drowning 10 times"
+    unlock:
+      type: CUSTOM_STAT
+      stat-key: drowning-deaths
+      value: 10
   1509:
     name:
       ru: "Осторожный"
@@ -2363,6 +2446,9 @@ titles:
     description:
       ru: "Выжить 50 дней без смерти"
       en: "Survive 50 days without dying"
+    unlock:
+      type: SURVIVAL_DAYS
+      value: 50
   1510:
     name:
       ru: "Параноик"
@@ -2371,6 +2457,9 @@ titles:
     description:
       ru: "Выжить 100 дней без смерти"
       en: "Survive 100 days without dying"
+    unlock:
+      type: SURVIVAL_DAYS
+      value: 100
   1511:
     name:
       ru: "Нетленный"
@@ -2379,6 +2468,9 @@ titles:
     description:
       ru: "Выжить 365 дней без смерти"
       en: "Survive 365 days without dying"
+    unlock:
+      type: SURVIVAL_DAYS
+      value: 365
   1512:
     name:
       ru: "На Волоске"
@@ -2397,6 +2489,10 @@ titles:
     description:
       ru: "Разместить 1000 блоков"
       en: "Place 1000 blocks"
+    unlock:
+      type: CUSTOM_STAT
+      stat-key: blocks-placed
+      value: 1000
   1601:
     name:
       ru: "Прораб"
@@ -2405,6 +2501,10 @@ titles:
     description:
       ru: "Разместить 10000 блоков"
       en: "Place 10000 blocks"
+    unlock:
+      type: CUSTOM_STAT
+      stat-key: blocks-placed
+      value: 10000
   1602:
     name:
       ru: "Застройщик"
@@ -2413,6 +2513,10 @@ titles:
     description:
       ru: "Разместить 50000 блоков"
       en: "Place 50000 blocks"
+    unlock:
+      type: CUSTOM_STAT
+      stat-key: blocks-placed
+      value: 50000
   1603:
     name:
       ru: "Девелопер"
@@ -2421,6 +2525,10 @@ titles:
     description:
       ru: "Разместить 100000 блоков"
       en: "Place 100000 blocks"
+    unlock:
+      type: CUSTOM_STAT
+      stat-key: blocks-placed
+      value: 100000
   1604:
     name:
       ru: "Москва-Сити"
@@ -2429,3 +2537,7 @@ titles:
     description:
       ru: "Разместить 500000 блоков"
       en: "Place 500000 blocks"
+    unlock:
+      type: CUSTOM_STAT
+      stat-key: blocks-placed
+      value: 500000

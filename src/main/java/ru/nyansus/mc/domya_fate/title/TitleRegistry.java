@@ -134,7 +134,9 @@ public class TitleRegistry {
             }
         }
 
-        return new UnlockCondition(type, value, entities, materials);
+        String statKey = unlock.getString("stat-key", "");
+
+        return new UnlockCondition(type, value, entities, materials, statKey);
     }
 
     public Optional<Title> getTitle(int id) {

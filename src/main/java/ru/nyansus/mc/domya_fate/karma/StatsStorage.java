@@ -23,6 +23,14 @@ public class StatsStorage {
         return config.getInt(uuid + "." + key, 0);
     }
 
+    public synchronized void setStat(UUID uuid, String key, long value) {
+        config.set(uuid + "." + key, value);
+    }
+
+    public synchronized long getLongStat(UUID uuid, String key) {
+        return config.getLong(uuid + "." + key, 0L);
+    }
+
     public synchronized void incrementStat(UUID uuid, String key) {
         int current = getStat(uuid, key);
         config.set(uuid + "." + key, current + 1);

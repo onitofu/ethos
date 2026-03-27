@@ -14,12 +14,15 @@ public class UnlockCondition {
     private final int value;
     private final List<EntityType> entities;
     private final List<Material> materials;
+    private final String statKey;
 
-    public UnlockCondition(Type type, int value, List<EntityType> entities, List<Material> materials) {
+    public UnlockCondition(Type type, int value, List<EntityType> entities,
+                           List<Material> materials, String statKey) {
         this.type = type;
         this.value = value;
         this.entities = entities;
         this.materials = materials;
+        this.statKey = statKey;
     }
 
     public boolean isMet(Player player, StatsStorage stats) {
@@ -37,6 +40,9 @@ public class UnlockCondition {
             case ANIMALS_BRED -> player.getStatistic(Statistic.ANIMALS_BRED);
             case ENCHANT_ITEM -> player.getStatistic(Statistic.ITEM_ENCHANTED);
             case DISTANCE_KM -> getTotalDistanceCm(player) / 100_000;
+            case CUSTOM_STAT -> stats.getStat(player.getUniqueId(), statKey);
+            case SURVIVAL_DAYS -> getSurvivalDays(player, stats);
+            case VISITED_DIMENSIONS -> countVisitedDimensions(player, stats);
         };
     }
 
@@ -73,6 +79,31 @@ public class UnlockCondition {
         return total;
     }
 
+    private static final long MS_PER_DAY = 86_400_000L;
+
+    private int getSurvivalDays(Player player, StatsStorage stats) {
+        long lastDeath = stats.getLongStat(player.getUniqueId(), "last-death-time");
+        if (lastDeath == 0) {
+            lastDeath = player.getFirstPlayed();
+        }
+        return (int) ((System.currentTimeMillis() - lastDeath) / MS_PER_DAY);
+    }
+
+    private int countVisitedDimensions(Player player, StatsStorage stats) {
+        var uuid = player.getUniqueId();
+        int count = 0;
+        if (stats.getStat(uuid, "visited-normal") > 0) {
+            count++;
+        }
+        if (stats.getStat(uuid, "visited-nether") > 0) {
+            count++;
+        }
+        if (stats.getStat(uuid, "visited-the_end") > 0) {
+            count++;
+        }
+        return count;
+    }
+
     public enum Type {
         KILL_ENTITY,
         MINE_BLOCK,
@@ -82,6 +113,9 @@ public class UnlockCondition {
         TRADED_WITH_VILLAGER,
         ANIMALS_BRED,
         ENCHANT_ITEM,
-        DISTANCE_KM
+        DISTANCE_KM,
+        CUSTOM_STAT,
+        SURVIVAL_DAYS,
+        VISITED_DIMENSIONS
     }
 }

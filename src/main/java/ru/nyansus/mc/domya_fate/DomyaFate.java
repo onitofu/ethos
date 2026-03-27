@@ -22,6 +22,7 @@ import ru.nyansus.mc.domya_fate.listener.AnimalListener;
 import ru.nyansus.mc.domya_fate.listener.MobKillListener;
 import ru.nyansus.mc.domya_fate.listener.PlayerJoinListener;
 import ru.nyansus.mc.domya_fate.listener.PlayerKillListener;
+import ru.nyansus.mc.domya_fate.listener.StatsListener;
 import ru.nyansus.mc.domya_fate.listener.TradeListener;
 import ru.nyansus.mc.domya_fate.listener.VillagerCureListener;
 import ru.nyansus.mc.domya_fate.title.TitleManager;
@@ -99,6 +100,7 @@ public class DomyaFate extends JavaPlugin {
         pm.registerEvents(new TradeListener(this), this);
         pm.registerEvents(new VillagerCureListener(this), this);
         pm.registerEvents(new AnimalListener(this), this);
+        pm.registerEvents(new StatsListener(this), this);
         pm.registerEvents(new PvpDamageListener(this), this);
         pm.registerEvents(new TradeBlockListener(this), this);
         pm.registerEvents(new GolemAggroListener(this), this);
