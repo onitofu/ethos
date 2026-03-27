@@ -39,6 +39,11 @@ public class MobKillListener implements Listener {
             return;
         }
 
+        if (plugin.getAntiFarmManager().isMobStreakExceeded(
+                killer.getUniqueId(), entity.getType())) {
+            return;
+        }
+
         int karmaChange = calculateKarmaChange(entity);
         if (karmaChange == 0) {
             return;

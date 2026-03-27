@@ -24,11 +24,10 @@ karma-actions:
   kill-good-player: -30
   kill-evil-player: 10
 
-# Karma decay
+# Karma decay — fixed points per day towards zero
 decay:
   enabled: true
-  percent-per-hour: 1.0
-  min-threshold: 100
+  points-per-day: 5
 
 # Anti-farm protection
 anti-farm:
@@ -40,6 +39,8 @@ anti-farm:
   # AFK detection: no karma from mob kills if player hasn't moved
   afk-threshold-seconds: 30
   afk-move-distance: 5.0
+  # Mob streak: after N kills of same mob type, karma stops until different type killed
+  mob-streak-limit: 5
 
 # Karmic titles — map title ID to karma range (names/colors are in titles.yml)
 karma-titles:
