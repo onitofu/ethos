@@ -10,6 +10,7 @@ import ru.nyansus.mc.domya_fate.DomyaFate;
 import ru.nyansus.mc.domya_fate.buff.BuffEffect;
 import ru.nyansus.mc.domya_fate.buff.BuffTier;
 import ru.nyansus.mc.domya_fate.karma.KarmaTitle;
+import ru.nyansus.mc.domya_fate.util.ColorUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -100,7 +101,7 @@ public class KarmaCommand implements CommandExecutor, TabCompleter {
         String bar = buildBar(karma);
         String titleStr = karmaTitle
                 .flatMap(kt -> plugin.getTitleManager().getRegistry().getTitle(kt.id()))
-                .map(t -> " §7[" + colorCode(t.color()) + t.nameRu() + "§7]")
+                .map(t -> " §7[" + ColorUtil.colorCode(t.color()) + t.nameRu() + "§7]")
                 .orElse("");
 
         viewer.sendMessage(plugin.getMessages().get(viewer, "karma.display",
@@ -213,25 +214,6 @@ public class KarmaCommand implements CommandExecutor, TabCompleter {
         }
         bar.append("§8]");
         return bar.toString();
-    }
-
-    private String colorCode(String color) {
-        return switch (color) {
-            case "dark_red" -> "§4";
-            case "red" -> "§c";
-            case "gold" -> "§6";
-            case "green" -> "§a";
-            case "dark_green" -> "§2";
-            case "aqua" -> "§b";
-            case "light_purple" -> "§d";
-            case "dark_purple" -> "§5";
-            case "white" -> "§f";
-            case "gray" -> "§7";
-            case "dark_gray" -> "§8";
-            case "yellow" -> "§e";
-            case "blue" -> "§9";
-            default -> "§f";
-        };
     }
 
     @Override

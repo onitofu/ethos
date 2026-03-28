@@ -6,6 +6,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.inventory.ItemStack;
 import ru.nyansus.mc.domya_fate.DomyaFate;
 
@@ -48,5 +49,10 @@ public class AnimalListener implements Listener {
             int karmaChange = plugin.getConfig().getInt("karma-actions.feed-animal", 1);
             plugin.getKarmaManager().addKarma(player.getUniqueId(), karmaChange);
         }
+    }
+
+    @EventHandler
+    public void onPlayerQuit(PlayerQuitEvent event) {
+        lastFeedKarma.remove(event.getPlayer().getUniqueId());
     }
 }

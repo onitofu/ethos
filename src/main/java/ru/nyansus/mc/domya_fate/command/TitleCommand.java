@@ -9,6 +9,7 @@ import org.bukkit.entity.Player;
 import ru.nyansus.mc.domya_fate.DomyaFate;
 import ru.nyansus.mc.domya_fate.title.Title;
 import ru.nyansus.mc.domya_fate.title.TitleManager;
+import ru.nyansus.mc.domya_fate.util.ColorUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -70,7 +71,7 @@ public class TitleCommand implements CommandExecutor, TabCompleter {
             Title t = title.get();
             String marker = id == activeId ? " §a✔" : "";
             String desc = t.descriptionRu().isEmpty() ? "" : " §8- §7" + t.descriptionRu();
-            player.sendMessage("  " + colorCode(t.color()) + t.nameRu()
+            player.sendMessage("  " + ColorUtil.colorCode(t.color()) + t.nameRu()
                     + " §7(ID: " + t.id() + ")" + marker + desc);
         }
         return true;
@@ -123,7 +124,7 @@ public class TitleCommand implements CommandExecutor, TabCompleter {
         String status = unlocked ? "§a✔" : "§c✘";
 
         player.sendMessage(plugin.getMessages().get(player, "title.info-header"));
-        player.sendMessage("  " + colorCode(t.color()) + t.nameRu()
+        player.sendMessage("  " + ColorUtil.colorCode(t.color()) + t.nameRu()
                 + " §7/ " + t.nameEn());
         player.sendMessage("  §7ID: " + t.id());
         if (!t.descriptionRu().isEmpty()) {
@@ -237,23 +238,4 @@ public class TitleCommand implements CommandExecutor, TabCompleter {
         return names;
     }
 
-    private String colorCode(String color) {
-        return switch (color) {
-            case "dark_red" -> "§4";
-            case "red" -> "§c";
-            case "gold" -> "§6";
-            case "green" -> "§a";
-            case "dark_green" -> "§2";
-            case "aqua" -> "§b";
-            case "dark_aqua" -> "§3";
-            case "light_purple" -> "§d";
-            case "dark_purple" -> "§5";
-            case "white" -> "§f";
-            case "gray" -> "§7";
-            case "dark_gray" -> "§8";
-            case "yellow" -> "§e";
-            case "blue" -> "§9";
-            default -> "§f";
-        };
-    }
 }

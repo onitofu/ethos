@@ -109,6 +109,7 @@ public class AntiFarmManager {
 
     public void clearPlayer(UUID player) {
         pvpKills.remove(player);
+        mutualKills.remove(player);
         lastPositions.remove(player);
         lastMobType.remove(player);
         mobStreak.remove(player);

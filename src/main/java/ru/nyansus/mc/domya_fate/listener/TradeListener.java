@@ -4,6 +4,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.inventory.MerchantInventory;
 import ru.nyansus.mc.domya_fate.DomyaFate;
 
@@ -46,5 +47,10 @@ public class TradeListener implements Listener {
         lastTradeKarma.put(player.getUniqueId(), now);
         int karmaChange = plugin.getConfig().getInt("karma-actions.villager-trade", 1);
         plugin.getKarmaManager().addKarma(player.getUniqueId(), karmaChange);
+    }
+
+    @EventHandler
+    public void onPlayerQuit(PlayerQuitEvent event) {
+        lastTradeKarma.remove(event.getPlayer().getUniqueId());
     }
 }

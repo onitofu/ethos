@@ -34,7 +34,6 @@ public class BuffConfig {
     private void loadTiers(FileConfiguration config) {
         ConfigurationSection section = config.getConfigurationSection("buffs.tiers");
         if (section == null) {
-            loadLegacyTiers(config);
             return;
         }
 
@@ -123,75 +122,6 @@ public class BuffConfig {
             ambient = (Boolean) map.get("ambient");
         }
         return BuffEffect.potion(potionType, amplifier, ambient);
-    }
-
-    @SuppressWarnings("deprecation")
-    private void loadLegacyTiers(FileConfiguration config) {
-        loadLegacySide(config, "buffs.negative", negativeTiers, true);
-        loadLegacySide(config, "buffs.positive", positiveTiers, false);
-    }
-
-    private void loadLegacySide(FileConfiguration config, String path,
-                                List<BuffTier> tiers, boolean negative) {
-        ConfigurationSection section = config.getConfigurationSection(path);
-        if (section == null) {
-            return;
-        }
-        for (String key : section.getKeys(false)) {
-            int threshold;
-            try {
-                threshold = Integer.parseInt(key);
-            } catch (NumberFormatException e) {
-                continue;
-            }
-            ConfigurationSection ts = section.getConfigurationSection(key);
-            if (ts == null) {
-                continue;
-            }
-            List<BuffEffect> effects = new ArrayList<>();
-
-            addIfPresent(effects, ts, "mob-damage-bonus", EffectType.MOB_DAMAGE_BONUS);
-            addIfPresent(effects, ts, "pvp-damage-penalty", EffectType.PVP_DAMAGE_PENALTY);
-            addIfPresent(effects, ts, "xp-bonus", EffectType.XP_BONUS);
-            addIfPresent(effects, ts, "speed-bonus", EffectType.SPEED_BONUS);
-            addIntIfPresent(effects, ts, "trade-price-increase", EffectType.TRADE_PRICE_INCREASE);
-            if (ts.getBoolean("block-trading", false)) {
-                effects.add(BuffEffect.bool(EffectType.BLOCK_TRADING));
-            }
-            if (ts.getBoolean("golem-aggro", false)) {
-                effects.add(BuffEffect.numeric(EffectType.GOLEM_AGGRO,
-                        ts.getDouble("golem-aggro-range", 16.0)));
-            }
-
-            List<Map<?, ?>> potionList = ts.getMapList("effects");
-            for (Map<?, ?> map : potionList) {
-                BuffEffect pe = parsePotionEffect(map);
-                if (pe != null) {
-                    effects.add(pe);
-                }
-            }
-
-            tiers.add(new BuffTier(threshold, effects));
-        }
-        if (negative) {
-            tiers.sort(Comparator.comparingInt(BuffTier::threshold));
-        } else {
-            tiers.sort(Comparator.comparingInt(BuffTier::threshold).reversed());
-        }
-    }
-
-    private void addIfPresent(List<BuffEffect> effects, ConfigurationSection ts,
-                              String key, EffectType type) {
-        if (ts.contains(key)) {
-            effects.add(BuffEffect.numeric(type, ts.getDouble(key)));
-        }
-    }
-
-    private void addIntIfPresent(List<BuffEffect> effects, ConfigurationSection ts,
-                                 String key, EffectType type) {
-        if (ts.contains(key)) {
-            effects.add(BuffEffect.numeric(type, ts.getInt(key)));
-        }
     }
 
     public BuffTier findNegativeTier(int karma) {

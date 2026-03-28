@@ -7,7 +7,7 @@ import org.bukkit.entity.Bee;
 import org.bukkit.entity.Chicken;
 import org.bukkit.entity.Cow;
 import org.bukkit.entity.Donkey;
-import org.bukkit.entity.EntityType;
+
 import org.bukkit.entity.Horse;
 import org.bukkit.entity.Llama;
 import org.bukkit.entity.MushroomCow;
@@ -40,9 +40,9 @@ public class MobBehaviorTask extends BukkitRunnable {
             int karma = plugin.getKarmaManager().getKarma(player.getUniqueId());
 
             if (config.hasEffect(karma, EffectType.PASSIVE_MOB_HOSTILE)) {
-                hostilePassiveMobs(player);
+                handlePassiveMobs(player, true);
             } else if (config.hasEffect(karma, EffectType.PASSIVE_MOB_FLEE)) {
-                fleePassiveMobs(player);
+                handlePassiveMobs(player, false);
             }
 
             if (config.hasEffect(karma, EffectType.GOLEM_AGGRO)) {
@@ -58,7 +58,7 @@ public class MobBehaviorTask extends BukkitRunnable {
         }
     }
 
-    private void fleePassiveMobs(Player player) {
+    private void handlePassiveMobs(Player player, boolean hostile) {
         Location playerLoc = player.getLocation();
         for (Entity entity : player.getNearbyEntities(12, 12, 12)) {
             if (!(entity instanceof Animals animal)) {
@@ -68,29 +68,17 @@ public class MobBehaviorTask extends BukkitRunnable {
             if (dist > 10) {
                 continue;
             }
-            var dir = animal.getLocation().subtract(playerLoc).toVector();
-            if (dir.lengthSquared() == 0) {
-                continue;
-            }
-            dir.normalize().multiply(8);
-            Location fleeTarget = animal.getLocation().add(dir);
-            animal.getPathfinder().moveTo(fleeTarget, 1.5);
-        }
-    }
-
-    private void hostilePassiveMobs(Player player) {
-        Location playerLoc = player.getLocation();
-        for (Entity entity : player.getNearbyEntities(12, 12, 12)) {
-            if (!(entity instanceof Animals animal)) {
-                continue;
-            }
-            double dist = animal.getLocation().distance(playerLoc);
-            if (dist > 10) {
-                continue;
-            }
-            animal.getPathfinder().moveTo(playerLoc, 1.3);
-            if (dist < 2.0) {
-                player.damage(getAnimalDamage(animal), animal);
+            if (hostile) {
+                animal.getPathfinder().moveTo(playerLoc, 1.3);
+                if (dist < 2.0) {
+                    player.damage(getAnimalDamage(animal), animal);
+                }
+            } else {
+                var dir = animal.getLocation().subtract(playerLoc).toVector();
+                if (dir.lengthSquared() > 0) {
+                    dir.normalize().multiply(8);
+                    animal.getPathfinder().moveTo(animal.getLocation().add(dir), 1.5);
+                }
             }
         }
     }

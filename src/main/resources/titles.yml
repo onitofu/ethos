@@ -2762,3 +2762,19 @@ titles:
       type: CUSTOM_STAT
       stat-key: piglin-barters
       value: 5000
+  230:
+    name:
+      ru: "Архидемон"
+      en: "Archdemon"
+    color: "dark_red"
+    description:
+      ru: "Карма -10000"
+      en: "Karma -10000"
+  231:
+    name:
+      ru: "Архангел"
+      en: "Archangel"
+    color: "light_purple"
+    description:
+      ru: "Карма 10000"
+      en: "Karma 10000"
