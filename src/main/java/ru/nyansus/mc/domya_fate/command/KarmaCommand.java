@@ -42,7 +42,7 @@ public class KarmaCommand implements CommandExecutor, TabCompleter {
             return true;
         }
 
-        if (!sender.hasPermission("domya.karma.view.others")) {
+        if (!sender.hasPermission("ethos.karma.view.others")) {
             sender.sendMessage(plugin.getMessages().get(sender, "command.no-permission"));
             return true;
         }
@@ -63,7 +63,7 @@ public class KarmaCommand implements CommandExecutor, TabCompleter {
     }
 
     private boolean handleSet(CommandSender sender, String[] args) {
-        if (!sender.hasPermission("domya.karma.admin")) {
+        if (!sender.hasPermission("ethos.karma.admin")) {
             sender.sendMessage(plugin.getMessages().get(sender, "command.no-permission"));
             return true;
         }
@@ -222,10 +222,10 @@ public class KarmaCommand implements CommandExecutor, TabCompleter {
         if (args.length == 1) {
             List<String> completions = new ArrayList<>();
             String prefix = args[0].toLowerCase();
-            if (sender.hasPermission("domya.karma.admin") && "set".startsWith(prefix)) {
+            if (sender.hasPermission("ethos.karma.admin") && "set".startsWith(prefix)) {
                 completions.add("set");
             }
-            if (sender.hasPermission("domya.karma.view.others")) {
+            if (sender.hasPermission("ethos.karma.view.others")) {
                 for (Player player : Bukkit.getOnlinePlayers()) {
                     if (player.getName().toLowerCase().startsWith(prefix)) {
                         completions.add(player.getName());
@@ -235,7 +235,7 @@ public class KarmaCommand implements CommandExecutor, TabCompleter {
             return completions;
         }
         if (args.length == 2 && args[0].equalsIgnoreCase("set")
-                && sender.hasPermission("domya.karma.admin")) {
+                && sender.hasPermission("ethos.karma.admin")) {
             List<String> names = new ArrayList<>();
             String prefix = args[1].toLowerCase();
             for (Player player : Bukkit.getOnlinePlayers()) {
@@ -246,7 +246,7 @@ public class KarmaCommand implements CommandExecutor, TabCompleter {
             return names;
         }
         if (args.length == 3 && args[0].equalsIgnoreCase("set")
-                && sender.hasPermission("domya.karma.admin")) {
+                && sender.hasPermission("ethos.karma.admin")) {
             return List.of("-10000", "-5000", "0", "5000", "10000");
         }
         return List.of();

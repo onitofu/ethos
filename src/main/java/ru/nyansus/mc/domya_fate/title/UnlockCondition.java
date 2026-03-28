@@ -5,6 +5,7 @@ import org.bukkit.Statistic;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import ru.nyansus.mc.domya_fate.karma.StatsStorage;
+import ru.nyansus.mc.domya_fate.util.StatKeys;
 
 import java.util.List;
 
@@ -33,7 +34,7 @@ public class UnlockCondition {
         return switch (type) {
             case KILL_ENTITY -> sumEntityStats(player, Statistic.KILL_ENTITY);
             case MINE_BLOCK -> sumMaterialStats(player, Statistic.MINE_BLOCK);
-            case PLAYER_KILLS -> stats.getStat(player.getUniqueId(), "pvp-kills");
+            case PLAYER_KILLS -> stats.getStat(player.getUniqueId(), StatKeys.PVP_KILLS);
             case DEATHS -> player.getStatistic(Statistic.DEATHS);
             case FISH_CAUGHT -> player.getStatistic(Statistic.FISH_CAUGHT);
             case TRADED_WITH_VILLAGER -> player.getStatistic(Statistic.TRADED_WITH_VILLAGER);
@@ -82,7 +83,7 @@ public class UnlockCondition {
     private static final long MS_PER_DAY = 86_400_000L;
 
     private int getSurvivalDays(Player player, StatsStorage stats) {
-        long lastDeath = stats.getLongStat(player.getUniqueId(), "last-death-time");
+        long lastDeath = stats.getLongStat(player.getUniqueId(), StatKeys.LAST_DEATH_TIME);
         if (lastDeath == 0) {
             lastDeath = player.getFirstPlayed();
         }
@@ -92,13 +93,13 @@ public class UnlockCondition {
     private int countVisitedDimensions(Player player, StatsStorage stats) {
         var uuid = player.getUniqueId();
         int count = 0;
-        if (stats.getStat(uuid, "visited-normal") > 0) {
+        if (stats.getStat(uuid, StatKeys.VISITED_NORMAL) > 0) {
             count++;
         }
-        if (stats.getStat(uuid, "visited-nether") > 0) {
+        if (stats.getStat(uuid, StatKeys.VISITED_NETHER) > 0) {
             count++;
         }
-        if (stats.getStat(uuid, "visited-the_end") > 0) {
+        if (stats.getStat(uuid, StatKeys.VISITED_THE_END) > 0) {
             count++;
         }
         return count;

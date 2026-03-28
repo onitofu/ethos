@@ -19,7 +19,7 @@ public class DomyaFatePlaceholders extends PlaceholderExpansion {
 
     @Override
     public @NotNull String getIdentifier() {
-        return "domya";
+        return "ethos";
     }
 
     @Override

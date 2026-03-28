@@ -27,7 +27,8 @@ public class VillagerCureListener implements Listener {
             if (converter != null) {
                 int karmaChange = plugin.getConfig().getInt("karma-actions.cure-zombie-villager", 30);
                 plugin.getKarmaManager().addKarma(converter.getUniqueId(), karmaChange);
-                plugin.getStatsStorage().incrementStat(converter.getUniqueId(), "zombie-villager-cures");
+                plugin.getStatsStorage().incrementStat(converter.getUniqueId(),
+                        ru.nyansus.mc.domya_fate.util.StatKeys.ZOMBIE_VILLAGER_CURES);
             }
         }
     }

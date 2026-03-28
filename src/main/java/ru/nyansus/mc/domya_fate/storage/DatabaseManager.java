@@ -16,7 +16,7 @@ public class DatabaseManager {
     private Connection connection;
 
     public DatabaseManager(File dataFolder) {
-        this.dbFile = new File(dataFolder, "domya-fate.db");
+        this.dbFile = new File(dataFolder, "ethos.db");
     }
 
     public void initialize() throws SQLException {

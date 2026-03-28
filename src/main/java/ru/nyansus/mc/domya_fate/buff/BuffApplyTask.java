@@ -20,7 +20,7 @@ import java.util.Optional;
 public class BuffApplyTask extends BukkitRunnable {
 
     private static final NamespacedKey HEALTH_KEY =
-            new NamespacedKey("domya-fate", "health_bonus");
+            new NamespacedKey("ethos", "health_bonus");
 
     private final DomyaFate plugin;
     private final KarmaManager karmaManager;

@@ -135,7 +135,7 @@ public class TitleCommand implements CommandExecutor, TabCompleter {
     }
 
     private boolean handleGive(CommandSender sender, String[] args) {
-        if (!sender.hasPermission("domya.title.admin")) {
+        if (!sender.hasPermission("ethos.title.admin")) {
             sender.sendMessage(plugin.getMessages().get(sender, "command.no-permission"));
             return true;
         }
@@ -186,7 +186,7 @@ public class TitleCommand implements CommandExecutor, TabCompleter {
                     completions.add(sub);
                 }
             }
-            if (sender.hasPermission("domya.title.admin") && "give".startsWith(prefix)) {
+            if (sender.hasPermission("ethos.title.admin") && "give".startsWith(prefix)) {
                 completions.add("give");
             }
             if (sender instanceof Player player) {
@@ -205,12 +205,12 @@ public class TitleCommand implements CommandExecutor, TabCompleter {
             if (args[0].equalsIgnoreCase("info")) {
                 return completeTitleIds(args[1]);
             }
-            if (args[0].equalsIgnoreCase("give") && sender.hasPermission("domya.title.admin")) {
+            if (args[0].equalsIgnoreCase("give") && sender.hasPermission("ethos.title.admin")) {
                 return completePlayerNames(args[1]);
             }
         }
         if (args.length == 3 && args[0].equalsIgnoreCase("give")
-                && sender.hasPermission("domya.title.admin")) {
+                && sender.hasPermission("ethos.title.admin")) {
             return completeTitleIds(args[2]);
         }
         return List.of();

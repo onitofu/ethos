@@ -138,7 +138,7 @@ public class DomyaFate extends JavaPlugin {
             dtCmd.setExecutor(titleCommand);
             dtCmd.setTabCompleter(titleCommand);
         }
-        var fateCmd = getCommand("domyafate");
+        var fateCmd = getCommand("ethos");
         if (fateCmd != null) {
             DomyaFateCommand fateCommand = new DomyaFateCommand(this);
             fateCmd.setExecutor(fateCommand);

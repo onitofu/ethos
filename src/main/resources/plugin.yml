@@ -1,4 +1,4 @@
-name: domya-fate
+name: ethos
 version: '${version}'
 main: ru.nyansus.mc.domya_fate.DomyaFate
 api-version: '1.21'
@@ -9,29 +9,32 @@ commands:
   karma:
     description: View or manage karma
     usage: /karma [player|set <player> <value>]
-    permission: domya.karma.view
+    permission: ethos.karma.view
   dt:
     description: Manage your titles
     usage: /dt [id|reset|info <id>|give <player> <id>]
-    permission: domya.title.use
-  domyafate:
+    permission: ethos.title.use
+  ethos:
     description: Admin commands
-    usage: /domyafate reload
-    permission: domya.karma.admin
+    usage: /ethos reload
+    permission: ethos.admin
 
 permissions:
-  domya.karma.view:
+  ethos.karma.view:
     description: View your own karma
     default: true
-  domya.karma.view.others:
+  ethos.karma.view.others:
     description: View other players' karma
     default: true
-  domya.karma.admin:
+  ethos.karma.admin:
     description: Set karma for other players
     default: op
-  domya.title.use:
+  ethos.admin:
+    description: Plugin admin commands (reload)
+    default: op
+  ethos.title.use:
     description: View and select titles
     default: true
-  domya.title.admin:
+  ethos.title.admin:
     description: Give titles to other players
     default: op

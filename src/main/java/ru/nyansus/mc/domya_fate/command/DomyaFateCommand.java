@@ -18,14 +18,14 @@ public class DomyaFateCommand implements CommandExecutor, TabCompleter {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        if (!sender.hasPermission("domya.karma.admin")) {
+        if (!sender.hasPermission("ethos.admin")) {
             sender.sendMessage(plugin.getMessages().get(sender, "command.no-permission"));
             return true;
         }
 
         if (args.length == 0) {
-            sender.sendMessage("§6domya-fate §7v" + plugin.getPluginMeta().getVersion());
-            sender.sendMessage("§7/domyafate reload");
+            sender.sendMessage("§6Ethos §7v" + plugin.getPluginMeta().getVersion());
+            sender.sendMessage("§7/ethos reload");
             return true;
         }
 
@@ -41,7 +41,7 @@ public class DomyaFateCommand implements CommandExecutor, TabCompleter {
     @Override
     public List<String> onTabComplete(CommandSender sender, Command command,
                                       String label, String[] args) {
-        if (args.length == 1 && sender.hasPermission("domya.karma.admin")) {
+        if (args.length == 1 && sender.hasPermission("ethos.admin")) {
             String prefix = args[0].toLowerCase();
             if ("reload".startsWith(prefix)) {
                 return List.of("reload");
