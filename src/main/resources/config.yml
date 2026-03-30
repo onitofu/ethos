@@ -4,6 +4,9 @@ default-locale: en
 # Title automatically given to new players (-1 to disable)
 default-title: 0
 
+# Karma reset cooldown (days). Players can use /karma reset once per this period.
+karma-reset-cooldown-days: 30
+
 # Karma range
 karma:
   min: -10000

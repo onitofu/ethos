@@ -14,6 +14,8 @@ karma:
   set-usage: "§cИспользование: /karma set <игрок> <значение>"
   set-success: "§aКарма игрока {player} установлена на {karma}."
   invalid-number: "§cНеверное число."
+  reset-success: "§aВаша карма сброшена с {old} до 0."
+  reset-cooldown: "§cСброс кармы будет доступен через {days} дн."
   effect:
     mob_damage_bonus: "урон по мобам"
     passive_mob_damage_bonus: "урон по мирным мобам"

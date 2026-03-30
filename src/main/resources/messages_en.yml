@@ -14,6 +14,8 @@ karma:
   set-usage: "§cUsage: /karma set <player> <value>"
   set-success: "§aKarma of {player} set to {karma}."
   invalid-number: "§cInvalid number."
+  reset-success: "§aYour karma has been reset from {old} to 0."
+  reset-cooldown: "§cKarma reset available in {days} days."
   effect:
     mob_damage_bonus: "mob damage"
     passive_mob_damage_bonus: "passive mob damage"

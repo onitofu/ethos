@@ -22,6 +22,9 @@ public final class StatKeys {
     public static final String TAMED_PREFIX = "tamed-";
     public static final String TAMED_TOTAL = "tamed-total";
 
+    // Karma reset
+    public static final String LAST_KARMA_RESET = "last-karma-reset";
+
     // Actions
     public static final String BLOCKS_PLACED = "blocks-placed";
     public static final String ITEMS_CRAFTED = "items-crafted";

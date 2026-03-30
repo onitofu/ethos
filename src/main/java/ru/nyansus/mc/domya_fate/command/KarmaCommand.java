@@ -10,7 +10,9 @@ import ru.nyansus.mc.domya_fate.DomyaFate;
 import ru.nyansus.mc.domya_fate.buff.BuffEffect;
 import ru.nyansus.mc.domya_fate.buff.BuffTier;
 import ru.nyansus.mc.domya_fate.karma.KarmaTitle;
+import ru.nyansus.mc.domya_fate.karma.StatsStorage;
 import ru.nyansus.mc.domya_fate.util.ColorUtil;
+import ru.nyansus.mc.domya_fate.util.StatKeys;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,6 +33,9 @@ public class KarmaCommand implements CommandExecutor, TabCompleter {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (args.length >= 1 && args[0].equalsIgnoreCase("set")) {
             return handleSet(sender, args);
+        }
+        if (args.length >= 1 && args[0].equalsIgnoreCase("reset")) {
+            return handleReset(sender);
         }
 
         if (args.length == 0) {
@@ -91,6 +96,33 @@ public class KarmaCommand implements CommandExecutor, TabCompleter {
         sender.sendMessage(plugin.getMessages().get(sender, "karma.set-success",
                 "{player}", target.getName(),
                 "{karma}", String.valueOf(value)));
+        return true;
+    }
+
+    private boolean handleReset(CommandSender sender) {
+        if (!(sender instanceof Player player)) {
+            sender.sendMessage(plugin.getMessages().get(sender, "karma.player-only"));
+            return true;
+        }
+
+        long cooldownDays = plugin.getConfig().getLong("karma-reset-cooldown-days", 30);
+        long cooldownMs = cooldownDays * 86_400_000L;
+        StatsStorage stats = plugin.getStatsStorage();
+        long lastReset = stats.getLongStat(player.getUniqueId(), StatKeys.LAST_KARMA_RESET);
+        long now = System.currentTimeMillis();
+
+        if (lastReset > 0 && now - lastReset < cooldownMs) {
+            long remainingDays = (cooldownMs - (now - lastReset)) / 86_400_000L + 1;
+            player.sendMessage(plugin.getMessages().get(player, "karma.reset-cooldown",
+                    "{days}", String.valueOf(remainingDays)));
+            return true;
+        }
+
+        int oldKarma = plugin.getKarmaManager().getKarma(player.getUniqueId());
+        plugin.getKarmaManager().setKarma(player.getUniqueId(), 0);
+        stats.setStat(player.getUniqueId(), StatKeys.LAST_KARMA_RESET, now);
+        player.sendMessage(plugin.getMessages().get(player, "karma.reset-success",
+                "{old}", String.valueOf(oldKarma)));
         return true;
     }
 
@@ -226,6 +258,9 @@ public class KarmaCommand implements CommandExecutor, TabCompleter {
             String prefix = args[0].toLowerCase();
             if (sender.hasPermission("ethos.karma.admin") && "set".startsWith(prefix)) {
                 completions.add("set");
+            }
+            if ("reset".startsWith(prefix)) {
+                completions.add("reset");
             }
             if (sender.hasPermission("ethos.karma.view.others")) {
                 for (Player player : Bukkit.getOnlinePlayers()) {
