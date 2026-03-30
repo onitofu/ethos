@@ -2778,3 +2778,13 @@ titles:
     description:
       ru: "Карма 10000"
       en: "Karma 10000"
+
+  # === Seasonal ===
+  232:
+    name:
+      ru: "Шут"
+      en: "Jester"
+    color: "yellow"
+    description:
+      ru: "Зайти 1 апреля"
+      en: "Login on April 1st"

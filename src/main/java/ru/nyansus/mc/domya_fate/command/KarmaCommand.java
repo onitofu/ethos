@@ -158,8 +158,9 @@ public class KarmaCommand implements CommandExecutor, TabCompleter {
     }
 
     private boolean isBuff(BuffEffect effect) {
-        if (effect.effectType() == ru.nyansus.mc.domya_fate.buff.EffectType.PASSIVE_MOB_DAMAGE_BONUS
-                && effect.value() < 0) {
+        if (effect.value() < 0 && (
+                effect.effectType() == ru.nyansus.mc.domya_fate.buff.EffectType.MOB_DAMAGE_BONUS
+                || effect.effectType() == ru.nyansus.mc.domya_fate.buff.EffectType.PASSIVE_MOB_DAMAGE_BONUS)) {
             return false;
         }
         return switch (effect.effectType()) {
@@ -174,11 +175,12 @@ public class KarmaCommand implements CommandExecutor, TabCompleter {
     private String formatValue(BuffEffect effect) {
         double val = effect.value();
         return switch (effect.effectType()) {
-            case MOB_DAMAGE_BONUS, PVP_DAMAGE_BONUS, XP_BONUS, LOOT_BONUS,
+            case MOB_DAMAGE_BONUS, PASSIVE_MOB_DAMAGE_BONUS ->
+                    (val >= 0 ? "+" : "-") + pct(Math.abs(val));
+            case PVP_DAMAGE_BONUS, XP_BONUS, LOOT_BONUS,
                     SPEED_BONUS, DOUBLE_CROP_CHANCE,
                     KEEP_INVENTORY_CHANCE -> "+" + pct(val);
             case RESISTANCE, FALL_DAMAGE_REDUCTION, FIRE_RESISTANCE -> "-" + pct(val);
-            case PASSIVE_MOB_DAMAGE_BONUS -> (val >= 0 ? "+" : "-") + pct(Math.abs(val));
             case PVP_DAMAGE_PENALTY, XP_PENALTY, XP_DEATH_PENALTY -> "-" + pct(val);
             case HEALTH_BONUS -> "+" + (int) (val / 2) + "❤";
             default -> "";

@@ -79,12 +79,20 @@ public class StatsListener implements Listener {
     @EventHandler(ignoreCancelled = true)
     public void onPiglinBarter(PiglinBarterEvent event) {
         var piglin = event.getEntity();
-        var nearest = piglin.getWorld().getNearbyPlayers(piglin.getLocation(), 10);
-        if (nearest.isEmpty()) {
-            return;
+        var location = piglin.getLocation();
+        Player closest = null;
+        double closestDist = Double.MAX_VALUE;
+        for (Player player : piglin.getWorld().getNearbyPlayers(location, 10)) {
+            double dist = player.getLocation().distanceSquared(location);
+            if (dist < closestDist) {
+                closestDist = dist;
+                closest = player;
+            }
         }
-        Player closest = nearest.iterator().next();
-        plugin.getStatsStorage().incrementStat(closest.getUniqueId(), StatKeys.PIGLIN_BARTERS);
+        if (closest != null) {
+            plugin.getStatsStorage().incrementStat(
+                    closest.getUniqueId(), StatKeys.PIGLIN_BARTERS);
+        }
     }
 
     @EventHandler(ignoreCancelled = true, priority = EventPriority.MONITOR)

@@ -2,6 +2,7 @@ package ru.nyansus.mc.domya_fate.buff;
 
 import org.bukkit.GameMode;
 import org.bukkit.entity.Enemy;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -12,6 +13,14 @@ import ru.nyansus.mc.domya_fate.DomyaFate;
 import java.util.Set;
 
 public class HostileMobListener implements Listener {
+
+    private static final Set<EntityType> ALWAYS_HOSTILE = Set.of(
+            EntityType.ENDER_DRAGON,
+            EntityType.WITHER,
+            EntityType.WARDEN,
+            EntityType.ELDER_GUARDIAN,
+            EntityType.ENDERMAN
+    );
 
     private static final Set<TargetReason> RETALIATION_REASONS = Set.of(
             TargetReason.TARGET_ATTACKED_ENTITY,
@@ -29,6 +38,9 @@ public class HostileMobListener implements Listener {
     @EventHandler(ignoreCancelled = true)
     public void onEntityTarget(EntityTargetLivingEntityEvent event) {
         if (!(event.getEntity() instanceof Enemy)) {
+            return;
+        }
+        if (ALWAYS_HOSTILE.contains(event.getEntity().getType())) {
             return;
         }
         if (!(event.getTarget() instanceof Player player)) {

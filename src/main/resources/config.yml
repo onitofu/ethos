@@ -371,3 +371,13 @@ tab:
 # Task intervals (ticks)
 buff-check-interval: 1200
 unlock-check-interval: 6000
+
+# Seasonal titles — granted on login during date range
+# Format: "year-month-day" or "year-month-day-hour-minute"
+# timezone: Java timezone ID (default: UTC)
+seasonal-titles:
+  april-fools-2026:
+    title-id: 232
+    from: "2026-4-1-0-0"
+    to: "2026-4-1-23-59"
+    timezone: "Europe/Moscow"

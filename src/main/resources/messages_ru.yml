@@ -15,7 +15,7 @@ karma:
   set-success: "§aКарма игрока {player} установлена на {karma}."
   invalid-number: "§cНеверное число."
   effect:
-    mob_damage_bonus: "урон по враждебным мобам"
+    mob_damage_bonus: "урон по мобам"
     passive_mob_damage_bonus: "урон по мирным мобам"
     pvp_damage_bonus: "урон по игрокам"
     pvp_damage_penalty: "урон по игрокам"

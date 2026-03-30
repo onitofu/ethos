@@ -159,6 +159,8 @@ public class DomyaFate extends JavaPlugin {
         karmaTitleManager = new KarmaTitleManager(getConfig());
         antiFarmManager = new AntiFarmManager(getConfig());
         buffConfig = new BuffConfig(getConfig());
+        TitleRegistry titleRegistry = new TitleRegistry(this);
+        titleManager = new TitleManager(titleRegistry, titleManager.getStorage());
     }
 
     public Messages getMessages() {

@@ -3,6 +3,7 @@ package ru.nyansus.mc.domya_fate.buff;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.entity.Animals;
+import org.bukkit.entity.Tameable;
 import org.bukkit.entity.Bee;
 import org.bukkit.entity.Chicken;
 import org.bukkit.entity.Cow;
@@ -62,6 +63,9 @@ public class MobBehaviorTask extends BukkitRunnable {
         Location playerLoc = player.getLocation();
         for (Entity entity : player.getNearbyEntities(12, 12, 12)) {
             if (!(entity instanceof Animals animal)) {
+                continue;
+            }
+            if (animal instanceof Tameable tamed && tamed.isTamed()) {
                 continue;
             }
             double dist = animal.getLocation().distance(playerLoc);

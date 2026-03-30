@@ -113,6 +113,10 @@ public class TitleManager {
         return newlyUnlocked;
     }
 
+    public TitleStorage getStorage() {
+        return storage;
+    }
+
     public TitleRegistry getRegistry() {
         return registry;
     }
