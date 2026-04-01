@@ -32,6 +32,6 @@ jobs:
       - name: Upload JAR artifact
         uses: actions/upload-artifact@v4
         with:
-          name: TEMPLATE_PLUGIN_NAME
-          path: build/libs/TEMPLATE_PLUGIN_NAME-*.jar
+          name: ethos
+          path: build/libs/ethos-*.jar
           if-no-files-found: error

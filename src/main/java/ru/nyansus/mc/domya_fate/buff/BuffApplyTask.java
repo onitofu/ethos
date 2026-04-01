@@ -2,10 +2,14 @@ package ru.nyansus.mc.domya_fate.buff;
 
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.IronGolem;
+import org.bukkit.GameMode;
+import org.bukkit.NamespacedKey;
+import org.bukkit.attribute.Attribute;
+import org.bukkit.attribute.AttributeInstance;
+import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 import ru.nyansus.mc.domya_fate.DomyaFate;
 import ru.nyansus.mc.domya_fate.karma.KarmaManager;
@@ -15,11 +19,11 @@ import java.util.Optional;
 
 public class BuffApplyTask extends BukkitRunnable {
 
-    private static final int SAVE_EVERY_N_CYCLES = 5;
+    private static final NamespacedKey HEALTH_KEY =
+            new NamespacedKey("ethos", "health_bonus");
 
     private final DomyaFate plugin;
     private final KarmaManager karmaManager;
-    private int cycleCount;
 
     public BuffApplyTask(DomyaFate plugin, KarmaManager karmaManager) {
         this.plugin = plugin;
@@ -28,25 +32,22 @@ public class BuffApplyTask extends BukkitRunnable {
 
     @Override
     public void run() {
-        cycleCount++;
-        if (cycleCount % SAVE_EVERY_N_CYCLES == 0) {
-            karmaManager.saveAll();
-            plugin.getTitleManager().saveAll();
-            plugin.getStatsStorage().save();
-        }
-
         BuffConfig config = plugin.getBuffConfig();
         for (var player : plugin.getServer().getOnlinePlayers()) {
             int karma = karmaManager.getKarma(player.getUniqueId());
-            player.removeMetadata("domya_karma_cached", plugin);
-            player.setMetadata("domya_karma_cached",
-                    new org.bukkit.metadata.FixedMetadataValue(plugin, karma));
 
             plugin.getAntiFarmManager().updatePosition(player);
-            applyEffects(player, karma, config);
-            if (config.isGolemAggro(karma)) {
-                aggroNearbyGolems(player, config.getGolemAggroRange(karma));
+
+            if (player.getGameMode() != GameMode.SURVIVAL) {
+                if (config.isTabEnabled()) {
+                    updateTabName(player, karma);
+                }
+                continue;
             }
+
+            applyEffects(player, karma, config);
+
+
             if (config.isTabEnabled()) {
                 updateTabName(player, karma);
             }
@@ -54,39 +55,70 @@ public class BuffApplyTask extends BukkitRunnable {
     }
 
     private void applyEffects(Player player, int karma, BuffConfig config) {
-        BuffTier negativeTier = config.findNegativeTier(karma);
-        BuffTier positiveTier = config.findPositiveTier(karma);
+        BuffTier tier = config.findTier(karma);
+        if (tier == null) {
+            removeHealthModifier(player);
+            return;
+        }
 
         int duration = config.getEffectDuration();
 
-        if (negativeTier != null) {
-            for (EffectEntry entry : negativeTier.effects()) {
-                player.addPotionEffect(
-                        new PotionEffect(entry.type(), duration, entry.amplifier(),
-                                entry.ambient(), !entry.ambient()));
-            }
-            if (negativeTier.speedBonus() > 0) {
-                player.addPotionEffect(
-                        new PotionEffect(org.bukkit.potion.PotionEffectType.SPEED,
+        for (BuffEffect effect : tier.effects()) {
+            switch (effect.effectType()) {
+                case POTION_EFFECT -> applyPotionIfStronger(player, effect, duration);
+                case SPEED_BONUS -> player.addPotionEffect(
+                        new PotionEffect(PotionEffectType.SPEED, duration, 0, true, false));
+                case NIGHT_VISION -> player.addPotionEffect(
+                        new PotionEffect(PotionEffectType.NIGHT_VISION,
                                 duration, 0, true, false));
-            }
-        }
-
-        if (positiveTier != null) {
-            for (EffectEntry entry : positiveTier.effects()) {
-                player.addPotionEffect(
-                        new PotionEffect(entry.type(), duration, entry.amplifier(),
-                                entry.ambient(), !entry.ambient()));
+                case REGENERATION_BONUS -> player.addPotionEffect(
+                        new PotionEffect(PotionEffectType.REGENERATION, duration,
+                                (int) effect.value(), true, false));
+                case MINING_SPEED -> {
+                    int amp = (int) effect.value();
+                    if (amp >= 0) {
+                        player.addPotionEffect(new PotionEffect(
+                                PotionEffectType.HASTE, duration, amp, true, false));
+                    } else {
+                        player.addPotionEffect(new PotionEffect(
+                                PotionEffectType.MINING_FATIGUE, duration,
+                                Math.abs(amp) - 1, true, false));
+                    }
+                }
+                case GLOWING -> player.addPotionEffect(
+                        new PotionEffect(PotionEffectType.GLOWING,
+                                duration, 0, true, false));
+                case HEALTH_BONUS -> applyHealthModifier(player, effect.value());
+                default -> { }
             }
         }
     }
 
-    private void aggroNearbyGolems(Player player, double range) {
-        for (Entity entity : player.getNearbyEntities(range, range, range)) {
-            if (entity instanceof IronGolem golem && golem.getTarget() == null) {
-                golem.setTarget(player);
-            }
+    private void applyPotionIfStronger(Player player, BuffEffect effect, int duration) {
+        PotionEffect existing = player.getPotionEffect(effect.potionType());
+        if (existing != null && existing.getAmplifier() > effect.amplifier()) {
+            return;
         }
+        player.addPotionEffect(new PotionEffect(effect.potionType(), duration,
+                effect.amplifier(), effect.ambient(), !effect.ambient()));
+    }
+
+    private void applyHealthModifier(Player player, double bonus) {
+        AttributeInstance attr = player.getAttribute(Attribute.MAX_HEALTH);
+        if (attr == null) {
+            return;
+        }
+        removeHealthModifier(player);
+        attr.addTransientModifier(new AttributeModifier(
+                HEALTH_KEY, bonus, AttributeModifier.Operation.ADD_NUMBER));
+    }
+
+    private void removeHealthModifier(Player player) {
+        AttributeInstance attr = player.getAttribute(Attribute.MAX_HEALTH);
+        if (attr == null) {
+            return;
+        }
+        attr.removeModifier(HEALTH_KEY);
     }
 
     private void updateTabName(Player player, int karma) {

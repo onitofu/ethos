@@ -21,6 +21,10 @@ public class MobKillListener implements Listener {
             EntityType.ENDER_DRAGON, EntityType.WITHER
     );
 
+    private static final Set<EntityType> NO_KARMA = Set.of(
+            EntityType.SILVERFISH
+    );
+
     private final DomyaFate plugin;
 
     public MobKillListener(DomyaFate plugin) {
@@ -36,6 +40,11 @@ public class MobKillListener implements Listener {
         }
 
         if (plugin.getAntiFarmManager().isAfk(killer)) {
+            return;
+        }
+
+        if (plugin.getAntiFarmManager().isMobStreakExceeded(
+                killer.getUniqueId(), entity.getType())) {
             return;
         }
 
@@ -66,6 +75,9 @@ public class MobKillListener implements Listener {
         }
         if (BOSSES.contains(entity.getType())) {
             return getConfig("kill-boss", 50);
+        }
+        if (NO_KARMA.contains(entity.getType())) {
+            return 0;
         }
         if (entity instanceof Enemy) {
             return getConfig("kill-hostile", 1);

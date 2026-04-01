@@ -36,7 +36,8 @@ public class PlayerKillListener implements Listener {
         }
 
         afm.recordPvpKill(killer.getUniqueId(), victim.getUniqueId());
-        plugin.getStatsStorage().incrementStat(killer.getUniqueId(), "pvp-kills");
+        plugin.getStatsStorage().incrementStat(killer.getUniqueId(),
+                ru.nyansus.mc.domya_fate.util.StatKeys.PVP_KILLS);
 
         int victimKarma = km.getKarma(victim.getUniqueId());
         int karmaChange;

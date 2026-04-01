@@ -4,101 +4,383 @@ default-locale: en
 # Title automatically given to new players (-1 to disable)
 default-title: 0
 
+# Karma reset cooldown (days). Players can use /karma reset once per this period.
+karma-reset-cooldown-days: 30
+
 # Karma range
 karma:
-  min: -1000
-  max: 1000
+  min: -10000
+  max: 10000
 
 # Karma change per action
 karma-actions:
-  kill-hostile: 1
-  kill-boss: 50
-  villager-trade: 2
+  kill-hostile: 3
+  kill-boss: 250
+  villager-trade: 10
   cure-zombie-villager: 30
-  feed-animal: 1
-  kill-passive: -3
-  kill-tamed: -20
+  feed-animal: 10
+  kill-passive: -5
+  kill-tamed: -25
   kill-villager: -25
   kill-golem: -15
-  kill-player: -15
-  kill-good-player: -30
-  kill-evil-player: 10
+  kill-player: -25
+  kill-good-player: -50
+  kill-evil-player: 50
 
-# Karma decay
+# Karma decay — fixed points per day towards zero
 decay:
   enabled: true
-  percent-per-hour: 1.0
-  min-threshold: 100
+  points-per-day: 5
 
 # Anti-farm protection
 anti-farm:
-  pvp-cooldown-minutes: 30
+  pvp-cooldown-minutes: 10
   mutual-kill-window-minutes: 5
-  spawner-karma-multiplier: 0.5
+  spawner-karma-multiplier: 0
   spawner-counts-for-titles: false
-  trade-cooldown-seconds: 60
+  trade-cooldown-seconds: 300
+  feed-cooldown-seconds: 300
   # AFK detection: no karma from mob kills if player hasn't moved
-  afk-threshold-seconds: 30
+  afk-threshold-seconds: 5
   afk-move-distance: 5.0
+  # Mob streak: after N kills of same mob type, karma stops until different type killed
+  mob-streak-limit: 10
 
 # Karmic titles — map title ID to karma range (names/colors are in titles.yml)
 karma-titles:
-  1: [-1000, -800]
-  2: [-800, -600]
-  3: [-600, -400]
-  4: [-400, -200]
-  5: [200, 400]
-  6: [400, 600]
-  7: [600, 800]
-  8: [800, 1000]
+  1: [-2000, -1000]
+  2: [-3000, -2000]
+  3: [-4000, -3000]
+  4: [-5000, -4000]
+  5: [-6000, -5000]
+  6: [-7000, -6000]
+  7: [-8000, -7000]
+  8: [-9000, -8000]
+  9: [-10000, -9000]
+  230: [-10001, -10000]
+  10: [1000, 2000]
+  11: [2000, 3000]
+  12: [3000, 4000]
+  13: [4000, 5000]
+  14: [5000, 6000]
+  15: [6000, 7000]
+  16: [7000, 8000]
+  17: [8000, 9000]
+  18: [9000, 10000]
+  231: [10000, 10001]
 
-# Buff system
+# Buff system — unified modifier format
 buffs:
-  # Potion effect duration in ticks (should be slightly longer than check-interval)
   effect-duration: 1400
-
-  # Negative karma — better at combat, worse at economy
-  negative:
-    -200:
-      mob-damage-bonus: 0.05
-      trade-price-increase: 1
-    -400:
-      mob-damage-bonus: 0.10
-      speed-bonus: 0.05
-      trade-price-increase: 2
-    -600:
-      mob-damage-bonus: 0.15
-      speed-bonus: 0.10
-      block-trading: true
-    -800:
-      mob-damage-bonus: 0.20
-      speed-bonus: 0.15
-      block-trading: true
-      golem-aggro: true
-      golem-aggro-range: 16.0
-
-  # Positive karma — better at economy, slightly weaker in PvP
-  positive:
-    200:
-      xp-bonus: 0.05
-    400:
-      xp-bonus: 0.10
-    600:
-      xp-bonus: 0.15
+  tiers:
+    # === Negative karma ===
+    -500:
       effects:
-        - { type: HERO_OF_THE_VILLAGE, amplifier: 0 }
-      pvp-damage-penalty: 0.05
-    800:
-      xp-bonus: 0.20
+        - { type: MOB_DAMAGE_BONUS, value: 0.01 }
+    -1000:
       effects:
-        - { type: HERO_OF_THE_VILLAGE, amplifier: 1 }
-        - { type: LUCK, amplifier: 0 }
-      pvp-damage-penalty: 0.10
+        - { type: MOB_DAMAGE_BONUS, value: 0.02 }
+        - { type: TRADE_PRICE_INCREASE, value: 1 }
+    -1500:
+      effects:
+        - { type: MOB_DAMAGE_BONUS, value: 0.03 }
+        - { type: TRADE_PRICE_INCREASE, value: 1 }
+    -2000:
+      effects:
+        - { type: MOB_DAMAGE_BONUS, value: 0.04 }
+        - { type: TRADE_PRICE_INCREASE, value: 1 }
+    -2500:
+      effects:
+        - { type: MOB_DAMAGE_BONUS, value: 0.04 }
+        - { type: TRADE_PRICE_INCREASE, value: 2 }
+    -3000:
+      effects:
+        - { type: MOB_DAMAGE_BONUS, value: 0.05 }
+        - { type: TRADE_PRICE_INCREASE, value: 2 }
+    -3500:
+      effects:
+        - { type: MOB_DAMAGE_BONUS, value: 0.05 }
+        - { type: TRADE_PRICE_INCREASE, value: 2 }
+        - { type: LOOT_BONUS, value: 0.03 }
+    -4000:
+      effects:
+        - { type: MOB_DAMAGE_BONUS, value: 0.06 }
+        - { type: TRADE_PRICE_INCREASE, value: 3 }
+        - { type: LOOT_BONUS, value: 0.04 }
+    -4500:
+      effects:
+        - { type: MOB_DAMAGE_BONUS, value: 0.06 }
+        - { type: BLOCK_TRADING, value: true }
+        - { type: LOOT_BONUS, value: 0.05 }
+    -5000:
+      effects:
+        - { type: MOB_DAMAGE_BONUS, value: 0.07 }
+        - { type: BLOCK_TRADING, value: true }
+        - { type: LOOT_BONUS, value: 0.05 }
+        - { type: HOSTILE_MOB_REDUCED_RANGE, value: 12.0 }
+    -5500:
+      effects:
+        - { type: MOB_DAMAGE_BONUS, value: 0.07 }
+        - { type: BLOCK_TRADING, value: true }
+        - { type: LOOT_BONUS, value: 0.06 }
+        - { type: HOSTILE_MOB_REDUCED_RANGE, value: 10.0 }
+    -6000:
+      effects:
+        - { type: MOB_DAMAGE_BONUS, value: 0.08 }
+        - { type: BLOCK_TRADING, value: true }
+        - { type: LOOT_BONUS, value: 0.07 }
+        - { type: HOSTILE_MOB_REDUCED_RANGE, value: 8.0 }
+        - { type: PASSIVE_MOB_FLEE, value: true }
+    -6500:
+      effects:
+        - { type: MOB_DAMAGE_BONUS, value: 0.08 }
+        - { type: BLOCK_TRADING, value: true }
+        - { type: LOOT_BONUS, value: 0.07 }
+        - { type: HOSTILE_MOB_REDUCED_RANGE, value: 6.0 }
+        - { type: PASSIVE_MOB_FLEE, value: true }
+        - { type: GOLEM_AGGRO, value: 16.0 }
+    -7000:
+      effects:
+        - { type: MOB_DAMAGE_BONUS, value: 0.09 }
+        - { type: SPEED_BONUS, value: 0.03 }
+        - { type: BLOCK_TRADING, value: true }
+        - { type: LOOT_BONUS, value: 0.08 }
+        - { type: HOSTILE_MOB_NEUTRAL, value: true }
+        - { type: GOLEM_AGGRO, value: 20.0 }
+        - { type: PASSIVE_MOB_HOSTILE, value: true }
+    -7500:
+      effects:
+        - { type: MOB_DAMAGE_BONUS, value: 0.09 }
+        - { type: SPEED_BONUS, value: 0.03 }
+        - { type: BLOCK_TRADING, value: true }
+        - { type: LOOT_BONUS, value: 0.09 }
+        - { type: HOSTILE_MOB_NEUTRAL, value: true }
+        - { type: FALL_DAMAGE_REDUCTION, value: 0.08 }
+        - { type: GOLEM_AGGRO, value: 20.0 }
+        - { type: PASSIVE_MOB_HOSTILE, value: true }
+        - { type: BLOCK_TAMING, value: true }
+    -8000:
+      effects:
+        - { type: MOB_DAMAGE_BONUS, value: 0.10 }
+        - { type: SPEED_BONUS, value: 0.05 }
+        - { type: BLOCK_TRADING, value: true }
+        - { type: LOOT_BONUS, value: 0.09 }
+        - { type: HOSTILE_MOB_NEUTRAL, value: true }
+        - { type: FALL_DAMAGE_REDUCTION, value: 0.10 }
+        - { type: GOLEM_AGGRO, value: 24.0 }
+        - { type: PASSIVE_MOB_HOSTILE, value: true }
+        - { type: BLOCK_TAMING, value: true }
+    -8500:
+      effects:
+        - { type: MOB_DAMAGE_BONUS, value: 0.10 }
+        - { type: SPEED_BONUS, value: 0.05 }
+        - { type: BLOCK_TRADING, value: true }
+        - { type: LOOT_BONUS, value: 0.10 }
+        - { type: HOSTILE_MOB_NEUTRAL, value: true }
+        - { type: FALL_DAMAGE_REDUCTION, value: 0.12 }
+        - { type: GOLEM_AGGRO, value: 24.0 }
+        - { type: PASSIVE_MOB_HOSTILE, value: true }
+        - { type: BLOCK_TAMING, value: true }
+        - { type: BLOCK_RIDING, value: true }
+    -9000:
+      effects:
+        - { type: MOB_DAMAGE_BONUS, value: 0.11 }
+        - { type: SPEED_BONUS, value: 0.07 }
+        - { type: BLOCK_TRADING, value: true }
+        - { type: LOOT_BONUS, value: 0.11 }
+        - { type: HOSTILE_MOB_NEUTRAL, value: true }
+        - { type: FALL_DAMAGE_REDUCTION, value: 0.13 }
+        - { type: GOLEM_AGGRO, value: 28.0 }
+        - { type: PASSIVE_MOB_HOSTILE, value: true }
+        - { type: BLOCK_TAMING, value: true }
+        - { type: BLOCK_RIDING, value: true }
+    -9500:
+      effects:
+        - { type: MOB_DAMAGE_BONUS, value: 0.11 }
+        - { type: SPEED_BONUS, value: 0.07 }
+        - { type: BLOCK_TRADING, value: true }
+        - { type: LOOT_BONUS, value: 0.11 }
+        - { type: HOSTILE_MOB_NEUTRAL, value: true }
+        - { type: FALL_DAMAGE_REDUCTION, value: 0.14 }
+        - { type: GOLEM_AGGRO, value: 30.0 }
+        - { type: PASSIVE_MOB_HOSTILE, value: true }
+        - { type: BLOCK_TAMING, value: true }
+        - { type: BLOCK_RIDING, value: true }
+    -10000:
+      effects:
+        - { type: MOB_DAMAGE_BONUS, value: 0.12 }
+        - { type: SPEED_BONUS, value: 0.10 }
+        - { type: BLOCK_TRADING, value: true }
+        - { type: LOOT_BONUS, value: 0.12 }
+        - { type: HOSTILE_MOB_NEUTRAL, value: true }
+        - { type: FALL_DAMAGE_REDUCTION, value: 0.15 }
+        - { type: GOLEM_AGGRO, value: 32.0 }
+        - { type: PASSIVE_MOB_HOSTILE, value: true }
+        - { type: BLOCK_TAMING, value: true }
+        - { type: BLOCK_RIDING, value: true }
+
+    # === Positive karma ===
+    500:
+      effects:
+        - { type: XP_BONUS, value: 0.01 }
+    1000:
+      effects:
+        - { type: XP_BONUS, value: 0.02 }
+    1500:
+      effects:
+        - { type: XP_BONUS, value: 0.03 }
+        - { type: DOUBLE_CROP_CHANCE, value: 0.02 }
+    2000:
+      effects:
+        - { type: XP_BONUS, value: 0.03 }
+        - { type: DOUBLE_CROP_CHANCE, value: 0.03 }
+    2500:
+      effects:
+        - { type: XP_BONUS, value: 0.04 }
+        - { type: DOUBLE_CROP_CHANCE, value: 0.04 }
+    3000:
+      effects:
+        - { type: XP_BONUS, value: 0.04 }
+        - { type: DOUBLE_CROP_CHANCE, value: 0.04 }
+        - { type: MOB_DAMAGE_BONUS, value: -0.01 }
+    3500:
+      effects:
+        - { type: XP_BONUS, value: 0.05 }
+        - { type: DOUBLE_CROP_CHANCE, value: 0.05 }
+        - { type: MOB_DAMAGE_BONUS, value: -0.02 }
+        - { type: HOSTILE_MOB_INCREASED_RANGE, value: 18.0 }
+    4000:
+      effects:
+        - { type: XP_BONUS, value: 0.05 }
+        - { type: DOUBLE_CROP_CHANCE, value: 0.05 }
+        - { type: MOB_DAMAGE_BONUS, value: -0.02 }
+        - { type: HOSTILE_MOB_INCREASED_RANGE, value: 20.0 }
+    4500:
+      effects:
+        - { type: XP_BONUS, value: 0.06 }
+        - { type: DOUBLE_CROP_CHANCE, value: 0.06 }
+        - { type: MOB_DAMAGE_BONUS, value: -0.03 }
+        - { type: HOSTILE_MOB_INCREASED_RANGE, value: 20.0 }
+        - { type: RESISTANCE, value: 0.02 }
+    5000:
+      effects:
+        - { type: XP_BONUS, value: 0.06 }
+        - { type: DOUBLE_CROP_CHANCE, value: 0.06 }
+        - { type: MOB_DAMAGE_BONUS, value: -0.03 }
+        - { type: HOSTILE_MOB_INCREASED_RANGE, value: 22.0 }
+        - { type: RESISTANCE, value: 0.03 }
+    5500:
+      effects:
+        - { type: XP_BONUS, value: 0.07 }
+        - { type: DOUBLE_CROP_CHANCE, value: 0.07 }
+        - { type: MOB_DAMAGE_BONUS, value: -0.04 }
+        - { type: HOSTILE_MOB_INCREASED_RANGE, value: 22.0 }
+        - { type: RESISTANCE, value: 0.03 }
+    6000:
+      effects:
+        - { type: XP_BONUS, value: 0.07 }
+        - { type: DOUBLE_CROP_CHANCE, value: 0.07 }
+        - { type: MOB_DAMAGE_BONUS, value: -0.04 }
+        - { type: HOSTILE_MOB_INCREASED_RANGE, value: 24.0 }
+        - { type: RESISTANCE, value: 0.04 }
+        - { type: POTION_EFFECT, potion: LUCK, amplifier: 0 }
+    6500:
+      effects:
+        - { type: XP_BONUS, value: 0.08 }
+        - { type: DOUBLE_CROP_CHANCE, value: 0.08 }
+        - { type: MOB_DAMAGE_BONUS, value: -0.05 }
+        - { type: HOSTILE_MOB_INCREASED_RANGE, value: 24.0 }
+        - { type: RESISTANCE, value: 0.04 }
+        - { type: POTION_EFFECT, potion: LUCK, amplifier: 0 }
+    7000:
+      effects:
+        - { type: XP_BONUS, value: 0.08 }
+        - { type: DOUBLE_CROP_CHANCE, value: 0.08 }
+        - { type: MOB_DAMAGE_BONUS, value: -0.05 }
+        - { type: HOSTILE_MOB_INCREASED_RANGE, value: 26.0 }
+        - { type: RESISTANCE, value: 0.05 }
+        - { type: POTION_EFFECT, potion: LUCK, amplifier: 0 }
+    7500:
+      effects:
+        - { type: XP_BONUS, value: 0.09 }
+        - { type: DOUBLE_CROP_CHANCE, value: 0.09 }
+        - { type: MOB_DAMAGE_BONUS, value: -0.05 }
+        - { type: HOSTILE_MOB_INCREASED_RANGE, value: 26.0 }
+        - { type: RESISTANCE, value: 0.05 }
+        - { type: POTION_EFFECT, potion: LUCK, amplifier: 0 }
+        - { type: POTION_EFFECT, potion: HERO_OF_THE_VILLAGE, amplifier: 0 }
+    8000:
+      effects:
+        - { type: XP_BONUS, value: 0.09 }
+        - { type: DOUBLE_CROP_CHANCE, value: 0.09 }
+        - { type: MOB_DAMAGE_BONUS, value: -0.06 }
+        - { type: HOSTILE_MOB_INCREASED_RANGE, value: 28.0 }
+        - { type: RESISTANCE, value: 0.06 }
+        - { type: POTION_EFFECT, potion: LUCK, amplifier: 0 }
+        - { type: POTION_EFFECT, potion: HERO_OF_THE_VILLAGE, amplifier: 0 }
+        - { type: HEALTH_BONUS, value: 2.0 }
+    8500:
+      effects:
+        - { type: XP_BONUS, value: 0.10 }
+        - { type: DOUBLE_CROP_CHANCE, value: 0.10 }
+        - { type: MOB_DAMAGE_BONUS, value: -0.06 }
+        - { type: HOSTILE_MOB_INCREASED_RANGE, value: 28.0 }
+        - { type: RESISTANCE, value: 0.06 }
+        - { type: POTION_EFFECT, potion: LUCK, amplifier: 0 }
+        - { type: POTION_EFFECT, potion: HERO_OF_THE_VILLAGE, amplifier: 0 }
+        - { type: HEALTH_BONUS, value: 2.0 }
+    9000:
+      effects:
+        - { type: XP_BONUS, value: 0.10 }
+        - { type: DOUBLE_CROP_CHANCE, value: 0.10 }
+        - { type: MOB_DAMAGE_BONUS, value: -0.06 }
+        - { type: HOSTILE_MOB_INCREASED_RANGE, value: 30.0 }
+        - { type: RESISTANCE, value: 0.06 }
+        - { type: POTION_EFFECT, potion: LUCK, amplifier: 0 }
+        - { type: POTION_EFFECT, potion: HERO_OF_THE_VILLAGE, amplifier: 1 }
+        - { type: HEALTH_BONUS, value: 2.0 }
+    9500:
+      effects:
+        - { type: XP_BONUS, value: 0.11 }
+        - { type: DOUBLE_CROP_CHANCE, value: 0.11 }
+        - { type: MOB_DAMAGE_BONUS, value: -0.07 }
+        - { type: HOSTILE_MOB_INCREASED_RANGE, value: 30.0 }
+        - { type: RESISTANCE, value: 0.07 }
+        - { type: POTION_EFFECT, potion: LUCK, amplifier: 0 }
+        - { type: POTION_EFFECT, potion: HERO_OF_THE_VILLAGE, amplifier: 1 }
+        - { type: HEALTH_BONUS, value: 2.0 }
+    10000:
+      effects:
+        - { type: XP_BONUS, value: 0.12 }
+        - { type: DOUBLE_CROP_CHANCE, value: 0.12 }
+        - { type: MOB_DAMAGE_BONUS, value: -0.07 }
+        - { type: HOSTILE_MOB_INCREASED_RANGE, value: 32.0 }
+        - { type: RESISTANCE, value: 0.07 }
+        - { type: POTION_EFFECT, potion: LUCK, amplifier: 0 }
+        - { type: POTION_EFFECT, potion: HERO_OF_THE_VILLAGE, amplifier: 1 }
+        - { type: HEALTH_BONUS, value: 2.0 }
+
+# Passive mob hostile damage (when PASSIVE_MOB_HOSTILE is active)
+passive-mob-damage:
+  large: 5.0
+  medium: 3.0
+  small: 1.0
+  default: 1.0
 
 # Tab display
 tab:
   enabled: false
 
 # Task intervals (ticks)
-buff-check-interval: 150
-unlock-check-interval: 150
+buff-check-interval: 1200
+unlock-check-interval: 6000
+
+# Seasonal titles — granted on login during date range
+# Format: "year-month-day" or "year-month-day-hour-minute"
+# timezone: Java timezone ID (default: UTC)
+seasonal-titles:
+  april-fools-2026:
+    title-id: 232
+    from: "2026-4-1-0-0"
+    to: "2026-4-1-23-59"
+    timezone: "Europe/Moscow"

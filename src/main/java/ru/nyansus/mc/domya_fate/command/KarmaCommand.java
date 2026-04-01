@@ -7,9 +7,12 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
 import ru.nyansus.mc.domya_fate.DomyaFate;
-import ru.nyansus.mc.domya_fate.buff.BuffConfig;
+import ru.nyansus.mc.domya_fate.buff.BuffEffect;
 import ru.nyansus.mc.domya_fate.buff.BuffTier;
 import ru.nyansus.mc.domya_fate.karma.KarmaTitle;
+import ru.nyansus.mc.domya_fate.karma.StatsStorage;
+import ru.nyansus.mc.domya_fate.util.ColorUtil;
+import ru.nyansus.mc.domya_fate.util.StatKeys;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,6 +34,9 @@ public class KarmaCommand implements CommandExecutor, TabCompleter {
         if (args.length >= 1 && args[0].equalsIgnoreCase("set")) {
             return handleSet(sender, args);
         }
+        if (args.length >= 1 && args[0].equalsIgnoreCase("reset")) {
+            return handleReset(sender);
+        }
 
         if (args.length == 0) {
             if (!(sender instanceof Player player)) {
@@ -41,7 +47,7 @@ public class KarmaCommand implements CommandExecutor, TabCompleter {
             return true;
         }
 
-        if (!sender.hasPermission("domya.karma.view.others")) {
+        if (!sender.hasPermission("ethos.karma.view.others")) {
             sender.sendMessage(plugin.getMessages().get(sender, "command.no-permission"));
             return true;
         }
@@ -62,7 +68,7 @@ public class KarmaCommand implements CommandExecutor, TabCompleter {
     }
 
     private boolean handleSet(CommandSender sender, String[] args) {
-        if (!sender.hasPermission("domya.karma.admin")) {
+        if (!sender.hasPermission("ethos.karma.admin")) {
             sender.sendMessage(plugin.getMessages().get(sender, "command.no-permission"));
             return true;
         }
@@ -93,6 +99,33 @@ public class KarmaCommand implements CommandExecutor, TabCompleter {
         return true;
     }
 
+    private boolean handleReset(CommandSender sender) {
+        if (!(sender instanceof Player player)) {
+            sender.sendMessage(plugin.getMessages().get(sender, "karma.player-only"));
+            return true;
+        }
+
+        long cooldownDays = plugin.getConfig().getLong("karma-reset-cooldown-days", 30);
+        long cooldownMs = cooldownDays * 86_400_000L;
+        StatsStorage stats = plugin.getStatsStorage();
+        long lastReset = stats.getLongStat(player.getUniqueId(), StatKeys.LAST_KARMA_RESET);
+        long now = System.currentTimeMillis();
+
+        if (lastReset > 0 && now - lastReset < cooldownMs) {
+            long remainingDays = (cooldownMs - (now - lastReset)) / 86_400_000L + 1;
+            player.sendMessage(plugin.getMessages().get(player, "karma.reset-cooldown",
+                    "{days}", String.valueOf(remainingDays)));
+            return true;
+        }
+
+        int oldKarma = plugin.getKarmaManager().getKarma(player.getUniqueId());
+        plugin.getKarmaManager().setKarma(player.getUniqueId(), 0);
+        stats.setStat(player.getUniqueId(), StatKeys.LAST_KARMA_RESET, now);
+        player.sendMessage(plugin.getMessages().get(player, "karma.reset-success",
+                "{old}", String.valueOf(oldKarma)));
+        return true;
+    }
+
     private void showKarma(Player viewer, UUID targetUuid, String targetName) {
         int karma = plugin.getKarmaManager().getKarma(targetUuid);
         Optional<KarmaTitle> karmaTitle = plugin.getKarmaTitleManager().getTitle(karma);
@@ -100,7 +133,7 @@ public class KarmaCommand implements CommandExecutor, TabCompleter {
         String bar = buildBar(karma);
         String titleStr = karmaTitle
                 .flatMap(kt -> plugin.getTitleManager().getRegistry().getTitle(kt.id()))
-                .map(t -> " §7[" + colorCode(t.color()) + t.nameRu() + "§7]")
+                .map(t -> " §7[" + ColorUtil.colorCode(t.color()) + t.nameRu() + "§7]")
                 .orElse("");
 
         viewer.sendMessage(plugin.getMessages().get(viewer, "karma.display",
@@ -113,60 +146,77 @@ public class KarmaCommand implements CommandExecutor, TabCompleter {
     }
 
     private void showEffects(Player viewer, int karma) {
-        BuffConfig config = plugin.getBuffConfig();
-        List<String> buffs = new ArrayList<>();
-        List<String> debuffs = new ArrayList<>();
-
-        if (karma < 0) {
-            BuffTier tier = config.findNegativeTier(karma);
-            if (tier != null) {
-                if (tier.mobDamageBonus() > 0) {
-                    buffs.add("+" + pct(tier.mobDamageBonus())
-                            + " " + plugin.getMessages().get(viewer, "karma.buff.mob-damage"));
-                }
-                if (tier.speedBonus() > 0) {
-                    buffs.add("+" + pct(tier.speedBonus())
-                            + " " + plugin.getMessages().get(viewer, "karma.buff.speed"));
-                }
-                if (tier.tradePriceIncrease() > 0) {
-                    debuffs.add(plugin.getMessages().get(viewer, "karma.debuff.trade-prices",
-                            "{level}", String.valueOf(tier.tradePriceIncrease())));
-                }
-                if (tier.blockTrading()) {
-                    debuffs.add(plugin.getMessages().get(viewer, "karma.debuff.trade-blocked"));
-                }
-                if (tier.golemAggro()) {
-                    debuffs.add(plugin.getMessages().get(viewer, "karma.debuff.golem-aggro"));
-                }
-            }
-        } else if (karma > 0) {
-            BuffTier tier = config.findPositiveTier(karma);
-            if (tier != null) {
-                if (tier.xpBonus() > 0) {
-                    buffs.add("+" + pct(tier.xpBonus())
-                            + " " + plugin.getMessages().get(viewer, "karma.buff.xp"));
-                }
-                if (tier.effects().stream().anyMatch(e ->
-                        e.type().equals(org.bukkit.potion.PotionEffectType.HERO_OF_THE_VILLAGE))) {
-                    buffs.add(plugin.getMessages().get(viewer, "karma.buff.trade-discount"));
-                }
-                if (tier.effects().stream().anyMatch(e ->
-                        e.type().equals(org.bukkit.potion.PotionEffectType.LUCK))) {
-                    buffs.add(plugin.getMessages().get(viewer, "karma.buff.luck"));
-                }
-                if (tier.pvpDamagePenalty() > 0) {
-                    debuffs.add("-" + pct(tier.pvpDamagePenalty())
-                            + " " + plugin.getMessages().get(viewer, "karma.debuff.pvp-damage"));
-                }
-            }
+        BuffTier tier = plugin.getBuffConfig().findTier(karma);
+        if (tier == null) {
+            return;
         }
 
-        for (String buff : buffs) {
-            viewer.sendMessage("  §a▲ " + buff);
+        for (BuffEffect effect : tier.effects()) {
+            String line = formatEffect(viewer, effect);
+            if (line != null) {
+                viewer.sendMessage(line);
+            }
         }
-        for (String debuff : debuffs) {
-            viewer.sendMessage("  §c▼ " + debuff);
+    }
+
+    private String formatEffect(Player viewer, BuffEffect effect) {
+        if (effect.effectType() == ru.nyansus.mc.domya_fate.buff.EffectType.POTION_EFFECT) {
+            return formatPotionEffect(viewer, effect);
         }
+
+        String key = "karma.effect." + effect.effectType().name().toLowerCase();
+        String msg = plugin.getMessages().get(viewer, key);
+        if (msg.startsWith("[")) {
+            return null;
+        }
+
+        boolean isBuff = isBuff(effect);
+        String prefix = isBuff ? "  §a▲ " : "  §c▼ ";
+        String value = formatValue(effect);
+
+        return prefix + (value.isEmpty() ? msg : value + " " + msg);
+    }
+
+    private String formatPotionEffect(Player viewer, BuffEffect effect) {
+        String name = effect.potionType().translationKey();
+        int level = effect.amplifier() + 1;
+        String display = plugin.getMessages().get(viewer,
+                "karma.potion." + effect.potionType().getKey().getKey(),
+                "{level}", String.valueOf(level));
+        if (display.startsWith("[")) {
+            display = effect.potionType().getKey().getKey() + " " + level;
+        }
+        return "  §a▲ " + display;
+    }
+
+    private boolean isBuff(BuffEffect effect) {
+        if (effect.value() < 0 && (
+                effect.effectType() == ru.nyansus.mc.domya_fate.buff.EffectType.MOB_DAMAGE_BONUS
+                || effect.effectType() == ru.nyansus.mc.domya_fate.buff.EffectType.PASSIVE_MOB_DAMAGE_BONUS)) {
+            return false;
+        }
+        return switch (effect.effectType()) {
+            case PVP_DAMAGE_PENALTY, XP_PENALTY, XP_DEATH_PENALTY,
+                    TRADE_PRICE_INCREASE, BLOCK_TRADING, GOLEM_AGGRO,
+                    PASSIVE_MOB_FLEE, PASSIVE_MOB_HOSTILE, BLOCK_TAMING, BLOCK_RIDING,
+                    GLOWING, HUNGER_RATE, HOSTILE_MOB_INCREASED_RANGE -> false;
+            default -> true;
+        };
+    }
+
+    private String formatValue(BuffEffect effect) {
+        double val = effect.value();
+        return switch (effect.effectType()) {
+            case MOB_DAMAGE_BONUS, PASSIVE_MOB_DAMAGE_BONUS ->
+                    (val >= 0 ? "+" : "-") + pct(Math.abs(val));
+            case PVP_DAMAGE_BONUS, XP_BONUS, LOOT_BONUS,
+                    SPEED_BONUS, DOUBLE_CROP_CHANCE,
+                    KEEP_INVENTORY_CHANCE -> "+" + pct(val);
+            case RESISTANCE, FALL_DAMAGE_REDUCTION, FIRE_RESISTANCE -> "-" + pct(val);
+            case PVP_DAMAGE_PENALTY, XP_PENALTY, XP_DEATH_PENALTY -> "-" + pct(val);
+            case HEALTH_BONUS -> "+" + (int) (val / 2) + "❤";
+            default -> "";
+        };
     }
 
     private String pct(double value) {
@@ -200,35 +250,19 @@ public class KarmaCommand implements CommandExecutor, TabCompleter {
         return bar.toString();
     }
 
-    private String colorCode(String color) {
-        return switch (color) {
-            case "dark_red" -> "§4";
-            case "red" -> "§c";
-            case "gold" -> "§6";
-            case "green" -> "§a";
-            case "dark_green" -> "§2";
-            case "aqua" -> "§b";
-            case "light_purple" -> "§d";
-            case "dark_purple" -> "§5";
-            case "white" -> "§f";
-            case "gray" -> "§7";
-            case "dark_gray" -> "§8";
-            case "yellow" -> "§e";
-            case "blue" -> "§9";
-            default -> "§f";
-        };
-    }
-
     @Override
     public List<String> onTabComplete(CommandSender sender, Command command,
                                       String label, String[] args) {
         if (args.length == 1) {
             List<String> completions = new ArrayList<>();
             String prefix = args[0].toLowerCase();
-            if (sender.hasPermission("domya.karma.admin") && "set".startsWith(prefix)) {
+            if (sender.hasPermission("ethos.karma.admin") && "set".startsWith(prefix)) {
                 completions.add("set");
             }
-            if (sender.hasPermission("domya.karma.view.others")) {
+            if ("reset".startsWith(prefix)) {
+                completions.add("reset");
+            }
+            if (sender.hasPermission("ethos.karma.view.others")) {
                 for (Player player : Bukkit.getOnlinePlayers()) {
                     if (player.getName().toLowerCase().startsWith(prefix)) {
                         completions.add(player.getName());
@@ -238,7 +272,7 @@ public class KarmaCommand implements CommandExecutor, TabCompleter {
             return completions;
         }
         if (args.length == 2 && args[0].equalsIgnoreCase("set")
-                && sender.hasPermission("domya.karma.admin")) {
+                && sender.hasPermission("ethos.karma.admin")) {
             List<String> names = new ArrayList<>();
             String prefix = args[1].toLowerCase();
             for (Player player : Bukkit.getOnlinePlayers()) {
@@ -249,8 +283,8 @@ public class KarmaCommand implements CommandExecutor, TabCompleter {
             return names;
         }
         if (args.length == 3 && args[0].equalsIgnoreCase("set")
-                && sender.hasPermission("domya.karma.admin")) {
-            return List.of("-1000", "-500", "0", "500", "1000");
+                && sender.hasPermission("ethos.karma.admin")) {
+            return List.of("-10000", "-5000", "0", "5000", "10000");
         }
         return List.of();
     }

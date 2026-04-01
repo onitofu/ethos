@@ -2,6 +2,7 @@ package ru.nyansus.mc.domya_fate.karma;
 
 import org.bukkit.Location;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 
 import java.util.HashMap;
@@ -16,10 +17,13 @@ public class AntiFarmManager {
     private final boolean spawnerCountsForTitles;
     private final long afkThresholdMs;
     private final double afkMoveDistance;
+    private final int mobStreakLimit;
 
     private final Map<UUID, Map<UUID, Long>> pvpKills = new HashMap<>();
     private final Map<UUID, Map<UUID, Long>> mutualKills = new HashMap<>();
     private final Map<UUID, LocationSnapshot> lastPositions = new HashMap<>();
+    private final Map<UUID, EntityType> lastMobType = new HashMap<>();
+    private final Map<UUID, Integer> mobStreak = new HashMap<>();
 
     public AntiFarmManager(FileConfiguration config) {
         this.pvpCooldownMs = config.getLong("anti-farm.pvp-cooldown-minutes", 30) * 60_000L;
@@ -28,6 +32,18 @@ public class AntiFarmManager {
         this.spawnerCountsForTitles = config.getBoolean("anti-farm.spawner-counts-for-titles", false);
         this.afkThresholdMs = config.getLong("anti-farm.afk-threshold-seconds", 120) * 1000L;
         this.afkMoveDistance = config.getDouble("anti-farm.afk-move-distance", 5.0);
+        this.mobStreakLimit = config.getInt("anti-farm.mob-streak-limit", 5);
+    }
+
+    public boolean isMobStreakExceeded(UUID player, EntityType mobType) {
+        EntityType last = lastMobType.get(player);
+        if (last != null && last == mobType) {
+            int streak = mobStreak.merge(player, 1, Integer::sum);
+            return streak > mobStreakLimit;
+        }
+        lastMobType.put(player, mobType);
+        mobStreak.put(player, 1);
+        return false;
     }
 
     public boolean isAfk(Player player) {
@@ -93,7 +109,10 @@ public class AntiFarmManager {
 
     public void clearPlayer(UUID player) {
         pvpKills.remove(player);
+        mutualKills.remove(player);
         lastPositions.remove(player);
+        lastMobType.remove(player);
+        mobStreak.remove(player);
     }
 
     public int applySpawnerMultiplier(int karma) {

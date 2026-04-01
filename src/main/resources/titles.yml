@@ -1,8 +1,5 @@
-# ============================================================
-# Title definitions
-# Karmic titles (ID 1-8) are auto-granted/revoked by karma
-# Vanilla titles (ID 100+) are unlocked by achievements
-# ============================================================
+# Title definitions — sequential IDs
+# To add a new title, use the next available ID
 
 titles:
   # === Default ===
@@ -15,155 +12,156 @@ titles:
       ru: "Стартовый титул"
       en: "Starting title"
 
-  # === Karmic (1-8) ===
+  # === Karmic: Negative (1-9) ===
   1:
-    name:
-      ru: "Тиран"
-      en: "Tyrant"
-    color: "dark_red"
-    description:
-      ru: "Карма от -1000 до -800"
-      en: "Karma from -1000 to -800"
-  2:
-    name:
-      ru: "Каратель"
-      en: "Punisher"
-    color: "red"
-    description:
-      ru: "Карма от -800 до -600"
-      en: "Karma from -800 to -600"
-  3:
-    name:
-      ru: "Головорез"
-      en: "Thug"
-    color: "red"
-    description:
-      ru: "Карма от -600 до -400"
-      en: "Karma from -600 to -400"
-  4:
     name:
       ru: "Разбойник"
       en: "Bandit"
     color: "gold"
     description:
-      ru: "Карма от -400 до -200"
-      en: "Karma from -400 to -200"
+      ru: "Карма от -1000 до -2000"
+      en: "Karma from -1000 to -2000"
+  2:
+    name:
+      ru: "Хулиган"
+      en: "Hooligan"
+    color: "gold"
+    description:
+      ru: "Карма от -2000 до -3000"
+      en: "Karma from -2000 to -3000"
+  3:
+    name:
+      ru: "Сталкер"
+      en: "Stalker"
+    color: "red"
+    description:
+      ru: "Карма от -3000 до -4000"
+      en: "Karma from -3000 to -4000"
+  4:
+    name:
+      ru: "Головорез"
+      en: "Thug"
+    color: "red"
+    description:
+      ru: "Карма от -4000 до -5000"
+      en: "Karma from -4000 to -5000"
   5:
     name:
-      ru: "Святоша"
-      en: "Puritan"
-    color: "green"
+      ru: "Каратель"
+      en: "Punisher"
+    color: "red"
     description:
-      ru: "Карма от 200 до 400"
-      en: "Karma from 200 to 400"
+      ru: "Карма от -5000 до -6000"
+      en: "Karma from -5000 to -6000"
   6:
+    name:
+      ru: "Безжалостный"
+      en: "Ruthless"
+    color: "dark_red"
+    description:
+      ru: "Карма от -6000 до -7000"
+      en: "Karma from -6000 to -7000"
+  7:
+    name:
+      ru: "Палач"
+      en: "Executioner"
+    color: "dark_red"
+    description:
+      ru: "Карма от -7000 до -8000"
+      en: "Karma from -7000 to -8000"
+  8:
+    name:
+      ru: "Тиран"
+      en: "Tyrant"
+    color: "dark_red"
+    description:
+      ru: "Карма от -8000 до -9000"
+      en: "Karma from -8000 to -9000"
+  9:
+    name:
+      ru: "Тёмный Лорд"
+      en: "Dark Lord"
+    color: "dark_red"
+    description:
+      ru: "Карма от -9000 до -10000"
+      en: "Karma from -9000 to -10000"
+
+  # === Karmic: Positive (10-18) ===
+  10:
     name:
       ru: "Защитник"
       en: "Defender"
     color: "green"
     description:
-      ru: "Карма от 400 до 600"
-      en: "Karma from 400 to 600"
-  7:
+      ru: "Карма от 1000 до 2000"
+      en: "Karma from 1000 to 2000"
+  11:
+    name:
+      ru: "Дипломат"
+      en: "Diplomat"
+    color: "green"
+    description:
+      ru: "Карма от 2000 до 3000"
+      en: "Karma from 2000 to 3000"
+  12:
+    name:
+      ru: "Страж"
+      en: "Guardian"
+    color: "green"
+    description:
+      ru: "Карма от 3000 до 4000"
+      en: "Karma from 3000 to 4000"
+  13:
+    name:
+      ru: "На Кураже"
+      en: "On a Roll"
+    color: "aqua"
+    description:
+      ru: "Карма от 4000 до 5000"
+      en: "Karma from 4000 to 5000"
+  14:
+    name:
+      ru: "Святоша"
+      en: "Puritan"
+    color: "aqua"
+    description:
+      ru: "Карма от 5000 до 6000"
+      en: "Karma from 5000 to 6000"
+  15:
     name:
       ru: "Герой"
       en: "Hero"
     color: "aqua"
     description:
-      ru: "Карма от 600 до 800"
-      en: "Karma from 600 to 800"
-  8:
+      ru: "Карма от 6000 до 7000"
+      en: "Karma from 6000 to 7000"
+  16:
+    name:
+      ru: "Паладин"
+      en: "Paladin"
+    color: "light_purple"
+    description:
+      ru: "Карма от 7000 до 8000"
+      en: "Karma from 7000 to 8000"
+  17:
     name:
       ru: "Легенда"
       en: "Legend"
     color: "light_purple"
     description:
-      ru: "Карма от 800 до 1000"
-      en: "Karma from 800 to 1000"
-
-  # === PvP (100-199) ===
-  100:
+      ru: "Карма от 8000 до 9000"
+      en: "Karma from 8000 to 9000"
+  18:
     name:
-      ru: "Заморыш"
-      en: "Weakling"
-    color: "gray"
-    description:
-      ru: "Убить 1 игрока"
-      en: "Kill 1 player"
-    unlock:
-      type: PLAYER_KILLS
-      value: 1
-  101:
-    name:
-      ru: "Задира"
-      en: "Bully"
-    color: "gold"
-    description:
-      ru: "Убить 10 игроков"
-      en: "Kill 10 players"
-    unlock:
-      type: PLAYER_KILLS
-      value: 10
-  102:
-    name:
-      ru: "Душегуб"
-      en: "Slayer"
-    color: "red"
-    description:
-      ru: "Убить 50 игроков"
-      en: "Kill 50 players"
-    unlock:
-      type: PLAYER_KILLS
-      value: 50
-  103:
-    name:
-      ru: "Мясник"
-      en: "Butcher"
-    color: "dark_red"
-    description:
-      ru: "Убить 100 игроков"
-      en: "Kill 100 players"
-    unlock:
-      type: PLAYER_KILLS
-      value: 100
-  104:
-    name:
-      ru: "Жнец"
-      en: "Reaper"
-    color: "dark_red"
-    description:
-      ru: "Убить 300 игроков"
-      en: "Kill 300 players"
-    unlock:
-      type: PLAYER_KILLS
-      value: 300
-  105:
-    name:
-      ru: "Убийца Убийц"
-      en: "Killer of Killers"
+      ru: "Избранный"
+      en: "The Chosen One"
     color: "light_purple"
     description:
-      ru: "Убить игрока с титулом «Жнец»"
-      en: "Kill a player with the Reaper title"
-  106:
-    name:
-      ru: "Неприкасаемый"
-      en: "Untouchable"
-    color: "gold"
-    description:
-      ru: "Умереть 0 раз в PvP (при 50+ убийствах)"
-      en: "Die 0 times in PvP (with 50+ kills)"
-  107:
-    name:
-      ru: "Берсерк"
-      en: "Berserker"
-    color: "red"
-    description:
-      ru: "Убить 3 игроков за 1 минуту"
-      en: "Kill 3 players within 1 minute"
+      ru: "Карма от 9000 до 10000"
+      en: "Karma from 9000 to 10000"
 
-  # === Zombies (200-209) ===
-  200:
+  # === KILL_ENTITY: Zombies (19-23) ===
+  19:
     name:
       ru: "Дежурный"
       en: "On Duty"
@@ -175,7 +173,7 @@ titles:
       type: KILL_ENTITY
       entity: ZOMBIE
       value: 10
-  201:
+  20:
     name:
       ru: "Санитар"
       en: "Medic"
@@ -187,7 +185,7 @@ titles:
       type: KILL_ENTITY
       entity: ZOMBIE
       value: 50
-  202:
+  21:
     name:
       ru: "Дезинфектор"
       en: "Disinfector"
@@ -199,7 +197,7 @@ titles:
       type: KILL_ENTITY
       entity: ZOMBIE
       value: 200
-  203:
+  22:
     name:
       ru: "Карантин"
       en: "Quarantine"
@@ -211,11 +209,11 @@ titles:
       type: KILL_ENTITY
       entity: ZOMBIE
       value: 500
-  204:
+  23:
     name:
       ru: "Пациент Зеро"
       en: "Patient Zero"
-    color: "dark_red"
+    color: "light_purple"
     description:
       ru: "Убить 1000 зомби"
       en: "Kill 1000 zombies"
@@ -224,8 +222,8 @@ titles:
       entity: ZOMBIE
       value: 1000
 
-  # === Skeletons (210-219) ===
-  210:
+  # === KILL_ENTITY: Skeletons (24-28) ===
+  24:
     name:
       ru: "Кальций"
       en: "Calcium"
@@ -237,7 +235,7 @@ titles:
       type: KILL_ENTITY
       entity: SKELETON
       value: 10
-  211:
+  25:
     name:
       ru: "Костолом"
       en: "Bone Breaker"
@@ -249,7 +247,7 @@ titles:
       type: KILL_ENTITY
       entity: SKELETON
       value: 50
-  212:
+  26:
     name:
       ru: "Ксилофон"
       en: "Xylophone"
@@ -261,7 +259,7 @@ titles:
       type: KILL_ENTITY
       entity: SKELETON
       value: 200
-  213:
+  27:
     name:
       ru: "Без Костей"
       en: "Boneless"
@@ -273,11 +271,11 @@ titles:
       type: KILL_ENTITY
       entity: SKELETON
       value: 500
-  214:
+  28:
     name:
       ru: "Spooky Scary"
       en: "Spooky Scary"
-    color: "dark_red"
+    color: "light_purple"
     description:
       ru: "Убить 1000 скелетов"
       en: "Kill 1000 skeletons"
@@ -286,8 +284,8 @@ titles:
       entity: SKELETON
       value: 1000
 
-  # === Phantoms (220-229) ===
-  220:
+  # === KILL_ENTITY: Phantoms (29-33) ===
+  29:
     name:
       ru: "Полуночник"
       en: "Night Owl"
@@ -299,7 +297,7 @@ titles:
       type: KILL_ENTITY
       entity: PHANTOM
       value: 10
-  221:
+  30:
     name:
       ru: "Бессонница"
       en: "Insomnia"
@@ -311,7 +309,7 @@ titles:
       type: KILL_ENTITY
       entity: PHANTOM
       value: 50
-  222:
+  31:
     name:
       ru: "Сова"
       en: "Owl"
@@ -323,7 +321,7 @@ titles:
       type: KILL_ENTITY
       entity: PHANTOM
       value: 200
-  223:
+  32:
     name:
       ru: "Энергетик"
       en: "Energy Drink"
@@ -335,7 +333,7 @@ titles:
       type: KILL_ENTITY
       entity: PHANTOM
       value: 500
-  224:
+  33:
     name:
       ru: "Ложись Спать!"
       en: "Go to Sleep!"
@@ -348,8 +346,8 @@ titles:
       entity: PHANTOM
       value: 1000
 
-  # === Drowned (230-239) ===
-  230:
+  # === KILL_ENTITY: Drowned (34-38) ===
+  34:
     name:
       ru: "Мокрый"
       en: "Wet"
@@ -361,7 +359,7 @@ titles:
       type: KILL_ENTITY
       entity: DROWNED
       value: 10
-  231:
+  35:
     name:
       ru: "Водолаз"
       en: "Diver"
@@ -373,7 +371,7 @@ titles:
       type: KILL_ENTITY
       entity: DROWNED
       value: 50
-  232:
+  36:
     name:
       ru: "Ихтиолог"
       en: "Ichthyologist"
@@ -385,7 +383,7 @@ titles:
       type: KILL_ENTITY
       entity: DROWNED
       value: 200
-  233:
+  37:
     name:
       ru: "Глубина"
       en: "The Deep"
@@ -397,11 +395,11 @@ titles:
       type: KILL_ENTITY
       entity: DROWNED
       value: 500
-  234:
+  38:
     name:
       ru: "Aquaman"
       en: "Aquaman"
-    color: "aqua"
+    color: "light_purple"
     description:
       ru: "Убить 1000 утопленников"
       en: "Kill 1000 drowned"
@@ -410,8 +408,8 @@ titles:
       entity: DROWNED
       value: 1000
 
-  # === Wither Skeletons (240-249) ===
-  240:
+  # === KILL_ENTITY: Wither Skeletons (39-43) ===
+  39:
     name:
       ru: "Турист Крепости"
       en: "Fortress Tourist"
@@ -423,7 +421,7 @@ titles:
       type: KILL_ENTITY
       entity: WITHER_SKELETON
       value: 10
-  241:
+  40:
     name:
       ru: "Чернокопатель"
       en: "Grave Robber"
@@ -435,7 +433,7 @@ titles:
       type: KILL_ENTITY
       entity: WITHER_SKELETON
       value: 50
-  242:
+  41:
     name:
       ru: "Три Черепа"
       en: "Three Skulls"
@@ -447,7 +445,7 @@ titles:
       type: KILL_ENTITY
       entity: WITHER_SKELETON
       value: 200
-  243:
+  42:
     name:
       ru: "Уголёк"
       en: "Ember"
@@ -459,11 +457,11 @@ titles:
       type: KILL_ENTITY
       entity: WITHER_SKELETON
       value: 500
-  244:
+  43:
     name:
       ru: "Визер? Где?"
       en: "Wither? Where?"
-    color: "dark_red"
+    color: "light_purple"
     description:
       ru: "Убить 1000 визер-скелетов"
       en: "Kill 1000 wither skeletons"
@@ -472,8 +470,8 @@ titles:
       entity: WITHER_SKELETON
       value: 1000
 
-  # === Spiders (300-309) ===
-  300:
+  # === KILL_ENTITY: Spiders (44-48) ===
+  44:
     name:
       ru: "Арахнофоб"
       en: "Arachnophobe"
@@ -485,7 +483,7 @@ titles:
       type: KILL_ENTITY
       entity: SPIDER
       value: 10
-  301:
+  45:
     name:
       ru: "Тапок"
       en: "Slipper"
@@ -497,7 +495,7 @@ titles:
       type: KILL_ENTITY
       entity: SPIDER
       value: 50
-  302:
+  46:
     name:
       ru: "Паутинка"
       en: "Cobweb"
@@ -509,7 +507,7 @@ titles:
       type: KILL_ENTITY
       entity: SPIDER
       value: 200
-  303:
+  47:
     name:
       ru: "Восемь Лап"
       en: "Eight Legs"
@@ -521,11 +519,11 @@ titles:
       type: KILL_ENTITY
       entity: SPIDER
       value: 500
-  304:
+  48:
     name:
       ru: "Человек-Паук"
       en: "Spider-Man"
-    color: "dark_red"
+    color: "light_purple"
     description:
       ru: "Убить 1000 пауков"
       en: "Kill 1000 spiders"
@@ -534,8 +532,8 @@ titles:
       entity: SPIDER
       value: 1000
 
-  # === Cave Spiders (310-319) ===
-  310:
+  # === KILL_ENTITY: Cave Spiders (49-53) ===
+  49:
     name:
       ru: "Спелеолог"
       en: "Spelunker"
@@ -547,11 +545,11 @@ titles:
       type: KILL_ENTITY
       entity: CAVE_SPIDER
       value: 10
-  311:
+  50:
     name:
       ru: "Антидот"
       en: "Antidote"
-    color: "dark_gray"
+    color: "green"
     description:
       ru: "Убить 50 пещерных пауков"
       en: "Kill 50 cave spiders"
@@ -559,7 +557,7 @@ titles:
       type: KILL_ENTITY
       entity: CAVE_SPIDER
       value: 50
-  312:
+  51:
     name:
       ru: "Иммунитет"
       en: "Immunity"
@@ -571,11 +569,11 @@ titles:
       type: KILL_ENTITY
       entity: CAVE_SPIDER
       value: 200
-  313:
+  52:
     name:
       ru: "Зелёнка"
-      en: "Greenish"
-    color: "green"
+      en: "Green Stuff"
+    color: "dark_green"
     description:
       ru: "Убить 500 пещерных пауков"
       en: "Kill 500 cave spiders"
@@ -583,11 +581,11 @@ titles:
       type: KILL_ENTITY
       entity: CAVE_SPIDER
       value: 500
-  314:
+  53:
     name:
       ru: "Ядовитый Сам"
-      en: "Venomous Myself"
-    color: "dark_green"
+      en: "Toxic Myself"
+    color: "light_purple"
     description:
       ru: "Убить 1000 пещерных пауков"
       en: "Kill 1000 cave spiders"
@@ -596,8 +594,8 @@ titles:
       entity: CAVE_SPIDER
       value: 1000
 
-  # === Silverfish (320-329) ===
-  320:
+  # === KILL_ENTITY: Silverfish (54-58) ===
+  54:
     name:
       ru: "Ой, Блок Живой"
       en: "Oh, Living Block"
@@ -609,11 +607,11 @@ titles:
       type: KILL_ENTITY
       entity: SILVERFISH
       value: 10
-  321:
+  55:
     name:
       ru: "Дезинсектор"
       en: "Exterminator"
-    color: "dark_gray"
+    color: "white"
     description:
       ru: "Убить 50 чешуйниц"
       en: "Kill 50 silverfish"
@@ -621,11 +619,11 @@ titles:
       type: KILL_ENTITY
       entity: SILVERFISH
       value: 50
-  322:
+  56:
     name:
       ru: "Паразитолог"
       en: "Parasitologist"
-    color: "gold"
+    color: "white"
     description:
       ru: "Убить 200 чешуйниц"
       en: "Kill 200 silverfish"
@@ -633,11 +631,11 @@ titles:
       type: KILL_ENTITY
       entity: SILVERFISH
       value: 200
-  323:
+  57:
     name:
       ru: "Чистые Стены"
       en: "Clean Walls"
-    color: "gold"
+    color: "dark_gray"
     description:
       ru: "Убить 500 чешуйниц"
       en: "Kill 500 silverfish"
@@ -645,7 +643,7 @@ titles:
       type: KILL_ENTITY
       entity: SILVERFISH
       value: 500
-  324:
+  58:
     name:
       ru: "Сильверфиш? Нет."
       en: "Silverfish? No."
@@ -658,8 +656,8 @@ titles:
       entity: SILVERFISH
       value: 1000
 
-  # === Creepers (400-409) ===
-  400:
+  # === KILL_ENTITY: Creepers (59-63) ===
+  59:
     name:
       ru: "Нервный"
       en: "Nervous"
@@ -671,7 +669,7 @@ titles:
       type: KILL_ENTITY
       entity: CREEPER
       value: 10
-  401:
+  60:
     name:
       ru: "Сапёр"
       en: "Sapper"
@@ -683,11 +681,11 @@ titles:
       type: KILL_ENTITY
       entity: CREEPER
       value: 50
-  402:
+  61:
     name:
       ru: "Тссс..."
-      en: "Ssssh..."
-    color: "dark_green"
+      en: "Shhh..."
+    color: "green"
     description:
       ru: "Убить 200 криперов"
       en: "Kill 200 creepers"
@@ -695,11 +693,11 @@ titles:
       type: KILL_ENTITY
       entity: CREEPER
       value: 200
-  403:
+  62:
     name:
       ru: "Взрывотехник"
       en: "Bomb Tech"
-    color: "gold"
+    color: "dark_green"
     description:
       ru: "Убить 500 криперов"
       en: "Kill 500 creepers"
@@ -707,10 +705,10 @@ titles:
       type: KILL_ENTITY
       entity: CREEPER
       value: 500
-  404:
+  63:
     name:
       ru: "Бронежилет"
-      en: "Bulletproof"
+      en: "Bulletproof Vest"
     color: "light_purple"
     description:
       ru: "Убить 1000 криперов"
@@ -719,79 +717,71 @@ titles:
       type: KILL_ENTITY
       entity: CREEPER
       value: 1000
-  405:
-    name:
-      ru: "Молниеотвод"
-      en: "Lightning Rod"
-    color: "yellow"
-    description:
-      ru: "Убить заряженного крипера"
-      en: "Kill a charged creeper"
 
-  # === Blazes (500-509) ===
-  500:
+  # === KILL_ENTITY: Blazes (64-68) ===
+  64:
     name:
       ru: "Обгорелый"
       en: "Scorched"
     color: "gray"
     description:
-      ru: "Убить 10 блейзов"
+      ru: "Убить 10 ифритов"
       en: "Kill 10 blazes"
     unlock:
       type: KILL_ENTITY
       entity: BLAZE
       value: 10
-  501:
+  65:
     name:
       ru: "Огнетушитель"
       en: "Fire Extinguisher"
     color: "gold"
     description:
-      ru: "Убить 50 блейзов"
+      ru: "Убить 50 ифритов"
       en: "Kill 50 blazes"
     unlock:
       type: KILL_ENTITY
       entity: BLAZE
       value: 50
-  502:
+  66:
     name:
       ru: "Жаростойкий"
       en: "Heatproof"
-    color: "red"
+    color: "gold"
     description:
-      ru: "Убить 200 блейзов"
+      ru: "Убить 200 ифритов"
       en: "Kill 200 blazes"
     unlock:
       type: KILL_ENTITY
       entity: BLAZE
       value: 200
-  503:
+  67:
     name:
       ru: "Прожарка Well Done"
-      en: "Prожарка Well Done"
+      en: "Well Done"
     color: "red"
     description:
-      ru: "Убить 500 блейзов"
+      ru: "Убить 500 ифритов"
       en: "Kill 500 blazes"
     unlock:
       type: KILL_ENTITY
       entity: BLAZE
       value: 500
-  504:
+  68:
     name:
       ru: "Феникс"
       en: "Phoenix"
-    color: "dark_red"
+    color: "light_purple"
     description:
-      ru: "Убить 1000 блейзов"
+      ru: "Убить 1000 ифритов"
       en: "Kill 1000 blazes"
     unlock:
       type: KILL_ENTITY
       entity: BLAZE
       value: 1000
 
-  # === Ghasts (510-519) ===
-  510:
+  # === KILL_ENTITY: Ghasts (69-73) ===
+  69:
     name:
       ru: "Не Плачь"
       en: "Don't Cry"
@@ -803,10 +793,10 @@ titles:
       type: KILL_ENTITY
       entity: GHAST
       value: 10
-  511:
+  70:
     name:
       ru: "Отбивалка"
-      en: "Swatter"
+      en: "Deflector"
     color: "white"
     description:
       ru: "Убить 50 гастов"
@@ -815,11 +805,11 @@ titles:
       type: KILL_ENTITY
       entity: GHAST
       value: 50
-  512:
+  71:
     name:
       ru: "Теннисист"
       en: "Tennis Player"
-    color: "gold"
+    color: "white"
     description:
       ru: "Убить 200 гастов"
       en: "Kill 200 ghasts"
@@ -827,7 +817,7 @@ titles:
       type: KILL_ENTITY
       entity: GHAST
       value: 200
-  513:
+  72:
     name:
       ru: "Return to Sender"
       en: "Return to Sender"
@@ -839,10 +829,10 @@ titles:
       type: KILL_ENTITY
       entity: GHAST
       value: 500
-  514:
+  73:
     name:
       ru: "Слёзы Кончились"
-      en: "No More Tears"
+      en: "Out of Tears"
     color: "light_purple"
     description:
       ru: "Убить 1000 гастов"
@@ -852,8 +842,8 @@ titles:
       entity: GHAST
       value: 1000
 
-  # === Hoglins (520-529) ===
-  520:
+  # === KILL_ENTITY: Hoglins (74-78) ===
+  74:
     name:
       ru: "Свинопас"
       en: "Swineherd"
@@ -865,11 +855,11 @@ titles:
       type: KILL_ENTITY
       entity: HOGLIN
       value: 10
-  521:
+  75:
     name:
       ru: "Отбивная"
       en: "Chop"
-    color: "red"
+    color: "gold"
     description:
       ru: "Убить 50 хоглинов"
       en: "Kill 50 hoglins"
@@ -877,11 +867,11 @@ titles:
       type: KILL_ENTITY
       entity: HOGLIN
       value: 50
-  522:
+  76:
     name:
       ru: "Шашлычник"
-      en: "Grill Master"
-    color: "red"
+      en: "BBQ Master"
+    color: "gold"
     description:
       ru: "Убить 200 хоглинов"
       en: "Kill 200 hoglins"
@@ -889,11 +879,11 @@ titles:
       type: KILL_ENTITY
       entity: HOGLIN
       value: 200
-  523:
+  77:
     name:
       ru: "Стейк"
       en: "Steak"
-    color: "dark_red"
+    color: "red"
     description:
       ru: "Убить 500 хоглинов"
       en: "Kill 500 hoglins"
@@ -901,11 +891,11 @@ titles:
       type: KILL_ENTITY
       entity: HOGLIN
       value: 500
-  524:
+  78:
     name:
       ru: "Мишлен ★"
       en: "Michelin ★"
-    color: "dark_red"
+    color: "light_purple"
     description:
       ru: "Убить 1000 хоглинов"
       en: "Kill 1000 hoglins"
@@ -914,8 +904,8 @@ titles:
       entity: HOGLIN
       value: 1000
 
-  # === Piglins (530-539) ===
-  530:
+  # === KILL_ENTITY: Piglins (79-83) ===
+  79:
     name:
       ru: "Без Золота"
       en: "No Gold"
@@ -927,7 +917,7 @@ titles:
       type: KILL_ENTITY
       entity: PIGLIN
       value: 10
-  531:
+  80:
     name:
       ru: "Плохая Сделка"
       en: "Bad Deal"
@@ -939,7 +929,7 @@ titles:
       type: KILL_ENTITY
       entity: PIGLIN
       value: 50
-  532:
+  81:
     name:
       ru: "Свинокрад"
       en: "Pig Thief"
@@ -951,11 +941,11 @@ titles:
       type: KILL_ENTITY
       entity: PIGLIN
       value: 200
-  533:
+  82:
     name:
       ru: "Персона Нон Грата"
       en: "Persona Non Grata"
-    color: "dark_red"
+    color: "red"
     description:
       ru: "Убить 500 пиглинов"
       en: "Kill 500 piglins"
@@ -963,11 +953,11 @@ titles:
       type: KILL_ENTITY
       entity: PIGLIN
       value: 500
-  534:
+  83:
     name:
       ru: "Анархист"
       en: "Anarchist"
-    color: "dark_red"
+    color: "light_purple"
     description:
       ru: "Убить 1000 пиглинов"
       en: "Kill 1000 piglins"
@@ -976,8 +966,8 @@ titles:
       entity: PIGLIN
       value: 1000
 
-  # === Magma Cubes (540-549) ===
-  540:
+  # === KILL_ENTITY: Magma Cubes (84-88) ===
+  84:
     name:
       ru: "Горячо!"
       en: "Hot!"
@@ -989,10 +979,10 @@ titles:
       type: KILL_ENTITY
       entity: MAGMA_CUBE
       value: 10
-  541:
+  85:
     name:
       ru: "Огнеступ"
-      en: "Firewalker"
+      en: "Fire Walker"
     color: "gold"
     description:
       ru: "Убить 50 магма-кубов"
@@ -1001,11 +991,11 @@ titles:
       type: KILL_ENTITY
       entity: MAGMA_CUBE
       value: 50
-  542:
+  86:
     name:
       ru: "Жаропрочный"
       en: "Fireproof"
-    color: "red"
+    color: "gold"
     description:
       ru: "Убить 200 магма-кубов"
       en: "Kill 200 magma cubes"
@@ -1013,7 +1003,7 @@ titles:
       type: KILL_ENTITY
       entity: MAGMA_CUBE
       value: 200
-  543:
+  87:
     name:
       ru: "Лавомес"
       en: "Lava Mixer"
@@ -1025,11 +1015,11 @@ titles:
       type: KILL_ENTITY
       entity: MAGMA_CUBE
       value: 500
-  544:
+  88:
     name:
       ru: "The Floor Is Lava"
       en: "The Floor Is Lava"
-    color: "dark_red"
+    color: "light_purple"
     description:
       ru: "Убить 1000 магма-кубов"
       en: "Kill 1000 magma cubes"
@@ -1038,8 +1028,8 @@ titles:
       entity: MAGMA_CUBE
       value: 1000
 
-  # === Endermen (600-609) ===
-  600:
+  # === KILL_ENTITY: Endermen (89-93) ===
+  89:
     name:
       ru: "Не Смотри"
       en: "Don't Look"
@@ -1051,7 +1041,7 @@ titles:
       type: KILL_ENTITY
       entity: ENDERMAN
       value: 10
-  601:
+  90:
     name:
       ru: "Гляделки"
       en: "Staring Contest"
@@ -1063,10 +1053,10 @@ titles:
       type: KILL_ENTITY
       entity: ENDERMAN
       value: 50
-  602:
+  91:
     name:
       ru: "Тыквоголовый"
-      en: "Pumpkinhead"
+      en: "Pumpkin Head"
     color: "dark_purple"
     description:
       ru: "Убить 200 эндерменов"
@@ -1075,7 +1065,7 @@ titles:
       type: KILL_ENTITY
       entity: ENDERMAN
       value: 200
-  603:
+  92:
     name:
       ru: "Телепорт"
       en: "Teleport"
@@ -1087,7 +1077,7 @@ titles:
       type: KILL_ENTITY
       entity: ENDERMAN
       value: 500
-  604:
+  93:
     name:
       ru: "Вне Зоны Доступа"
       en: "Out of Range"
@@ -1100,8 +1090,8 @@ titles:
       entity: ENDERMAN
       value: 1000
 
-  # === Shulkers (610-619) ===
-  610:
+  # === KILL_ENTITY: Shulkers (94-98) ===
+  94:
     name:
       ru: "Консервный Нож"
       en: "Can Opener"
@@ -1113,11 +1103,11 @@ titles:
       type: KILL_ENTITY
       entity: SHULKER
       value: 10
-  611:
+  95:
     name:
       ru: "Распаковщик"
       en: "Unpacker"
-    color: "light_purple"
+    color: "dark_purple"
     description:
       ru: "Убить 50 шалкеров"
       en: "Kill 50 shulkers"
@@ -1125,11 +1115,11 @@ titles:
       type: KILL_ENTITY
       entity: SHULKER
       value: 50
-  612:
+  96:
     name:
       ru: "Левитация"
       en: "Levitation"
-    color: "light_purple"
+    color: "dark_purple"
     description:
       ru: "Убить 200 шалкеров"
       en: "Kill 200 shulkers"
@@ -1137,10 +1127,10 @@ titles:
       type: KILL_ENTITY
       entity: SHULKER
       value: 200
-  613:
+  97:
     name:
       ru: "Ракушка"
-      en: "Shell"
+      en: "Seashell"
     color: "light_purple"
     description:
       ru: "Убить 500 шалкеров"
@@ -1149,7 +1139,7 @@ titles:
       type: KILL_ENTITY
       entity: SHULKER
       value: 500
-  614:
+  98:
     name:
       ru: "Unboxing"
       en: "Unboxing"
@@ -1162,8 +1152,8 @@ titles:
       entity: SHULKER
       value: 1000
 
-  # === Witches (700-709) ===
-  700:
+  # === KILL_ENTITY: Witches (99-103) ===
+  99:
     name:
       ru: "Скептик"
       en: "Skeptic"
@@ -1175,7 +1165,7 @@ titles:
       type: KILL_ENTITY
       entity: WITCH
       value: 10
-  701:
+  100:
     name:
       ru: "Инквизитор"
       en: "Inquisitor"
@@ -1187,7 +1177,7 @@ titles:
       type: KILL_ENTITY
       entity: WITCH
       value: 50
-  702:
+  101:
     name:
       ru: "Антизелье"
       en: "Anti-Potion"
@@ -1199,11 +1189,11 @@ titles:
       type: KILL_ENTITY
       entity: WITCH
       value: 200
-  703:
+  102:
     name:
       ru: "Монти Пайтон"
       en: "Monty Python"
-    color: "dark_purple"
+    color: "dark_red"
     description:
       ru: "Убить 500 ведьм"
       en: "Kill 500 witches"
@@ -1211,7 +1201,7 @@ titles:
       type: KILL_ENTITY
       entity: WITCH
       value: 500
-  704:
+  103:
     name:
       ru: "Она Утонула?"
       en: "Did She Drown?"
@@ -1224,8 +1214,8 @@ titles:
       entity: WITCH
       value: 1000
 
-  # === Guardians (710-719) ===
-  710:
+  # === KILL_ENTITY: Guardians (104-108) ===
+  104:
     name:
       ru: "Промокший"
       en: "Soaked"
@@ -1237,10 +1227,10 @@ titles:
       type: KILL_ENTITY
       entity: GUARDIAN
       value: 10
-  711:
+  105:
     name:
       ru: "Ныряльщик"
-      en: "Diver"
+      en: "Deep Diver"
     color: "dark_aqua"
     description:
       ru: "Убить 50 стражей"
@@ -1249,7 +1239,7 @@ titles:
       type: KILL_ENTITY
       entity: GUARDIAN
       value: 50
-  712:
+  106:
     name:
       ru: "Аквалангист"
       en: "Scuba Diver"
@@ -1261,7 +1251,7 @@ titles:
       type: KILL_ENTITY
       entity: GUARDIAN
       value: 200
-  713:
+  107:
     name:
       ru: "Суши"
       en: "Sushi"
@@ -1273,11 +1263,11 @@ titles:
       type: KILL_ENTITY
       entity: GUARDIAN
       value: 500
-  714:
+  108:
     name:
       ru: "Атлантида"
       en: "Atlantis"
-    color: "aqua"
+    color: "light_purple"
     description:
       ru: "Убить 1000 стражей"
       en: "Kill 1000 guardians"
@@ -1286,8 +1276,8 @@ titles:
       entity: GUARDIAN
       value: 1000
 
-  # === Ravagers and Raiders (720-729) ===
-  720:
+  # === KILL_ENTITY: Ravagers (109-113) ===
+  109:
     name:
       ru: "Дежурный по Деревне"
       en: "Village Guard"
@@ -1299,7 +1289,7 @@ titles:
       type: KILL_ENTITY
       entity: RAVAGER
       value: 10
-  721:
+  110:
     name:
       ru: "Баррикада"
       en: "Barricade"
@@ -1311,11 +1301,11 @@ titles:
       type: KILL_ENTITY
       entity: RAVAGER
       value: 50
-  722:
+  111:
     name:
       ru: "Неберущийся"
-      en: "Impregnable"
-    color: "gold"
+      en: "Unbreakable"
+    color: "green"
     description:
       ru: "Убить 200 разорителей"
       en: "Kill 200 ravagers"
@@ -1323,11 +1313,11 @@ titles:
       type: KILL_ENTITY
       entity: RAVAGER
       value: 200
-  723:
+  112:
     name:
       ru: "Крепость"
       en: "Fortress"
-    color: "gold"
+    color: "dark_green"
     description:
       ru: "Убить 500 разорителей"
       en: "Kill 500 ravagers"
@@ -1335,7 +1325,7 @@ titles:
       type: KILL_ENTITY
       entity: RAVAGER
       value: 500
-  724:
+  113:
     name:
       ru: "ЧОП"
       en: "Security"
@@ -1348,147 +1338,147 @@ titles:
       entity: RAVAGER
       value: 1000
 
-  # === Slimes (730-739) ===
-  730:
+  # === KILL_ENTITY: Slimes (114-118) ===
+  114:
     name:
       ru: "Липкий"
       en: "Sticky"
     color: "gray"
     description:
-      ru: "Убить 10 слизней"
+      ru: "Убить 10 слаймов"
       en: "Kill 10 slimes"
     unlock:
       type: KILL_ENTITY
       entity: SLIME
       value: 10
-  731:
+  115:
     name:
       ru: "Желейка"
       en: "Jelly"
     color: "green"
     description:
-      ru: "Убить 50 слизней"
+      ru: "Убить 50 слаймов"
       en: "Kill 50 slimes"
     unlock:
       type: KILL_ENTITY
       entity: SLIME
       value: 50
-  732:
+  116:
     name:
       ru: "Антислайм"
       en: "Anti-Slime"
     color: "green"
     description:
-      ru: "Убить 200 слизней"
+      ru: "Убить 200 слаймов"
       en: "Kill 200 slimes"
     unlock:
       type: KILL_ENTITY
       entity: SLIME
       value: 200
-  733:
+  117:
     name:
       ru: "Болотная Тварь"
       en: "Swamp Thing"
     color: "dark_green"
     description:
-      ru: "Убить 500 слизней"
+      ru: "Убить 500 слаймов"
       en: "Kill 500 slimes"
     unlock:
       type: KILL_ENTITY
       entity: SLIME
       value: 500
-  734:
+  118:
     name:
       ru: "Шрек"
       en: "Shrek"
-    color: "dark_green"
+    color: "light_purple"
     description:
-      ru: "Убить 1000 слизней"
+      ru: "Убить 1000 слаймов"
       en: "Kill 1000 slimes"
     unlock:
       type: KILL_ENTITY
       entity: SLIME
       value: 1000
 
-  # === Striders (740-749) ===
-  740:
+  # === KILL_ENTITY: Striders (119-123) ===
+  119:
     name:
       ru: "Лавовый Ковбой"
       en: "Lava Cowboy"
     color: "gray"
     description:
-      ru: "Убить 10 странников"
+      ru: "Убить 10 страйдеров"
       en: "Kill 10 striders"
     unlock:
       type: KILL_ENTITY
       entity: STRIDER
       value: 10
-  741:
+  120:
     name:
       ru: "На Поводке"
       en: "On a Leash"
-    color: "dark_aqua"
+    color: "gold"
     description:
-      ru: "Убить 50 странников"
+      ru: "Убить 50 страйдеров"
       en: "Kill 50 striders"
     unlock:
       type: KILL_ENTITY
       entity: STRIDER
       value: 50
-  742:
+  121:
     name:
       ru: "Водные Лыжи"
-      en: "Water Skiing"
-    color: "dark_aqua"
+      en: "Water Ski"
+    color: "gold"
     description:
-      ru: "Убить 200 странников"
+      ru: "Убить 200 страйдеров"
       en: "Kill 200 striders"
     unlock:
       type: KILL_ENTITY
       entity: STRIDER
       value: 200
-  743:
+  122:
     name:
       ru: "Лавосёрфер"
       en: "Lava Surfer"
-    color: "aqua"
+    color: "red"
     description:
-      ru: "Убить 500 странников"
+      ru: "Убить 500 страйдеров"
       en: "Kill 500 striders"
     unlock:
       type: KILL_ENTITY
       entity: STRIDER
       value: 500
-  744:
+  123:
     name:
       ru: "Страйдер? Я Страйдер."
-      en: "Strider? I'm the Strider."
-    color: "aqua"
+      en: "Strider? I Am Strider."
+    color: "light_purple"
     description:
-      ru: "Убить 1000 странников"
+      ru: "Убить 1000 страйдеров"
       en: "Kill 1000 striders"
     unlock:
       type: KILL_ENTITY
       entity: STRIDER
       value: 1000
 
-  # === Breezes (750-759) ===
-  750:
+  # === KILL_ENTITY: Breezes (124-128) ===
+  124:
     name:
       ru: "Сквозняк"
-      en: "Breeze"
+      en: "Draft"
     color: "gray"
     description:
-      ru: "Убить 1 бриз"
+      ru: "Убить 1 бриза"
       en: "Kill 1 breeze"
     unlock:
       type: KILL_ENTITY
       entity: BREEZE
       value: 1
-  751:
+  125:
     name:
       ru: "Ветродуй"
-      en: "Windblower"
+      en: "Wind Blower"
     color: "aqua"
     description:
       ru: "Убить 30 бризов"
@@ -1497,7 +1487,7 @@ titles:
       type: KILL_ENTITY
       entity: BREEZE
       value: 30
-  752:
+  126:
     name:
       ru: "Штормовое Предупреждение"
       en: "Storm Warning"
@@ -1509,11 +1499,11 @@ titles:
       type: KILL_ENTITY
       entity: BREEZE
       value: 100
-  753:
+  127:
     name:
       ru: "Безветрие"
       en: "Calm"
-    color: "light_purple"
+    color: "dark_aqua"
     description:
       ru: "Убить 300 бризов"
       en: "Kill 300 breezes"
@@ -1521,7 +1511,7 @@ titles:
       type: KILL_ENTITY
       entity: BREEZE
       value: 300
-  754:
+  128:
     name:
       ru: "Штиль"
       en: "Dead Calm"
@@ -1534,78 +1524,210 @@ titles:
       entity: BREEZE
       value: 500
 
-  # === Bosses (800-899) ===
-  800:
+  # === KILL_ENTITY: Wardens (129-133) ===
+  129:
+    name:
+      ru: "Безумец"
+      en: "Madman"
+    color: "gray"
+    description:
+      ru: "Убить 1 хранителя"
+      en: "Kill 1 warden"
+    unlock:
+      type: KILL_ENTITY
+      entity: WARDEN
+      value: 1
+  130:
+    name:
+      ru: "Бесстрашный"
+      en: "Fearless"
+    color: "dark_aqua"
+    description:
+      ru: "Убить 3 хранителей"
+      en: "Kill 3 wardens"
+    unlock:
+      type: KILL_ENTITY
+      entity: WARDEN
+      value: 3
+  131:
+    name:
+      ru: "Бездна Смотрит В Ответ"
+      en: "The Abyss Stares Back"
+    color: "dark_aqua"
+    description:
+      ru: "Убить 5 хранителей"
+      en: "Kill 5 wardens"
+    unlock:
+      type: KILL_ENTITY
+      entity: WARDEN
+      value: 5
+  132:
+    name:
+      ru: "Спирит"
+      en: "Spirit"
+    color: "dark_purple"
+    description:
+      ru: "Убить 10 хранителей"
+      en: "Kill 10 wardens"
+    unlock:
+      type: KILL_ENTITY
+      entity: WARDEN
+      value: 10
+  133:
+    name:
+      ru: "Альфа и Омега"
+      en: "Alpha and Omega"
+    color: "light_purple"
+    description:
+      ru: "Убить 20 хранителей"
+      en: "Kill 20 wardens"
+    unlock:
+      type: KILL_ENTITY
+      entity: WARDEN
+      value: 20
+
+  # === KILL_ENTITY: Ender Dragon (134-135) ===
+  134:
     name:
       ru: "Драконоборец"
       en: "Dragonslayer"
-    color: "light_purple"
+    color: "dark_purple"
     description:
-      ru: "Убить Дракона Края"
+      ru: "Убить дракона Края"
       en: "Kill the Ender Dragon"
     unlock:
       type: KILL_ENTITY
       entity: ENDER_DRAGON
       value: 1
-  801:
+  135:
     name:
       ru: "Дежавю"
       en: "Deja Vu"
-    color: "dark_purple"
+    color: "light_purple"
     description:
-      ru: "Убить Дракона 5 раз"
+      ru: "Убить дракона Края 5 раз"
       en: "Kill the Ender Dragon 5 times"
     unlock:
       type: KILL_ENTITY
       entity: ENDER_DRAGON
       value: 5
-  802:
+
+  # === KILL_ENTITY: Wither (136-137) ===
+  136:
     name:
       ru: "Три Головы, Ноль Проблем"
       en: "Three Heads, Zero Problems"
-    color: "dark_gray"
+    color: "dark_purple"
     description:
-      ru: "Убить Визера"
+      ru: "Убить визера"
       en: "Kill the Wither"
     unlock:
       type: KILL_ENTITY
       entity: WITHER
       value: 1
-  803:
+  137:
     name:
       ru: "Коллекционер Звёзд"
       en: "Star Collector"
-    color: "dark_red"
+    color: "light_purple"
     description:
-      ru: "Убить Визера 5 раз"
+      ru: "Убить визера 5 раз"
       en: "Kill the Wither 5 times"
     unlock:
       type: KILL_ENTITY
       entity: WITHER
       value: 5
-  804:
+
+  # === KILL_ENTITY: Elder Guardian (138) ===
+  138:
     name:
       ru: "Монумент Закрыт"
       en: "Monument Closed"
     color: "dark_aqua"
     description:
-      ru: "Убить Старшего Стража"
+      ru: "Убить древнего стража"
       en: "Kill an Elder Guardian"
     unlock:
       type: KILL_ENTITY
       entity: ELDER_GUARDIAN
       value: 1
-  805:
+
+  # === PLAYER_KILLS (139-144) ===
+  139:
     name:
-      ru: "Финалист"
-      en: "Finalist"
+      ru: "Заморыш"
+      en: "Weakling"
+    color: "gray"
+    description:
+      ru: "Убить 1 игрока"
+      en: "Kill 1 player"
+    unlock:
+      type: CUSTOM_STAT
+      stat-key: pvp-kills
+      value: 1
+  140:
+    name:
+      ru: "Задира"
+      en: "Bully"
+    color: "gold"
+    description:
+      ru: "Убить 10 игроков"
+      en: "Kill 10 players"
+    unlock:
+      type: CUSTOM_STAT
+      stat-key: pvp-kills
+      value: 10
+  141:
+    name:
+      ru: "Ниндзя"
+      en: "Ninja"
+    color: "red"
+    description:
+      ru: "Убить 50 игроков"
+      en: "Kill 50 players"
+    unlock:
+      type: CUSTOM_STAT
+      stat-key: pvp-kills
+      value: 50
+  142:
+    name:
+      ru: "Мародёр"
+      en: "Marauder"
     color: "dark_red"
     description:
-      ru: "Убить Дракона и Визера"
-      en: "Kill the Ender Dragon and the Wither"
+      ru: "Убить 100 игроков"
+      en: "Kill 100 players"
+    unlock:
+      type: CUSTOM_STAT
+      stat-key: pvp-kills
+      value: 100
+  143:
+    name:
+      ru: "Камикадзе"
+      en: "Kamikaze"
+    color: "dark_red"
+    description:
+      ru: "Убить 300 игроков"
+      en: "Kill 300 players"
+    unlock:
+      type: CUSTOM_STAT
+      stat-key: pvp-kills
+      value: 300
+  144:
+    name:
+      ru: "Жнец"
+      en: "Reaper"
+    color: "light_purple"
+    description:
+      ru: "Убить 500 игроков"
+      en: "Kill 500 players"
+    unlock:
+      type: CUSTOM_STAT
+      stat-key: pvp-kills
+      value: 500
 
-  # === Resources (900-999) ===
-  900:
+  # === MINE_BLOCK: Diamonds (145-148) ===
+  145:
     name:
       ru: "Блестяшка"
       en: "Shiny"
@@ -1617,11 +1739,23 @@ titles:
       type: MINE_BLOCK
       material: DIAMOND_ORE,DEEPSLATE_DIAMOND_ORE
       value: 100
-  901:
+  146:
+    name:
+      ru: "Жадина"
+      en: "Greedy"
+    color: "aqua"
+    description:
+      ru: "Добыть 500 алмазов"
+      en: "Mine 500 diamonds"
+    unlock:
+      type: MINE_BLOCK
+      material: DIAMOND_ORE,DEEPSLATE_DIAMOND_ORE
+      value: 500
+  147:
     name:
       ru: "Карат"
       en: "Carat"
-    color: "aqua"
+    color: "dark_aqua"
     description:
       ru: "Добыть 1000 алмазов"
       en: "Mine 1000 diamonds"
@@ -1629,11 +1763,11 @@ titles:
       type: MINE_BLOCK
       material: DIAMOND_ORE,DEEPSLATE_DIAMOND_ORE
       value: 1000
-  902:
+  148:
     name:
       ru: "De Beers"
       en: "De Beers"
-    color: "aqua"
+    color: "light_purple"
     description:
       ru: "Добыть 5000 алмазов"
       en: "Mine 5000 diamonds"
@@ -1641,31 +1775,35 @@ titles:
       type: MINE_BLOCK
       material: DIAMOND_ORE,DEEPSLATE_DIAMOND_ORE
       value: 5000
-  903:
+
+  # === MINE_BLOCK: Netherite (149-150) ===
+  149:
     name:
       ru: "Археолог"
       en: "Archaeologist"
     color: "dark_gray"
     description:
-      ru: "Добыть 10 незерита (древний обломок)"
-      en: "Mine 10 netherite (ancient debris)"
+      ru: "Добыть 10 древних обломков"
+      en: "Mine 10 ancient debris"
     unlock:
       type: MINE_BLOCK
       material: ANCIENT_DEBRIS
       value: 10
-  904:
+  150:
     name:
       ru: "Чёрное Золото"
       en: "Black Gold"
-    color: "dark_gray"
+    color: "dark_red"
     description:
-      ru: "Добыть 100 незерита"
-      en: "Mine 100 netherite"
+      ru: "Добыть 100 древних обломков"
+      en: "Mine 100 ancient debris"
     unlock:
       type: MINE_BLOCK
       material: ANCIENT_DEBRIS
       value: 100
-  905:
+
+  # === MINE_BLOCK: Emeralds (151) ===
+  151:
     name:
       ru: "Изумрудный Город"
       en: "Emerald City"
@@ -1677,7 +1815,9 @@ titles:
       type: MINE_BLOCK
       material: EMERALD_ORE,DEEPSLATE_EMERALD_ORE
       value: 500
-  906:
+
+  # === MINE_BLOCK: Stone (152-154) ===
+  152:
     name:
       ru: "Камнеед"
       en: "Stone Eater"
@@ -1689,11 +1829,23 @@ titles:
       type: MINE_BLOCK
       material: STONE,DEEPSLATE
       value: 10000
-  907:
+  153:
+    name:
+      ru: "Обжора"
+      en: "Glutton"
+    color: "dark_gray"
+    description:
+      ru: "Добыть 30000 камня"
+      en: "Mine 30000 stone"
+    unlock:
+      type: MINE_BLOCK
+      material: STONE,DEEPSLATE
+      value: 30000
+  154:
     name:
       ru: "Экскаватор"
       en: "Excavator"
-    color: "dark_gray"
+    color: "gold"
     description:
       ru: "Добыть 50000 камня"
       en: "Mine 50000 stone"
@@ -1701,7 +1853,9 @@ titles:
       type: MINE_BLOCK
       material: STONE,DEEPSLATE
       value: 50000
-  908:
+
+  # === MINE_BLOCK: Coal (155) ===
+  155:
     name:
       ru: "Кочегар"
       en: "Stoker"
@@ -1713,7 +1867,9 @@ titles:
       type: MINE_BLOCK
       material: COAL_ORE,DEEPSLATE_COAL_ORE
       value: 1000
-  909:
+
+  # === MINE_BLOCK: Iron (156-157) ===
+  156:
     name:
       ru: "Пирит"
       en: "Pyrite"
@@ -1725,7 +1881,7 @@ titles:
       type: MINE_BLOCK
       material: IRON_ORE,DEEPSLATE_IRON_ORE
       value: 1000
-  910:
+  157:
     name:
       ru: "Магнит"
       en: "Magnet"
@@ -1737,7 +1893,9 @@ titles:
       type: MINE_BLOCK
       material: IRON_ORE,DEEPSLATE_IRON_ORE
       value: 5000
-  911:
+
+  # === MINE_BLOCK: Gold (158) ===
+  158:
     name:
       ru: "Голдраш"
       en: "Gold Rush"
@@ -1749,22 +1907,26 @@ titles:
       type: MINE_BLOCK
       material: GOLD_ORE,DEEPSLATE_GOLD_ORE,NETHER_GOLD_ORE
       value: 1000
-  912:
+
+  # === MINE_BLOCK: Lapis (159) ===
+  159:
     name:
       ru: "Ультрамарин"
       en: "Ultramarine"
     color: "blue"
     description:
       ru: "Добыть 1000 лазурита"
-      en: "Mine 1000 lapis lazuli"
+      en: "Mine 1000 lapis"
     unlock:
       type: MINE_BLOCK
       material: LAPIS_ORE,DEEPSLATE_LAPIS_ORE
       value: 1000
-  913:
+
+  # === MINE_BLOCK: Redstone (160-161) ===
+  160:
     name:
       ru: "Схемотехник"
-      en: "Circuit Designer"
+      en: "Circuit Engineer"
     color: "red"
     description:
       ru: "Добыть 1000 редстоуна"
@@ -1773,7 +1935,7 @@ titles:
       type: MINE_BLOCK
       material: REDSTONE_ORE,DEEPSLATE_REDSTONE_ORE
       value: 1000
-  914:
+  161:
     name:
       ru: "Мамбл-мамбл"
       en: "Mumble-Mumble"
@@ -1786,99 +1948,377 @@ titles:
       material: REDSTONE_ORE,DEEPSLATE_REDSTONE_ORE
       value: 5000
 
-  # === Trading (1000-1099) ===
-  1000:
+  # === DISTANCE_KM (162-168) ===
+  162:
+    name:
+      ru: "Прогулка"
+      en: "Stroll"
+    color: "gray"
+    description:
+      ru: "Пройти 10 км"
+      en: "Walk 10 km"
+    unlock:
+      type: DISTANCE_KM
+      value: 10
+  163:
+    name:
+      ru: "Стоптанные Ботинки"
+      en: "Worn Boots"
+    color: "green"
+    description:
+      ru: "Пройти 100 км"
+      en: "Walk 100 km"
+    unlock:
+      type: DISTANCE_KM
+      value: 100
+  164:
+    name:
+      ru: "Спринтер"
+      en: "Sprinter"
+    color: "green"
+    description:
+      ru: "Пройти 300 км"
+      en: "Walk 300 km"
+    unlock:
+      type: DISTANCE_KM
+      value: 300
+  165:
+    name:
+      ru: "Шагомер"
+      en: "Pedometer"
+    color: "aqua"
+    description:
+      ru: "Пройти 500 км"
+      en: "Walk 500 km"
+    unlock:
+      type: DISTANCE_KM
+      value: 500
+  166:
+    name:
+      ru: "Ракета"
+      en: "Rocket"
+    color: "aqua"
+    description:
+      ru: "Пройти 1000 км"
+      en: "Walk 1000 km"
+    unlock:
+      type: DISTANCE_KM
+      value: 1000
+  167:
+    name:
+      ru: "Торпеда"
+      en: "Torpedo"
+    color: "gold"
+    description:
+      ru: "Пройти 3000 км"
+      en: "Walk 3000 km"
+    unlock:
+      type: DISTANCE_KM
+      value: 3000
+  168:
+    name:
+      ru: "Вокруг Света"
+      en: "Around the World"
+    color: "light_purple"
+    description:
+      ru: "Пройти 5000 км"
+      en: "Walk 5000 km"
+    unlock:
+      type: DISTANCE_KM
+      value: 5000
+
+  # === TRADED_WITH_VILLAGER (169-173) ===
+  169:
     name:
       ru: "Хмм"
       en: "Hmm"
-    color: "green"
+    color: "gray"
     description:
-      ru: "10 сделок с жителями"
-      en: "10 trades with villagers"
+      ru: "Совершить 10 сделок с жителями"
+      en: "Trade 10 times with villagers"
     unlock:
       type: TRADED_WITH_VILLAGER
       value: 10
-  1001:
+  170:
     name:
       ru: "Постоянный Клиент"
       en: "Regular Customer"
     color: "green"
     description:
-      ru: "100 сделок с жителями"
-      en: "100 trades with villagers"
+      ru: "Совершить 100 сделок с жителями"
+      en: "Trade 100 times with villagers"
     unlock:
       type: TRADED_WITH_VILLAGER
       value: 100
-  1002:
+  171:
     name:
       ru: "Шопоголик"
       en: "Shopaholic"
-    color: "gold"
+    color: "aqua"
     description:
-      ru: "500 сделок с жителями"
-      en: "500 trades with villagers"
+      ru: "Совершить 500 сделок с жителями"
+      en: "Trade 500 times with villagers"
     unlock:
       type: TRADED_WITH_VILLAGER
       value: 500
-  1003:
+  172:
     name:
       ru: "Экономика!"
       en: "Economy!"
     color: "gold"
     description:
-      ru: "1000 сделок с жителями"
-      en: "1000 trades with villagers"
+      ru: "Совершить 1000 сделок с жителями"
+      en: "Trade 1000 times with villagers"
     unlock:
       type: TRADED_WITH_VILLAGER
       value: 1000
-  1004:
+  173:
     name:
       ru: "Олигарх"
       en: "Oligarch"
     color: "light_purple"
     description:
-      ru: "2000 сделок с жителями"
-      en: "2000 trades with villagers"
+      ru: "Совершить 2000 сделок с жителями"
+      en: "Trade 2000 times with villagers"
     unlock:
       type: TRADED_WITH_VILLAGER
       value: 2000
-  1005:
+
+  # === FISH_CAUGHT (174-178) ===
+  174:
+    name:
+      ru: "Поплавок"
+      en: "Bobber"
+    color: "gray"
+    description:
+      ru: "Поймать 10 рыб"
+      en: "Catch 10 fish"
+    unlock:
+      type: FISH_CAUGHT
+      value: 10
+  175:
+    name:
+      ru: "Червячок"
+      en: "Worm"
+    color: "green"
+    description:
+      ru: "Поймать 50 рыб"
+      en: "Catch 50 fish"
+    unlock:
+      type: FISH_CAUGHT
+      value: 50
+  176:
+    name:
+      ru: "Терпение"
+      en: "Patience"
+    color: "aqua"
+    description:
+      ru: "Поймать 200 рыб"
+      en: "Catch 200 fish"
+    unlock:
+      type: FISH_CAUGHT
+      value: 200
+  177:
+    name:
+      ru: "Дед Мазай"
+      en: "Old Man and the Sea"
+    color: "dark_aqua"
+    description:
+      ru: "Поймать 500 рыб"
+      en: "Catch 500 fish"
+    unlock:
+      type: FISH_CAUGHT
+      value: 500
+  178:
+    name:
+      ru: "Вот Такая Рыба!"
+      en: "This Big Fish!"
+    color: "light_purple"
+    description:
+      ru: "Поймать 1000 рыб"
+      en: "Catch 1000 fish"
+    unlock:
+      type: FISH_CAUGHT
+      value: 1000
+
+  # === DEATHS (179-183) ===
+  179:
+    name:
+      ru: "Нуб"
+      en: "Noob"
+    color: "gray"
+    description:
+      ru: "Умереть 1 раз"
+      en: "Die 1 time"
+    unlock:
+      type: DEATHS
+      value: 1
+  180:
+    name:
+      ru: "Завсегдатай"
+      en: "Regular"
+    color: "green"
+    description:
+      ru: "Умереть 50 раз"
+      en: "Die 50 times"
+    unlock:
+      type: DEATHS
+      value: 50
+  181:
+    name:
+      ru: "Респаун"
+      en: "Respawn"
+    color: "gold"
+    description:
+      ru: "Умереть 100 раз"
+      en: "Die 100 times"
+    unlock:
+      type: DEATHS
+      value: 100
+  182:
+    name:
+      ru: "You Died"
+      en: "You Died"
+    color: "red"
+    description:
+      ru: "Умереть 500 раз"
+      en: "Die 500 times"
+    unlock:
+      type: DEATHS
+      value: 500
+  183:
+    name:
+      ru: "Профессионал"
+      en: "Professional"
+    color: "light_purple"
+    description:
+      ru: "Умереть 1000 раз"
+      en: "Die 1000 times"
+    unlock:
+      type: DEATHS
+      value: 1000
+
+  # === ANIMALS_BRED (184-187) ===
+  184:
+    name:
+      ru: "Пшеница"
+      en: "Wheat"
+    color: "green"
+    description:
+      ru: "Развести 100 животных"
+      en: "Breed 100 animals"
+    unlock:
+      type: ANIMALS_BRED
+      value: 100
+  185:
+    name:
+      ru: "Обаяшка"
+      en: "Charmer"
+    color: "green"
+    description:
+      ru: "Развести 300 животных"
+      en: "Breed 300 animals"
+    unlock:
+      type: ANIMALS_BRED
+      value: 300
+  186:
+    name:
+      ru: "Ферма Дяди"
+      en: "Uncle's Farm"
+    color: "gold"
+    description:
+      ru: "Развести 500 животных"
+      en: "Breed 500 animals"
+    unlock:
+      type: ANIMALS_BRED
+      value: 500
+  187:
+    name:
+      ru: "Скотопромышленник"
+      en: "Cattle Baron"
+    color: "light_purple"
+    description:
+      ru: "Развести 1000 животных"
+      en: "Breed 1000 animals"
+    unlock:
+      type: ANIMALS_BRED
+      value: 1000
+
+  # === ENCHANT_ITEM (188-190) ===
+  188:
+    name:
+      ru: "Блестит!"
+      en: "Shiny!"
+    color: "aqua"
+    description:
+      ru: "Зачаровать 10 предметов"
+      en: "Enchant 10 items"
+    unlock:
+      type: ENCHANT_ITEM
+      value: 10
+  189:
+    name:
+      ru: "Galactic Alphabet"
+      en: "Galactic Alphabet"
+    color: "dark_purple"
+    description:
+      ru: "Зачаровать 50 предметов"
+      en: "Enchant 50 items"
+    unlock:
+      type: ENCHANT_ITEM
+      value: 50
+  190:
+    name:
+      ru: "Enchanting!"
+      en: "Enchanting!"
+    color: "light_purple"
+    description:
+      ru: "Зачаровать 200 предметов"
+      en: "Enchant 200 items"
+    unlock:
+      type: ENCHANT_ITEM
+      value: 200
+
+  # === PIGLIN_BARTER (191-193) ===
+  191:
     name:
       ru: "Гачапон"
       en: "Gacha"
     color: "gold"
     description:
-      ru: "10 сделок с пиглинами"
-      en: "10 trades with piglins"
+      ru: "Совершить 10 бартеров с пиглинами"
+      en: "Barter 10 times with piglins"
     unlock:
       type: CUSTOM_STAT
       stat-key: piglin-barters
       value: 10
-  1006:
+  192:
     name:
       ru: "Лудоман"
       en: "Gambler"
     color: "gold"
     description:
-      ru: "100 сделок с пиглинами"
-      en: "100 trades with piglins"
+      ru: "Совершить 100 бартеров с пиглинами"
+      en: "Barter 100 times with piglins"
     unlock:
       type: CUSTOM_STAT
       stat-key: piglin-barters
       value: 100
-  1007:
+  193:
     name:
       ru: "Казино Всегда Выигрывает"
       en: "The House Always Wins"
     color: "light_purple"
     description:
-      ru: "500 сделок с пиглинами"
-      en: "500 trades with piglins"
+      ru: "Совершить 500 бартеров с пиглинами"
+      en: "Barter 500 times with piglins"
     unlock:
       type: CUSTOM_STAT
       stat-key: piglin-barters
       value: 500
-  1008:
+
+  # === ZOMBIE_VILLAGER_CURE (194-196) ===
+  194:
     name:
       ru: "Доктор"
       en: "Doctor"
@@ -1890,7 +2330,7 @@ titles:
       type: CUSTOM_STAT
       stat-key: zombie-villager-cures
       value: 1
-  1009:
+  195:
     name:
       ru: "Реаниматолог"
       en: "Resuscitator"
@@ -1902,7 +2342,7 @@ titles:
       type: CUSTOM_STAT
       stat-key: zombie-villager-cures
       value: 10
-  1010:
+  196:
     name:
       ru: "Зомби? Какие Зомби?"
       en: "Zombies? What Zombies?"
@@ -1915,124 +2355,8 @@ titles:
       stat-key: zombie-villager-cures
       value: 50
 
-  # === Travel and Exploration (1100-1199) ===
-  1100:
-    name:
-      ru: "Прогулка"
-      en: "Stroll"
-    color: "green"
-    description:
-      ru: "Пройти 10 км"
-      en: "Walk 10 km"
-    unlock:
-      type: DISTANCE_KM
-      value: 10
-  1101:
-    name:
-      ru: "Стоптанные Ботинки"
-      en: "Worn Out Boots"
-    color: "green"
-    description:
-      ru: "Пройти 100 км"
-      en: "Walk 100 km"
-    unlock:
-      type: DISTANCE_KM
-      value: 100
-  1102:
-    name:
-      ru: "Шагомер"
-      en: "Pedometer"
-    color: "aqua"
-    description:
-      ru: "Пройти 500 км"
-      en: "Walk 500 km"
-    unlock:
-      type: DISTANCE_KM
-      value: 500
-  1103:
-    name:
-      ru: "Форрест Гамп"
-      en: "Forrest Gump"
-    color: "gold"
-    description:
-      ru: "Пройти 1000 км"
-      en: "Walk 1000 km"
-    unlock:
-      type: DISTANCE_KM
-      value: 1000
-  1104:
-    name:
-      ru: "Вокруг Света"
-      en: "Around the World"
-    color: "light_purple"
-    description:
-      ru: "Пройти 5000 км"
-      en: "Walk 5000 km"
-    unlock:
-      type: DISTANCE_KM
-      value: 5000
-  1105:
-    name:
-      ru: "Турист"
-      en: "Tourist"
-    color: "red"
-    description:
-      ru: "Посетить Незер"
-      en: "Visit the Nether"
-    unlock:
-      type: CUSTOM_STAT
-      stat-key: visited-nether
-      value: 1
-  1106:
-    name:
-      ru: "А Тут Пусто"
-      en: "It's Empty Here"
-    color: "dark_purple"
-    description:
-      ru: "Посетить Энд"
-      en: "Visit the End"
-    unlock:
-      type: CUSTOM_STAT
-      stat-key: visited-the_end
-      value: 1
-  1107:
-    name:
-      ru: "Мультивселенная"
-      en: "Multiverse"
-    color: "light_purple"
-    description:
-      ru: "Посетить все 3 измерения"
-      en: "Visit all 3 dimensions"
-    unlock:
-      type: VISITED_DIMENSIONS
-      value: 3
-  1108:
-    name:
-      ru: "Следопыт"
-      en: "Pathfinder"
-    color: "green"
-    description:
-      ru: "Найти 10 различных биомов"
-      en: "Discover 10 different biomes"
-  1109:
-    name:
-      ru: "GPS"
-      en: "GPS"
-    color: "gold"
-    description:
-      ru: "Найти 30 различных биомов"
-      en: "Discover 30 different biomes"
-  1110:
-    name:
-      ru: "Google Maps"
-      en: "Google Maps"
-    color: "light_purple"
-    description:
-      ru: "Найти все биомы"
-      en: "Discover all biomes"
-
-  # === Farming and Animals (1200-1299) ===
-  1200:
+  # === TAME_ENTITY: Wolves (197-199) ===
+  197:
     name:
       ru: "Кость!"
       en: "Bone!"
@@ -2044,11 +2368,23 @@ titles:
       type: CUSTOM_STAT
       stat-key: tamed-wolf
       value: 1
-  1201:
+  198:
+    name:
+      ru: "Пушистик"
+      en: "Fluffy"
+    color: "white"
+    description:
+      ru: "Приручить 5 волков"
+      en: "Tame 5 wolves"
+    unlock:
+      type: CUSTOM_STAT
+      stat-key: tamed-wolf
+      value: 5
+  199:
     name:
       ru: "Стая"
       en: "Pack"
-    color: "white"
+    color: "gold"
     description:
       ru: "Приручить 10 волков"
       en: "Tame 10 wolves"
@@ -2056,341 +2392,132 @@ titles:
       type: CUSTOM_STAT
       stat-key: tamed-wolf
       value: 10
-  1202:
+
+  # === TAME_ENTITY: Cats (200-201) ===
+  200:
     name:
       ru: "Мяу"
       en: "Meow"
     color: "gold"
     description:
-      ru: "Приручить 1 кота"
+      ru: "Приручить 1 кошку"
       en: "Tame 1 cat"
     unlock:
       type: CUSTOM_STAT
       stat-key: tamed-cat
       value: 1
-  1203:
+  201:
     name:
       ru: "Crazy Cat Lady"
       en: "Crazy Cat Lady"
-    color: "gold"
+    color: "light_purple"
     description:
-      ru: "Приручить 10 котов"
+      ru: "Приручить 10 кошек"
       en: "Tame 10 cats"
     unlock:
       type: CUSTOM_STAT
       stat-key: tamed-cat
       value: 10
-  1204:
+
+  # === TAME_ENTITY: Horses (202) ===
+  202:
     name:
       ru: "Ковбой"
       en: "Cowboy"
     color: "gold"
     description:
-      ru: "Приручить лошадь"
-      en: "Tame a horse"
+      ru: "Приручить 1 лошадь"
+      en: "Tame 1 horse"
     unlock:
       type: CUSTOM_STAT
       stat-key: tamed-horse
       value: 1
-  1205:
-    name:
-      ru: "Пшеница"
-      en: "Wheat"
-    color: "green"
-    description:
-      ru: "Разводить 100 животных"
-      en: "Breed 100 animals"
-    unlock:
-      type: ANIMALS_BRED
-      value: 100
-  1206:
-    name:
-      ru: "Ферма Дяди"
-      en: "Uncle's Farm"
-    color: "green"
-    description:
-      ru: "Разводить 500 животных"
-      en: "Breed 500 animals"
-    unlock:
-      type: ANIMALS_BRED
-      value: 500
-  1207:
-    name:
-      ru: "Скотопромышленник"
-      en: "Rancher"
-    color: "dark_green"
-    description:
-      ru: "Разводить 1000 животных"
-      en: "Breed 1000 animals"
-    unlock:
-      type: ANIMALS_BRED
-      value: 1000
-  1208:
-    name:
-      ru: "Жу-жу"
-      en: "Buzz-Buzz"
-    color: "yellow"
-    description:
-      ru: "Разводить 50 пчёл"
-      en: "Breed 50 bees"
-  1209:
-    name:
-      ru: "Пасека"
-      en: "Apiary"
-    color: "yellow"
-    description:
-      ru: "Разводить 200 пчёл"
-      en: "Breed 200 bees"
-  1210:
-    name:
-      ru: "Грядка"
-      en: "Garden Bed"
-    color: "green"
-    description:
-      ru: "Посадить 1000 семян"
-      en: "Plant 1000 seeds"
-  1211:
-    name:
-      ru: "Комбайн"
-      en: "Harvester"
-    color: "dark_green"
-    description:
-      ru: "Собрать 5000 урожая"
-      en: "Harvest 5000 crops"
 
-  # === Fishing (1300-1399) ===
-  1300:
+  # === VISIT_DIMENSION (203-205) ===
+  203:
     name:
-      ru: "Поплавок"
-      en: "Bobber"
-    color: "gray"
+      ru: "Турист"
+      en: "Tourist"
+    color: "red"
     description:
-      ru: "Поймать 10 рыб"
-      en: "Catch 10 fish"
-    unlock:
-      type: FISH_CAUGHT
-      value: 10
-  1301:
-    name:
-      ru: "Червячок"
-      en: "Worm"
-    color: "aqua"
-    description:
-      ru: "Поймать 50 рыб"
-      en: "Catch 50 fish"
-    unlock:
-      type: FISH_CAUGHT
-      value: 50
-  1302:
-    name:
-      ru: "Терпение"
-      en: "Patience"
-    color: "dark_aqua"
-    description:
-      ru: "Поймать 200 рыб"
-      en: "Catch 200 fish"
-    unlock:
-      type: FISH_CAUGHT
-      value: 200
-  1303:
-    name:
-      ru: "Дед Мазай"
-      en: "Old Fisherman"
-    color: "dark_aqua"
-    description:
-      ru: "Поймать 500 рыб"
-      en: "Catch 500 fish"
-    unlock:
-      type: FISH_CAUGHT
-      value: 500
-  1304:
-    name:
-      ru: "Вот Такая Рыба!"
-      en: "Fish This Big!"
-    color: "aqua"
-    description:
-      ru: "Поймать 1000 рыб"
-      en: "Catch 1000 fish"
-    unlock:
-      type: FISH_CAUGHT
-      value: 1000
-  1305:
-    name:
-      ru: "Удача"
-      en: "Lucky"
-    color: "gold"
-    description:
-      ru: "Поймать сокровище (удочкой)"
-      en: "Catch a treasure (with fishing rod)"
-  1306:
-    name:
-      ru: "Магнит На Дне"
-      en: "Magnet on the Bottom"
-    color: "gold"
-    description:
-      ru: "Поймать 20 сокровищ"
-      en: "Catch 20 treasures"
-
-  # === Crafting and Enchanting (1400-1499) ===
-  1400:
-    name:
-      ru: "Самоделкин"
-      en: "Handyman"
-    color: "white"
-    description:
-      ru: "Скрафтить 100 предметов"
-      en: "Craft 100 items"
+      ru: "Посетить Незер"
+      en: "Visit the Nether"
     unlock:
       type: CUSTOM_STAT
-      stat-key: items-crafted
-      value: 100
-  1401:
-    name:
-      ru: "Конвейер"
-      en: "Conveyor"
-    color: "white"
-    description:
-      ru: "Скрафтить 500 предметов"
-      en: "Craft 500 items"
-    unlock:
-      type: CUSTOM_STAT
-      stat-key: items-crafted
-      value: 500
-  1402:
-    name:
-      ru: "Фабрика"
-      en: "Factory"
-    color: "gold"
-    description:
-      ru: "Скрафтить 2000 предметов"
-      en: "Craft 2000 items"
-    unlock:
-      type: CUSTOM_STAT
-      stat-key: items-crafted
-      value: 2000
-  1403:
-    name:
-      ru: "Блестит!"
-      en: "Shiny!"
-    color: "blue"
-    description:
-      ru: "Зачаровать 10 предметов"
-      en: "Enchant 10 items"
-    unlock:
-      type: ENCHANT_ITEM
-      value: 10
-  1404:
-    name:
-      ru: "Galactic Alphabet"
-      en: "Galactic Alphabet"
-    color: "blue"
-    description:
-      ru: "Зачаровать 50 предметов"
-      en: "Enchant 50 items"
-    unlock:
-      type: ENCHANT_ITEM
-      value: 50
-  1405:
-    name:
-      ru: "Enchanting!"
-      en: "Enchanting!"
-    color: "dark_purple"
-    description:
-      ru: "Зачаровать 200 предметов"
-      en: "Enchant 200 items"
-    unlock:
-      type: ENCHANT_ITEM
-      value: 200
-  1406:
-    name:
-      ru: "Пробирка"
-      en: "Test Tube"
-    color: "dark_purple"
-    description:
-      ru: "Сварить 50 зелий"
-      en: "Brew 50 potions"
-  1407:
-    name:
-      ru: "Breaking Bad"
-      en: "Breaking Bad"
-    color: "dark_purple"
-    description:
-      ru: "Сварить 200 зелий"
-      en: "Brew 200 potions"
-  1408:
-    name:
-      ru: "Тук-Тук"
-      en: "Knock-Knock"
-    color: "dark_gray"
-    description:
-      ru: "Использовать наковальню 50 раз"
-      en: "Use anvil 50 times"
-  1409:
-    name:
-      ru: "Too Expensive!"
-      en: "Too Expensive!"
-    color: "dark_gray"
-    description:
-      ru: "Использовать наковальню 200 раз"
-      en: "Use anvil 200 times"
-
-  # === Deaths and Survival (1500-1599) ===
-  1500:
-    name:
-      ru: "Ой"
-      en: "Oops"
-    color: "gray"
-    description:
-      ru: "Умереть 1 раз"
-      en: "Die 1 time"
-    unlock:
-      type: DEATHS
+      stat-key: visited-nether
       value: 1
-  1501:
+  204:
     name:
-      ru: "Завсегдатай"
-      en: "Regular"
-    color: "gray"
+      ru: "А Тут Пусто"
+      en: "Nothing Here"
+    color: "dark_purple"
     description:
-      ru: "Умереть 50 раз"
-      en: "Die 50 times"
+      ru: "Посетить Энд"
+      en: "Visit the End"
     unlock:
-      type: DEATHS
+      type: CUSTOM_STAT
+      stat-key: visited-the_end
+      value: 1
+  205:
+    name:
+      ru: "Мультивселенная"
+      en: "Multiverse"
+    color: "light_purple"
+    description:
+      ru: "Посетить все 3 измерения"
+      en: "Visit all 3 dimensions"
+    unlock:
+      type: VISITED_DIMENSIONS
+      value: 3
+
+  # === SURVIVAL_DAYS (206-209) ===
+  206:
+    name:
+      ru: "Осторожный"
+      en: "Careful"
+    color: "green"
+    description:
+      ru: "Выжить 50 дней без смерти"
+      en: "Survive 50 days without dying"
+    unlock:
+      type: SURVIVAL_DAYS
       value: 50
-  1502:
+  207:
     name:
-      ru: "Респаун"
-      en: "Respawn"
-    color: "dark_gray"
+      ru: "Параноик"
+      en: "Paranoid"
+    color: "aqua"
     description:
-      ru: "Умереть 100 раз"
-      en: "Die 100 times"
+      ru: "Выжить 100 дней без смерти"
+      en: "Survive 100 days without dying"
     unlock:
-      type: DEATHS
+      type: SURVIVAL_DAYS
       value: 100
-  1503:
+  208:
     name:
-      ru: "You Died"
-      en: "You Died"
-    color: "dark_red"
+      ru: "Живая Легенда"
+      en: "Living Legend"
+    color: "gold"
     description:
-      ru: "Умереть 500 раз"
-      en: "Die 500 times"
+      ru: "Выжить 200 дней без смерти"
+      en: "Survive 200 days without dying"
     unlock:
-      type: DEATHS
-      value: 500
-  1504:
+      type: SURVIVAL_DAYS
+      value: 200
+  209:
     name:
-      ru: "Профессионал"
-      en: "Professional"
-    color: "dark_red"
+      ru: "Нетленный"
+      en: "Immortal"
+    color: "light_purple"
     description:
-      ru: "Умереть 1000 раз"
-      en: "Die 1000 times"
+      ru: "Выжить 365 дней без смерти"
+      en: "Survive 365 days without dying"
     unlock:
-      type: DEATHS
-      value: 1000
-  1505:
+      type: SURVIVAL_DAYS
+      value: 365
+
+  # === DEATH_BY_CAUSE (210-213) ===
+  210:
     name:
       ru: "Икар"
       en: "Icarus"
@@ -2402,11 +2529,11 @@ titles:
       type: CUSTOM_STAT
       stat-key: fall-deaths
       value: 20
-  1506:
+  211:
     name:
       ru: "Самородок"
       en: "Nugget"
-    color: "red"
+    color: "yellow"
     description:
       ru: "Умереть в лаве 10 раз"
       en: "Die in lava 10 times"
@@ -2414,130 +2541,250 @@ titles:
       type: CUSTOM_STAT
       stat-key: lava-deaths
       value: 10
-  1507:
+  212:
     name:
       ru: "Диета"
       en: "Diet"
-    color: "dark_green"
+    color: "green"
     description:
       ru: "Умереть от голода 10 раз"
-      en: "Die from starvation 10 times"
+      en: "Starve to death 10 times"
     unlock:
       type: CUSTOM_STAT
       stat-key: starvation-deaths
       value: 10
-  1508:
+  213:
     name:
       ru: "Буль-Буль"
       en: "Blub-Blub"
     color: "dark_aqua"
     description:
-      ru: "Умереть от утопления 10 раз"
-      en: "Die from drowning 10 times"
+      ru: "Утонуть 10 раз"
+      en: "Drown 10 times"
     unlock:
       type: CUSTOM_STAT
       stat-key: drowning-deaths
       value: 10
-  1509:
-    name:
-      ru: "Осторожный"
-      en: "Cautious"
-    color: "green"
-    description:
-      ru: "Выжить 50 дней без смерти"
-      en: "Survive 50 days without dying"
-    unlock:
-      type: SURVIVAL_DAYS
-      value: 50
-  1510:
-    name:
-      ru: "Параноик"
-      en: "Paranoid"
-    color: "aqua"
-    description:
-      ru: "Выжить 100 дней без смерти"
-      en: "Survive 100 days without dying"
-    unlock:
-      type: SURVIVAL_DAYS
-      value: 100
-  1511:
-    name:
-      ru: "Нетленный"
-      en: "Imperishable"
-    color: "gold"
-    description:
-      ru: "Выжить 365 дней без смерти"
-      en: "Survive 365 days without dying"
-    unlock:
-      type: SURVIVAL_DAYS
-      value: 365
-  1512:
-    name:
-      ru: "На Волоске"
-      en: "By a Thread"
-    color: "red"
-    description:
-      ru: "Выжить на половине сердца"
-      en: "Survive at half a heart"
 
-  # === Building (1600-1699) ===
-  1600:
+  # === BLOCKS_PLACED (214-219) ===
+  214:
     name:
       ru: "Кубик"
-      en: "Block"
+      en: "Cube"
     color: "gray"
     description:
-      ru: "Разместить 1000 блоков"
+      ru: "Поставить 1000 блоков"
       en: "Place 1000 blocks"
     unlock:
       type: CUSTOM_STAT
       stat-key: blocks-placed
       value: 1000
-  1601:
+  215:
+    name:
+      ru: "Декоратор"
+      en: "Decorator"
+    color: "green"
+    description:
+      ru: "Поставить 5000 блоков"
+      en: "Place 5000 blocks"
+    unlock:
+      type: CUSTOM_STAT
+      stat-key: blocks-placed
+      value: 5000
+  216:
     name:
       ru: "Прораб"
       en: "Foreman"
-    color: "white"
+    color: "aqua"
     description:
-      ru: "Разместить 10000 блоков"
+      ru: "Поставить 10000 блоков"
       en: "Place 10000 blocks"
     unlock:
       type: CUSTOM_STAT
       stat-key: blocks-placed
       value: 10000
-  1602:
+  217:
     name:
       ru: "Застройщик"
       en: "Builder"
     color: "gold"
     description:
-      ru: "Разместить 50000 блоков"
+      ru: "Поставить 50000 блоков"
       en: "Place 50000 blocks"
     unlock:
       type: CUSTOM_STAT
       stat-key: blocks-placed
       value: 50000
-  1603:
+  218:
     name:
       ru: "Девелопер"
       en: "Developer"
-    color: "gold"
+    color: "red"
     description:
-      ru: "Разместить 100000 блоков"
+      ru: "Поставить 100000 блоков"
       en: "Place 100000 blocks"
     unlock:
       type: CUSTOM_STAT
       stat-key: blocks-placed
       value: 100000
-  1604:
+  219:
     name:
       ru: "Москва-Сити"
       en: "Moscow City"
     color: "light_purple"
     description:
-      ru: "Разместить 500000 блоков"
+      ru: "Поставить 500000 блоков"
       en: "Place 500000 blocks"
     unlock:
       type: CUSTOM_STAT
       stat-key: blocks-placed
       value: 500000
+
+  # === ITEMS_CRAFTED (220-225) ===
+  220:
+    name:
+      ru: "Ловкач"
+      en: "Trickster"
+    color: "gray"
+    description:
+      ru: "Скрафтить 50 предметов"
+      en: "Craft 50 items"
+    unlock:
+      type: CUSTOM_STAT
+      stat-key: items-crafted
+      value: 50
+  221:
+    name:
+      ru: "Самоделкин"
+      en: "Handyman"
+    color: "green"
+    description:
+      ru: "Скрафтить 100 предметов"
+      en: "Craft 100 items"
+    unlock:
+      type: CUSTOM_STAT
+      stat-key: items-crafted
+      value: 100
+  222:
+    name:
+      ru: "Перфекционист"
+      en: "Perfectionist"
+    color: "aqua"
+    description:
+      ru: "Скрафтить 300 предметов"
+      en: "Craft 300 items"
+    unlock:
+      type: CUSTOM_STAT
+      stat-key: items-crafted
+      value: 300
+  223:
+    name:
+      ru: "Конвейер"
+      en: "Conveyor"
+    color: "gold"
+    description:
+      ru: "Скрафтить 500 предметов"
+      en: "Craft 500 items"
+    unlock:
+      type: CUSTOM_STAT
+      stat-key: items-crafted
+      value: 500
+  224:
+    name:
+      ru: "Трюкач"
+      en: "Juggler"
+    color: "red"
+    description:
+      ru: "Скрафтить 1000 предметов"
+      en: "Craft 1000 items"
+    unlock:
+      type: CUSTOM_STAT
+      stat-key: items-crafted
+      value: 1000
+  225:
+    name:
+      ru: "Фабрика"
+      en: "Factory"
+    color: "light_purple"
+    description:
+      ru: "Скрафтить 2000 предметов"
+      en: "Craft 2000 items"
+    unlock:
+      type: CUSTOM_STAT
+      stat-key: items-crafted
+      value: 2000
+
+  # === Additional titles ===
+  226:
+    name:
+      ru: "Политолог"
+      en: "Politologist"
+    color: "gold"
+    description:
+      ru: "3000 сделок с жителями"
+      en: "3000 trades with villagers"
+    unlock:
+      type: TRADED_WITH_VILLAGER
+      value: 3000
+  227:
+    name:
+      ru: "Золотая Лихорадка"
+      en: "Gold Rush"
+    color: "gold"
+    description:
+      ru: "1000 сделок с пиглинами"
+      en: "1000 trades with piglins"
+    unlock:
+      type: CUSTOM_STAT
+      stat-key: piglin-barters
+      value: 1000
+  228:
+    name:
+      ru: "Свинья-Копилка"
+      en: "Piggy Bank"
+    color: "light_purple"
+    description:
+      ru: "2000 сделок с пиглинами"
+      en: "2000 trades with piglins"
+    unlock:
+      type: CUSTOM_STAT
+      stat-key: piglin-barters
+      value: 2000
+  229:
+    name:
+      ru: "Крёстный Отец"
+      en: "The Godfather"
+    color: "light_purple"
+    description:
+      ru: "5000 сделок с пиглинами"
+      en: "5000 trades with piglins"
+    unlock:
+      type: CUSTOM_STAT
+      stat-key: piglin-barters
+      value: 5000
+  230:
+    name:
+      ru: "Архидемон"
+      en: "Archdemon"
+    color: "dark_red"
+    description:
+      ru: "Карма -10000"
+      en: "Karma -10000"
+  231:
+    name:
+      ru: "Архангел"
+      en: "Archangel"
+    color: "light_purple"
+    description:
+      ru: "Карма 10000"
+      en: "Karma 10000"
+
+  # === Seasonal ===
+  232:
+    name:
+      ru: "Шут"
+      en: "Jester"
+    color: "yellow"
+    description:
+      ru: "Зайти 1 апреля"
+      en: "Login on April 1st"

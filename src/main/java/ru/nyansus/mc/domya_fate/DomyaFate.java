@@ -6,7 +6,12 @@ import org.bukkit.plugin.java.JavaPlugin;
 import ru.nyansus.mc.domya_fate.title.Title;
 import ru.nyansus.mc.domya_fate.buff.BuffApplyTask;
 import ru.nyansus.mc.domya_fate.buff.BuffConfig;
+import ru.nyansus.mc.domya_fate.buff.BlockRidingListener;
+import ru.nyansus.mc.domya_fate.buff.BlockTamingListener;
 import ru.nyansus.mc.domya_fate.buff.GolemAggroListener;
+import ru.nyansus.mc.domya_fate.buff.HostileMobListener;
+import ru.nyansus.mc.domya_fate.buff.MobBehaviorTask;
+import ru.nyansus.mc.domya_fate.buff.KarmaEffectsListener;
 import ru.nyansus.mc.domya_fate.buff.PvpDamageListener;
 import ru.nyansus.mc.domya_fate.buff.TradeBlockListener;
 import ru.nyansus.mc.domya_fate.buff.XpBonusListener;
@@ -17,7 +22,11 @@ import ru.nyansus.mc.domya_fate.karma.AntiFarmManager;
 import ru.nyansus.mc.domya_fate.karma.KarmaManager;
 import ru.nyansus.mc.domya_fate.karma.KarmaTitleManager;
 import ru.nyansus.mc.domya_fate.karma.StatsStorage;
-import ru.nyansus.mc.domya_fate.karma.YamlKarmaStorage;
+import ru.nyansus.mc.domya_fate.storage.DatabaseManager;
+import ru.nyansus.mc.domya_fate.storage.SqliteKarmaStorage;
+import ru.nyansus.mc.domya_fate.storage.SqliteStatsStorage;
+import ru.nyansus.mc.domya_fate.storage.SqliteTitleStorage;
+import ru.nyansus.mc.domya_fate.storage.YamlMigrator;
 import ru.nyansus.mc.domya_fate.listener.AnimalListener;
 import ru.nyansus.mc.domya_fate.listener.MobKillListener;
 import ru.nyansus.mc.domya_fate.listener.PlayerJoinListener;
@@ -28,7 +37,8 @@ import ru.nyansus.mc.domya_fate.listener.VillagerCureListener;
 import ru.nyansus.mc.domya_fate.title.TitleManager;
 import ru.nyansus.mc.domya_fate.title.TitleRegistry;
 import ru.nyansus.mc.domya_fate.title.UnlockScanTask;
-import ru.nyansus.mc.domya_fate.title.YamlTitleStorage;
+
+import java.sql.SQLException;
 
 public class DomyaFate extends JavaPlugin {
 
@@ -39,27 +49,35 @@ public class DomyaFate extends JavaPlugin {
     private BuffConfig buffConfig;
     private TitleManager titleManager;
     private StatsStorage statsStorage;
+    private DatabaseManager databaseManager;
 
     @Override
     public void onEnable() {
         saveDefaultConfig();
         messages = new Messages(this);
 
-        YamlKarmaStorage karmaStorage = new YamlKarmaStorage(getDataFolder());
-        karmaStorage.load();
+        databaseManager = new DatabaseManager(getDataFolder());
+        try {
+            databaseManager.initialize();
+        } catch (SQLException e) {
+            getLogger().severe("Failed to initialize database: " + e.getMessage());
+            getServer().getPluginManager().disablePlugin(this);
+            return;
+        }
 
-        karmaManager = new KarmaManager(this, karmaStorage);
+        YamlMigrator migrator = new YamlMigrator(this, databaseManager);
+        if (migrator.needsMigration()) {
+            migrator.migrate();
+        }
+
+        karmaManager = new KarmaManager(this, new SqliteKarmaStorage(databaseManager));
         karmaTitleManager = new KarmaTitleManager(getConfig());
         antiFarmManager = new AntiFarmManager(getConfig());
         buffConfig = new BuffConfig(getConfig());
-
-        statsStorage = new StatsStorage(getDataFolder());
-        statsStorage.load();
+        statsStorage = new SqliteStatsStorage(databaseManager);
 
         TitleRegistry titleRegistry = new TitleRegistry(this);
-        YamlTitleStorage titleStorage = new YamlTitleStorage(getDataFolder());
-        titleStorage.load();
-        titleManager = new TitleManager(titleRegistry, titleStorage);
+        titleManager = new TitleManager(titleRegistry, new SqliteTitleStorage(databaseManager));
 
         karmaManager.setOnKarmaChange((uuid, karma) -> {
             Player player = Bukkit.getPlayer(uuid);
@@ -77,18 +95,14 @@ public class DomyaFate extends JavaPlugin {
 
         long unlockInterval = getConfig().getLong("unlock-check-interval", 6000L);
         new UnlockScanTask(this).runTaskTimer(this, 200L, unlockInterval);
+
+        new MobBehaviorTask(this).runTaskTimer(this, 20L, 20L);
     }
 
     @Override
     public void onDisable() {
-        if (karmaManager != null) {
-            karmaManager.saveAll();
-        }
-        if (titleManager != null) {
-            titleManager.saveAll();
-        }
-        if (statsStorage != null) {
-            statsStorage.save();
+        if (databaseManager != null) {
+            databaseManager.close();
         }
     }
 
@@ -105,6 +119,10 @@ public class DomyaFate extends JavaPlugin {
         pm.registerEvents(new TradeBlockListener(this), this);
         pm.registerEvents(new GolemAggroListener(this), this);
         pm.registerEvents(new XpBonusListener(this), this);
+        pm.registerEvents(new HostileMobListener(this), this);
+        pm.registerEvents(new BlockTamingListener(this), this);
+        pm.registerEvents(new BlockRidingListener(this), this);
+        pm.registerEvents(new KarmaEffectsListener(this), this);
     }
 
     private void registerCommands() {
@@ -120,7 +138,7 @@ public class DomyaFate extends JavaPlugin {
             dtCmd.setExecutor(titleCommand);
             dtCmd.setTabCompleter(titleCommand);
         }
-        var fateCmd = getCommand("domyafate");
+        var fateCmd = getCommand("ethos");
         if (fateCmd != null) {
             DomyaFateCommand fateCommand = new DomyaFateCommand(this);
             fateCmd.setExecutor(fateCommand);
@@ -141,6 +159,8 @@ public class DomyaFate extends JavaPlugin {
         karmaTitleManager = new KarmaTitleManager(getConfig());
         antiFarmManager = new AntiFarmManager(getConfig());
         buffConfig = new BuffConfig(getConfig());
+        TitleRegistry titleRegistry = new TitleRegistry(this);
+        titleManager = new TitleManager(titleRegistry, titleManager.getStorage());
     }
 
     public Messages getMessages() {

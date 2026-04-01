@@ -1,6 +1,9 @@
 package ru.nyansus.mc.domya_fate.buff;
 
+import org.bukkit.GameMode;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
+import org.bukkit.entity.IronGolem;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -20,22 +23,35 @@ public class GolemAggroListener implements Listener {
         if (event.getEntity().getType() != EntityType.IRON_GOLEM) {
             return;
         }
+        IronGolem golem = (IronGolem) event.getEntity();
 
         if (event.getTarget() instanceof Player player) {
             int karma = plugin.getKarmaManager().getKarma(player.getUniqueId());
-            if (plugin.getBuffConfig().isGolemAggro(karma)) {
+            if (plugin.getBuffConfig().hasEffect(karma, EffectType.GOLEM_AGGRO)) {
                 return;
             }
         }
 
-        if (event.getTarget() == null && event.getEntity().getCustomName() == null) {
-            var golem = (org.bukkit.entity.IronGolem) event.getEntity();
-            if (golem.getTarget() instanceof Player current) {
-                int karma = plugin.getKarmaManager().getKarma(current.getUniqueId());
-                if (plugin.getBuffConfig().isGolemAggro(karma)) {
-                    event.setCancelled(true);
+        if (event.getTarget() == null) {
+            Player target = findNearbyEvilPlayer(golem);
+            if (target != null) {
+                event.setTarget(target);
+            }
+        }
+    }
+
+    private Player findNearbyEvilPlayer(IronGolem golem) {
+        for (Entity entity : golem.getNearbyEntities(16, 16, 16)) {
+            if (entity instanceof Player player) {
+                int karma = plugin.getKarmaManager().getKarma(player.getUniqueId());
+                double range = plugin.getBuffConfig()
+                        .getNumericEffect(karma, EffectType.GOLEM_AGGRO);
+                if (range > 0 && player.getGameMode() == GameMode.SURVIVAL
+                        && golem.getLocation().distance(player.getLocation()) <= range) {
+                    return player;
                 }
             }
         }
+        return null;
     }
 }
