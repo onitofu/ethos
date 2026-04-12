@@ -26,7 +26,6 @@ import ru.nyansus.mc.domya_fate.storage.DatabaseManager;
 import ru.nyansus.mc.domya_fate.storage.SqliteKarmaStorage;
 import ru.nyansus.mc.domya_fate.storage.SqliteStatsStorage;
 import ru.nyansus.mc.domya_fate.storage.SqliteTitleStorage;
-import ru.nyansus.mc.domya_fate.storage.YamlMigrator;
 import ru.nyansus.mc.domya_fate.listener.AnimalListener;
 import ru.nyansus.mc.domya_fate.listener.MobKillListener;
 import ru.nyansus.mc.domya_fate.listener.PlayerJoinListener;
@@ -63,11 +62,6 @@ public class DomyaFate extends JavaPlugin {
             getLogger().severe("Failed to initialize database: " + e.getMessage());
             getServer().getPluginManager().disablePlugin(this);
             return;
-        }
-
-        YamlMigrator migrator = new YamlMigrator(this, databaseManager);
-        if (migrator.needsMigration()) {
-            migrator.migrate();
         }
 
         karmaManager = new KarmaManager(this, new SqliteKarmaStorage(databaseManager));
