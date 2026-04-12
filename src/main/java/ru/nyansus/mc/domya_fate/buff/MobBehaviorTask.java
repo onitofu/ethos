@@ -112,7 +112,8 @@ public class MobBehaviorTask extends BukkitRunnable {
 
     private void attractHostileMobs(Player player, double range) {
         for (Entity entity : player.getNearbyEntities(range, range, range)) {
-            if (entity instanceof Enemy mob && ((Mob) mob).getTarget() == null) {
+            if (entity instanceof Enemy mob && ((Mob) mob).getTarget() == null
+                    && entity.getType() != EntityType.ZOMBIFIED_PIGLIN) {
                 ((Mob) mob).setTarget(player);
             }
         }

@@ -19,6 +19,7 @@ public class HostileMobListener implements Listener {
             EntityType.WITHER,
             EntityType.WARDEN,
             EntityType.ELDER_GUARDIAN,
+            EntityType.GUARDIAN,
             EntityType.ENDERMAN
     );
 
