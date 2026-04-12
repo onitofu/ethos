@@ -130,7 +130,7 @@ public class BuffApplyTask extends BukkitRunnable {
 
         Component name;
         if (title.isPresent()) {
-            NamedTextColor titleColor = parseColor(title.get().color());
+            NamedTextColor titleColor = parseColor(title.get().color().primary());
             name = Component.text("")
                     .append(Component.text(title.get().nameRu(), titleColor))
                     .append(Component.text(" "))

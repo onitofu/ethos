@@ -132,11 +132,11 @@ public class DomyaFate extends JavaPlugin {
             karmaCmd.setExecutor(karmaCommand);
             karmaCmd.setTabCompleter(karmaCommand);
         }
-        var dtCmd = getCommand("dt");
-        if (dtCmd != null) {
+        var titleCmd = getCommand("etitle");
+        if (titleCmd != null) {
             TitleCommand titleCommand = new TitleCommand(this);
-            dtCmd.setExecutor(titleCommand);
-            dtCmd.setTabCompleter(titleCommand);
+            titleCmd.setExecutor(titleCommand);
+            titleCmd.setTabCompleter(titleCommand);
         }
         var fateCmd = getCommand("ethos");
         if (fateCmd != null) {
@@ -185,6 +185,10 @@ public class DomyaFate extends JavaPlugin {
 
     public TitleManager getTitleManager() {
         return titleManager;
+    }
+
+    public float getTitleGradientShift() {
+        return (float) getConfig().getDouble("title.gradient-shift", 25d);
     }
 
     public StatsStorage getStatsStorage() {

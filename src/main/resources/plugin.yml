@@ -10,10 +10,11 @@ commands:
     description: View or manage karma
     usage: /karma [player|set <player> <value>]
     permission: ethos.karma.view
-  dt:
+  etitle:
     description: Manage your titles
-    usage: /dt [id|reset|info <id>|give <player> <id>]
+    usage: /etitle [id|reset|info <id>|give <player> <id>]
     permission: ethos.title.use
+    aliases: [dt, et]
   ethos:
     description: Admin commands
     usage: /ethos reload

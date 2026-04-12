@@ -4,6 +4,13 @@ default-locale: en
 # Title automatically given to new players (-1 to disable)
 default-title: 0
 
+# Title color rendering
+title:
+  # Hue shift (degrees) applied ONLY to titles declared with `auto-gradient: <color>`.
+  # Titles with plain `color:` are always rendered flat regardless of this value.
+  # 0 = disable auto-gradient entirely (render flat even for `auto-gradient` titles).
+  gradient-shift: 25
+
 # Karma reset cooldown (days). Players can use /karma reset once per this period.
 karma-reset-cooldown-days: 30
 

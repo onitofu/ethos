@@ -1,5 +1,24 @@
 # Title definitions — sequential IDs
 # To add a new title, use the next available ID
+#
+# Color formats — pick ONE field per title:
+#
+# 1) Flat color (name or hex). Always rendered as a single color.
+#      color: "red"
+#      color: "#FF5555"
+#
+# 2) Auto-gradient from a single color. Uses title.gradient-shift from config.yml.
+#      auto-gradient: "red"
+#
+# 3) Alternating colors per character (2 or 3 colors).
+#      color: ["red", "gold"]
+#      color: ["#FF0000", "#FFAA00", "#FFFF00"]
+#
+# 4) Explicit gradient (2+ stops).
+#      gradient: ["red", "gold"]
+#      gradient: ["#FF0000", "#00FF00", "#0000FF"]
+#
+# Demo titles: 300 (alternate), 301 (gradient), 302 (auto-gradient).
 
 titles:
   # === Default ===
@@ -2788,3 +2807,29 @@ titles:
     description:
       ru: "Зайти 1 апреля"
       en: "Login on April 1st"
+
+  # === Color format demos (admin/give only) ===
+  300:
+    name:
+      ru: "Радужный"
+      en: "Rainbow"
+    color: ["#FF0000", "#FFAA00", "#FFFF55"]
+    description:
+      ru: "Пример чередования цветов по буквам"
+      en: "Example: alternating per-letter colors"
+  301:
+    name:
+      ru: "Закат"
+      en: "Sunset"
+    gradient: ["#FF5555", "#FFAA00", "#FFFF55"]
+    description:
+      ru: "Пример явного градиента"
+      en: "Example: explicit gradient"
+  302:
+    name:
+      ru: "Аметист"
+      en: "Amethyst"
+    auto-gradient: "#C77DFF"
+    description:
+      ru: "Пример hex-цвета с автоградиентом"
+      en: "Example: hex color with auto-gradient"

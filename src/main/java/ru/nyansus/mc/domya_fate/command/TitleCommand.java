@@ -1,5 +1,7 @@
 package ru.nyansus.mc.domya_fate.command;
 
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -9,10 +11,11 @@ import org.bukkit.entity.Player;
 import ru.nyansus.mc.domya_fate.DomyaFate;
 import ru.nyansus.mc.domya_fate.title.Title;
 import ru.nyansus.mc.domya_fate.title.TitleManager;
-import ru.nyansus.mc.domya_fate.util.ColorUtil;
+import ru.nyansus.mc.domya_fate.title.TitleRenderer;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Optional;
 import java.util.Set;
 
@@ -50,6 +53,20 @@ public class TitleCommand implements CommandExecutor, TabCompleter {
         return handleSelect(player, args[0]);
     }
 
+    private static final MiniMessage MM = MiniMessage.miniMessage();
+    private static final int PROGRESS_BAR_WIDTH = 20;
+
+    private static String buildProgressLine(int unlocked, int total) {
+        double ratio = total == 0 ? 0 : (double) unlocked / total;
+        int filled = (int) Math.round(ratio * PROGRESS_BAR_WIDTH);
+        String bar = "<green>" + "█".repeat(filled) + "</green>"
+                + "<dark_gray>" + "░".repeat(PROGRESS_BAR_WIDTH - filled) + "</dark_gray>";
+        String percent = String.format(Locale.ROOT, "%.1f", ratio * 100);
+        return "  <gray>" + unlocked + "<dark_gray>/</dark_gray><gray>" + total
+                + " <dark_gray>(</dark_gray><yellow>" + percent + "%</yellow><dark_gray>)</dark_gray> "
+                + bar;
+    }
+
     private boolean handleList(Player player) {
         TitleManager tm = plugin.getTitleManager();
         Set<Integer> unlocked = tm.getUnlockedTitles(player.getUniqueId());
@@ -61,6 +78,8 @@ public class TitleCommand implements CommandExecutor, TabCompleter {
         }
 
         player.sendMessage(plugin.getMessages().get(player, "title.list-header"));
+        player.sendMessage(MM.deserialize(buildProgressLine(
+                unlocked.size(), tm.getRegistry().getAllTitles().size())));
 
         int activeId = active.map(Title::id).orElse(-1);
         for (int id : unlocked.stream().sorted().toList()) {
@@ -69,10 +88,13 @@ public class TitleCommand implements CommandExecutor, TabCompleter {
                 continue;
             }
             Title t = title.get();
-            String marker = id == activeId ? " §a✔" : "";
-            String desc = t.descriptionRu().isEmpty() ? "" : " §8- §7" + t.descriptionRu();
-            player.sendMessage("  " + ColorUtil.colorCode(t.color()) + t.nameRu()
-                    + " §7(ID: " + t.id() + ")" + marker + desc);
+            String marker = id == activeId ? " <green>✔</green>" : "";
+            String desc = t.descriptionRu().isEmpty() ? ""
+                    : " <dark_gray>-</dark_gray> <gray>" + t.descriptionRu() + "</gray>";
+            String rendered = TitleRenderer.render(t.nameRu(), t.color(), plugin.getTitleGradientShift());
+            Component line = MM.deserialize(
+                    "  " + rendered + " <gray>(ID: " + t.id() + ")</gray>" + marker + desc);
+            player.sendMessage(line);
         }
         return true;
     }
@@ -124,8 +146,10 @@ public class TitleCommand implements CommandExecutor, TabCompleter {
         String status = unlocked ? "§a✔" : "§c✘";
 
         player.sendMessage(plugin.getMessages().get(player, "title.info-header"));
-        player.sendMessage("  " + ColorUtil.colorCode(t.color()) + t.nameRu()
-                + " §7/ " + t.nameEn());
+        String nameRendered = TitleRenderer.render(t.nameRu(), t.color(), plugin.getTitleGradientShift());
+        String enRendered = TitleRenderer.render(t.nameEn(), t.color(), plugin.getTitleGradientShift());
+        player.sendMessage(MM.deserialize(
+                "  " + nameRendered + " <gray>/</gray> " + enRendered));
         player.sendMessage("  §7ID: " + t.id());
         if (!t.descriptionRu().isEmpty()) {
             player.sendMessage("  §7" + t.descriptionRu());

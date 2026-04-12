@@ -1,8 +1,14 @@
 package ru.nyansus.mc.domya_fate.util;
 
+import ru.nyansus.mc.domya_fate.title.TitleColor;
+
 public final class ColorUtil {
 
     private ColorUtil() {
+    }
+
+    public static String colorCode(TitleColor color) {
+        return color == null ? "§f" : colorCode(color.primary());
     }
 
     public static String colorCode(String color) {

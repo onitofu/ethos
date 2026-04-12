@@ -17,6 +17,7 @@ import org.bukkit.entity.Rabbit;
 import org.bukkit.entity.Sheep;
 import org.bukkit.entity.Enemy;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.IronGolem;
 import org.bukkit.entity.Mob;
 import org.bukkit.entity.Player;
@@ -112,7 +113,8 @@ public class MobBehaviorTask extends BukkitRunnable {
 
     private void attractHostileMobs(Player player, double range) {
         for (Entity entity : player.getNearbyEntities(range, range, range)) {
-            if (entity instanceof Enemy mob && ((Mob) mob).getTarget() == null) {
+            if (entity instanceof Enemy mob && ((Mob) mob).getTarget() == null
+                    && entity.getType() != EntityType.ZOMBIFIED_PIGLIN) {
                 ((Mob) mob).setTarget(player);
             }
         }
