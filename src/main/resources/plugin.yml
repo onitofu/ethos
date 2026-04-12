@@ -1,6 +1,6 @@
 name: ethos
 version: '${version}'
-main: ru.nyansus.mc.domya_fate.DomyaFate
+main: ru.nyansus.mc.ethos.Ethos
 api-version: '1.21'
 softdepend:
   - PlaceholderAPI
