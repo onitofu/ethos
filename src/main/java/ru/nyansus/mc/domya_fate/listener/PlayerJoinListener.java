@@ -1,5 +1,6 @@
 package ru.nyansus.mc.domya_fate.listener;
 
+import org.bukkit.Bukkit;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -87,7 +88,8 @@ public class PlayerJoinListener implements Listener {
                 boolean isNew = tm.unlockTitle(player.getUniqueId(), titleId);
                 if (isNew) {
                     Optional<Title> title = tm.getRegistry().getTitle(titleId);
-                    title.ifPresent(t -> plugin.broadcastTitleUnlock(player, t));
+                    title.ifPresent(t -> Bukkit.getScheduler().runTaskLater(plugin,
+                            () -> plugin.broadcastTitleUnlock(player, t), 20L));
                 }
             }
         }

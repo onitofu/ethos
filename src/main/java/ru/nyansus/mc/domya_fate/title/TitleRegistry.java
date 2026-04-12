@@ -74,7 +74,7 @@ public class TitleRegistry {
             ConfigurationSection nameSection = entry.getConfigurationSection("name");
             String nameRu = nameSection != null ? nameSection.getString("ru", "Title " + id) : "Title " + id;
             String nameEn = nameSection != null ? nameSection.getString("en", "Title " + id) : "Title " + id;
-            String color = entry.getString("color", "white");
+            TitleColor color = parseColor(entry);
 
             ConfigurationSection descSection = entry.getConfigurationSection("description");
             String descRu = descSection != null ? descSection.getString("ru", "") : "";
@@ -86,6 +86,37 @@ public class TitleRegistry {
         }
 
         LOGGER.info("Loaded " + titles.size() + " titles");
+    }
+
+    private TitleColor parseColor(ConfigurationSection entry) {
+        String autoGradient = entry.getString("auto-gradient");
+        if (autoGradient != null && !autoGradient.isBlank()) {
+            return new TitleColor(TitleColor.Mode.AUTO_GRADIENT, List.of(autoGradient));
+        }
+        List<String> gradient = entry.getStringList("gradient");
+        if (!gradient.isEmpty()) {
+            return new TitleColor(TitleColor.Mode.GRADIENT, List.copyOf(gradient));
+        }
+        if (entry.isList("color")) {
+            List<String> list = entry.getStringList("color");
+            if (!list.isEmpty()) {
+                return new TitleColor(TitleColor.Mode.ALTERNATE, List.copyOf(list));
+            }
+        }
+        String raw = entry.getString("color", "white");
+        if (raw.startsWith("gradient:")) {
+            String[] parts = raw.substring("gradient:".length()).split(":");
+            List<String> list = new ArrayList<>();
+            for (String p : parts) {
+                if (!p.isBlank()) {
+                    list.add(p.trim());
+                }
+            }
+            if (!list.isEmpty()) {
+                return new TitleColor(TitleColor.Mode.GRADIENT, list);
+            }
+        }
+        return TitleColor.single(raw);
     }
 
     private UnlockCondition parseUnlockCondition(ConfigurationSection entry) {

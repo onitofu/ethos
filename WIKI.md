@@ -9,17 +9,17 @@
 | `/karma` | Посмотреть свою карму и активные модификаторы |
 | `/karma <ник>` | Посмотреть карму другого игрока |
 | `/karma reset` | Сбросить свою карму до 0 (раз в 30 дней) |
-| `/dt` | Список открытых титулов |
-| `/dt <id>` | Выбрать активный титул |
-| `/dt reset` | Снять активный титул |
-| `/dt info <id>` | Подробности о титуле |
+| `/etitle` | Список открытых титулов |
+| `/etitle <id>` | Выбрать активный титул |
+| `/etitle reset` | Снять активный титул |
+| `/etitle info <id>` | Подробности о титуле |
 
 ### Только для администраторов
 
 | Команда | Описание |
 |---|---|
 | `/karma set <ник> <число>` | Установить карму игроку |
-| `/dt give <ник> <id>` | Выдать титул игроку |
+| `/etitle give <ник> <id>` | Выдать титул игроку |
 | `/ethos reload` | Перезагрузить конфиги и титулы |
 
 ---
@@ -31,8 +31,8 @@
 | `ethos.karma.view` | `/karma` — своя карма | все |
 | `ethos.karma.view.others` | `/karma <ник>` — карма другого | все |
 | `ethos.karma.admin` | `/karma set` — установка кармы | op |
-| `ethos.title.use` | `/dt` — просмотр и выбор титулов | все |
-| `ethos.title.admin` | `/dt give` — выдача титулов | op |
+| `ethos.title.use` | `/etitle` — просмотр и выбор титулов | все |
+| `ethos.title.admin` | `/etitle give` — выдача титулов | op |
 | `ethos.admin` | `/ethos reload` — перезагрузка | op |
 
 ---
@@ -45,7 +45,7 @@
 |---|---|
 | `%ethos_karma%` | Числовое значение кармы |
 | `%ethos_title%` | Название активного титула |
-| `%ethos_title_colored%` | Активный титул с градиентным цветом (MiniMessage) |
+| `%ethos_title_colored%` | Активный титул с цветом/градиентом в формате MiniMessage, **без скобок** `[` `]` — оборачивать в чат/таб-плагине |
 | `%ethos_title_id%` | ID активного титула |
 | `%ethos_karma_title%` | Название кармического титула (по текущей карме) |
 
@@ -181,7 +181,7 @@
 
 ## Ванильные титулы
 
-Открываются автоматически при достижении условий. Полный список доступен через `/dt info <id>`.
+Открываются автоматически при достижении условий. Полный список доступен через `/etitle info <id>`.
 
 Категории: убийства мобов (26 типов × 5 ступеней), PvP, добыча ресурсов, дистанция, торговля, рыбалка, смерти, разведение, зачарование, бартер с пиглинами, лечение зомби-жителей, приручение, посещение измерений, выживание, смерти по причинам, строительство, крафт.
 
@@ -198,6 +198,195 @@
 ## Сброс кармы
 
 Команда `/karma reset` сбрасывает карму до 0. Доступна раз в 30 дней. При сбросе все кармические титулы забираются.
+
+---
+
+## Форматы цвета титулов (`titles.yml`)
+
+Каждому титулу можно задать цвет в одном из трёх режимов.
+
+На каждый титул — **один** из полей ниже.
+
+### 1) Плоский цвет (`color`)
+Имя цвета Minecraft или hex. Всегда рендерится плоским — **без** автоградиента.
+
+```yaml
+color: "red"
+color: "#C77DFF"
+```
+
+### 2) Автоградиент от одного цвета (`auto-gradient`)
+К указанному цвету автоматически применяется сдвиг оттенка (`title.gradient-shift` в `config.yml`, по умолчанию 25°). `gradient-shift: 0` → плоский цвет (оба конца совпадают).
+
+```yaml
+auto-gradient: "red"
+auto-gradient: "#C77DFF"
+```
+
+### 3) Чередование цветов по буквам (`color` — список из 2-3 цветов)
+
+```yaml
+color: ["red", "gold"]
+color: ["#FF0000", "#FFAA00", "#FFFF00"]
+```
+
+### 4) Явный градиент (`gradient` — список из 2+ цветов)
+
+```yaml
+gradient: ["red", "gold"]
+gradient: ["#FF0000", "#00FF00", "#0000FF"]
+```
+
+Готовые примеры — ID 300–302 в `titles.yml`.
+
+---
+
+## Модификаторы (`config.yml → buffs.tiers`)
+
+Каждый tier `buffs.tiers.<karma>` содержит список `effects` вида `{ type: ИМЯ, value: <число/bool> }`. Поддерживаемые типы:
+
+### Боевые
+| Тип | Описание | Значение |
+|---|---|---|
+| `MOB_DAMAGE_BONUS` | Бонус урона по враждебным мобам | множитель (0.05 = +5%) |
+| `PASSIVE_MOB_DAMAGE_BONUS` | Бонус урона по пассивным мобам | множитель |
+| `PVP_DAMAGE_BONUS` | Бонус исходящего PvP-урона | множитель |
+| `PVP_DAMAGE_PENALTY` | Штраф исходящего PvP-урона | множитель |
+| `RESISTANCE` | Снижение входящего урона | множитель |
+| `FALL_DAMAGE_REDUCTION` | Снижение урона от падения | множитель |
+| `FIRE_RESISTANCE` | Иммунитет к огню | bool |
+
+### Характеристики
+| Тип | Описание | Значение |
+|---|---|---|
+| `HEALTH_BONUS` | Доп. HP | в полусердцах |
+| `SPEED_BONUS` | Скорость передвижения | множитель |
+| `REGENERATION_BONUS` | Бонус регенерации (potion) | amplifier |
+| `HUNGER_RATE` | Модификатор голода | множитель |
+| `NIGHT_VISION` | Ночное зрение | bool |
+
+### Опыт
+| Тип | Описание | Значение |
+|---|---|---|
+| `XP_BONUS` | Бонус получаемого опыта | множитель |
+| `XP_PENALTY` | Штраф получаемого опыта | множитель |
+| `XP_DEATH_PENALTY` | Сохранение опыта при смерти | множитель |
+
+### Добыча
+| Тип | Описание | Значение |
+|---|---|---|
+| `LOOT_BONUS` | Шанс двойного дропа с мобов | вероятность (0.05 = 5%) |
+| `MINING_SPEED` | Скорость добычи блоков | множитель |
+| `DOUBLE_CROP_CHANCE` | Шанс двойного урожая | вероятность |
+
+### Торговля
+| Тип | Описание | Значение |
+|---|---|---|
+| `TRADE_PRICE_INCREASE` | Наценка у жителей | множитель |
+| `TRADE_PRICE_DECREASE` | Скидка у жителей | множитель |
+| `BLOCK_TRADING` | Полный запрет торговли | bool |
+
+### Взаимодействие с мобами
+| Тип | Описание | Значение |
+|---|---|---|
+| `HOSTILE_MOB_NEUTRAL` | Враждебные мобы не нападают первыми | bool |
+| `HOSTILE_MOB_REDUCED_RANGE` | Сниженная дальность обнаружения | bool |
+| `HOSTILE_MOB_INCREASED_RANGE` | Повышенная дальность обнаружения | bool |
+| `PASSIVE_MOB_FLEE` | Мирные мобы убегают от игрока | bool |
+| `PASSIVE_MOB_HOSTILE` | Мирные мобы нападают на игрока | bool |
+| `GOLEM_AGGRO` | Железные големы враждебны | bool |
+
+### Приручение / езда
+| Тип | Описание | Значение |
+|---|---|---|
+| `BLOCK_TAMING` | Запрет приручения | bool |
+| `BLOCK_RIDING` | Запрет езды верхом | bool |
+
+### Прочее
+| Тип | Описание | Значение |
+|---|---|---|
+| `KEEP_INVENTORY_CHANCE` | Шанс сохранить инвентарь при смерти | вероятность |
+| `GLOWING` | Свечение | bool |
+| `POTION_EFFECT` | Ванильный эффект зелья | `potion: NAME, amplifier: N, ambient: true/false` |
+
+Пример tier со смешанными эффектами:
+```yaml
+-7000:
+  effects:
+    - { type: MOB_DAMAGE_BONUS, value: 0.09 }
+    - { type: LOOT_BONUS, value: 0.08 }
+    - { type: HOSTILE_MOB_NEUTRAL, value: true }
+    - { type: POTION_EFFECT, potion: SPEED, amplifier: 0, ambient: true }
+```
+
+Примечание: `HEALTH_BONUS` применяется как временный атрибут, остальные числовые множители читаются из соответствующих листенеров.
+
+---
+
+## Условия открытия титулов (`titles.yml → unlock`)
+
+Необязательная секция `unlock` для ванильных титулов. Формат:
+```yaml
+unlock:
+  type: ТИП
+  value: <число>
+  entity: "ZOMBIE,SKELETON"   # для KILL_ENTITY
+  material: "DIAMOND_ORE"     # для MINE_BLOCK
+  stat-key: "custom-key"      # для CUSTOM_STAT
+```
+
+| Тип | Описание |
+|---|---|
+| `KILL_ENTITY` | Сумма убийств сущностей из `entity` |
+| `MINE_BLOCK` | Сумма добытых блоков из `material` |
+| `PLAYER_KILLS` | Убито игроков (кастомная статистика PvP) |
+| `DEATHS` | Смерти игрока |
+| `FISH_CAUGHT` | Пойманная рыба |
+| `TRADED_WITH_VILLAGER` | Число торговых операций |
+| `ANIMALS_BRED` | Разведено животных |
+| `ENCHANT_ITEM` | Зачаровано предметов |
+| `DISTANCE_KM` | Суммарная дистанция (ходьба, плавание, лодки, лошади и т.д.) в км |
+| `CUSTOM_STAT` | Произвольная статистика по `stat-key` |
+| `SURVIVAL_DAYS` | Дней без смерти |
+| `VISITED_DIMENSIONS` | Посещено измерений (overworld, nether, end) |
+
+---
+
+## Листенеры
+
+Внутренние обработчики событий. Настраивать их напрямую нельзя — поведение управляется через модификаторы и `config.yml`.
+
+### Карма и статистика
+| Листенер | Что делает | Конфиг |
+|---|---|---|
+| `PlayerJoinListener` | Выдаёт дефолтный титул, сезонные титулы, синхронизирует карму при входе | `default-title`, сезонные настройки |
+| `PlayerKillListener` | Карма за убийство игрока (нейтрал/плюс/минус) | `karma-actions.kill-player`, `kill-good-player`, `kill-evil-player` |
+| `MobKillListener` | Карма за убийство мобов, защита от спавнеров/стриков/AFK | `karma-actions.kill-*`, `anti-farm.*` |
+| `AnimalListener` | Карма за кормление/разведение мирных животных | `karma-actions.feed-animal`, `anti-farm.feed-cooldown-seconds` |
+| `TradeListener` | Карма за торговлю с жителем | `karma-actions.villager-trade`, `anti-farm.trade-cooldown-seconds` |
+| `VillagerCureListener` | Карма за лечение зомби-жителя | `karma-actions.cure-zombie-villager` |
+| `StatsListener` | Обновляет кастомную статистику (посещение измерений, дистанции и т.п.) | — |
+
+### Баффы/дебаффы
+| Листенер | Какой модификатор применяет |
+|---|---|
+| `PvpDamageListener` | `PVP_DAMAGE_BONUS`, `PVP_DAMAGE_PENALTY` |
+| `XpBonusListener` | `XP_BONUS`, `XP_PENALTY`, `XP_DEATH_PENALTY` |
+| `TradeBlockListener` | `TRADE_PRICE_INCREASE`, `TRADE_PRICE_DECREASE`, `BLOCK_TRADING` |
+| `HostileMobListener` | `HOSTILE_MOB_NEUTRAL`, `HOSTILE_MOB_REDUCED_RANGE`, `HOSTILE_MOB_INCREASED_RANGE` |
+| `GolemAggroListener` | `GOLEM_AGGRO` |
+| `BlockTamingListener` | `BLOCK_TAMING` |
+| `BlockRidingListener` | `BLOCK_RIDING` |
+| `KarmaEffectsListener` | `MOB_DAMAGE_BONUS`, `PASSIVE_MOB_DAMAGE_BONUS`, `RESISTANCE`, `FALL_DAMAGE_REDUCTION`, `LOOT_BONUS`, `DOUBLE_CROP_CHANCE`, `KEEP_INVENTORY_CHANCE` и др. |
+
+### Фоновые задачи
+| Таска | Назначение |
+|---|---|
+| `BuffApplyTask` | Применяет зельевые эффекты и атрибуты (`HEALTH_BONUS`, `SPEED_BONUS`, `NIGHT_VISION`, `POTION_EFFECT` и т.д.), обновляет таб-лист |
+| `MobBehaviorTask` | Привлекает враждебных мобов к игроку (`HOSTILE_MOB_INCREASED_RANGE`), уводит пассивных мобов (`PASSIVE_MOB_FLEE`, `PASSIVE_MOB_HOSTILE`) |
+| `UnlockScanTask` | Периодически проверяет `unlock`-условия ванильных титулов |
+
+Краткое правило: **именованные типы из `EffectType`** выставляются в `config.yml` → применяются соответствующим листенером из таблицы выше.
 
 ---
 
