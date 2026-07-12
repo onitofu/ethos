@@ -18,6 +18,7 @@ import ru.nyansus.mc.ethos.buff.XpBonusListener;
 import ru.nyansus.mc.ethos.command.EthosCommand;
 import ru.nyansus.mc.ethos.command.KarmaCommand;
 import ru.nyansus.mc.ethos.command.TitleCommand;
+import ru.nyansus.mc.ethos.enderman.EndermanManager;
 import ru.nyansus.mc.ethos.karma.AntiFarmManager;
 import ru.nyansus.mc.ethos.karma.KarmaManager;
 import ru.nyansus.mc.ethos.karma.KarmaTitleManager;
@@ -54,6 +55,7 @@ public class Ethos extends JavaPlugin {
     private StatsStorage statsStorage;
     private DatabaseManager databaseManager;
     private final Map<UUID, Boolean> karmaEffectsEnabled = new HashMap<>();
+    private EndermanManager endermanManager;
 
     @Override
     public void onEnable() {
@@ -96,6 +98,7 @@ public class Ethos extends JavaPlugin {
         new UnlockScanTask(this).runTaskTimer(this, 200L, unlockInterval);
 
         new MobBehaviorTask(this).runTaskTimer(this, 20L, 20L);
+        endermanManager.runTaskTimer(this, 40L, 20L);
     }
 
     @Override
@@ -122,6 +125,8 @@ public class Ethos extends JavaPlugin {
         pm.registerEvents(new BlockTamingListener(this), this);
         pm.registerEvents(new BlockRidingListener(this), this);
         pm.registerEvents(new KarmaEffectsListener(this), this);
+        endermanManager = new EndermanManager(this);
+        pm.registerEvents(endermanManager, this);
     }
 
     private void registerCommands() {
@@ -160,6 +165,9 @@ public class Ethos extends JavaPlugin {
         buffConfig = new BuffConfig(getConfig());
         TitleRegistry titleRegistry = new TitleRegistry(this);
         titleManager = new TitleManager(titleRegistry, titleManager.getStorage());
+        if (endermanManager != null) {
+            endermanManager.reload();
+        }
     }
 
     public Messages getMessages() {

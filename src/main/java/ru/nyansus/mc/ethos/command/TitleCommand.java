@@ -23,7 +23,7 @@ public class TitleCommand implements CommandExecutor, TabCompleter {
 
     private static final int TITLES_PER_PAGE = 10;
     private static final MiniMessage MM = MiniMessage.miniMessage();
-    private static final int PROGRESS_BAR_WIDTH = 20;
+    private static final int PROGRESS_BAR_WIDTH = 30;
 
     private final Ethos plugin;
 
@@ -75,7 +75,7 @@ public class TitleCommand implements CommandExecutor, TabCompleter {
                 + "<dark_gray>" + "▱".repeat(PROGRESS_BAR_WIDTH - filled) + "</dark_gray>";
         String percent = String.format(Locale.ROOT, "%.1f", ratio * 100);
         return "<gray>" + unlocked + "<dark_gray>/</dark_gray><gray>" + total
-                + " <dark_gray>(</dark_gray><yellow>" + percent + "%</yellow><dark_gray>)</dark_gray> "
+                + " <dark_gray>(</dark_gray><gray>" + percent + "%</gray><dark_gray>)</dark_gray> "
                 + bar;
     }
 
@@ -108,12 +108,10 @@ public class TitleCommand implements CommandExecutor, TabCompleter {
         int fromIndex = (currentPage - 1) * TITLES_PER_PAGE;
         int toIndex = Math.min(fromIndex + TITLES_PER_PAGE, titleIds.size());
 
-        player.sendMessage(plugin.getMessages().get(player, "title.list-header"));
-        player.sendMessage(MM.deserialize(buildProgressLine(
-                unlocked.size(), tm.getRegistry().getAllTitles().size())));
-        player.sendMessage(plugin.getMessages().get(player, "title.page",
+        player.sendMessage(plugin.getMessages().get(player, "title.list-header",
                 "{page}", String.valueOf(currentPage),
                 "{pages}", String.valueOf(totalPages)));
+        player.sendMessage("");
 
         int activeId = active.map(Title::id).orElse(-1);
         for (int id : titleIds.subList(fromIndex, toIndex)) {
@@ -137,12 +135,9 @@ public class TitleCommand implements CommandExecutor, TabCompleter {
                             + marker + desc + progress);
             player.sendMessage(line);
         }
-        if (totalPages > 1) {
-            String hintKey = includeLocked ? "title.page-hint-all" : "title.page-hint";
-            player.sendMessage(plugin.getMessages().get(player, hintKey,
-                    "{prev}", String.valueOf(Math.max(1, currentPage - 1)),
-                    "{next}", String.valueOf(Math.min(totalPages, currentPage + 1))));
-        }
+        player.sendMessage("");
+        player.sendMessage(MM.deserialize(buildProgressLine(
+                unlocked.size(), tm.getRegistry().getAllTitles().size())));
         return true;
     }
 

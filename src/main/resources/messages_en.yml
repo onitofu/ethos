@@ -61,7 +61,8 @@ karma:
 
 title:
   no-titles: "§7You have no unlocked titles."
-  list-header: "§6Your titles:"
+  list-header: "§8--------------- §fYour titles §7(Page §e{page}§7/§e{pages}) §8---------------"
+  list-footer: "§8----------------------------------------------------"
   page: "§7Page §e{page}§7/§e{pages}"
   page-hint: "§7Pages: §f/etitle page {prev} §7| §f/etitle page {next}"
   page-hint-all: "§7Pages: §f/etitle all {prev} §7| §f/etitle all {next}"

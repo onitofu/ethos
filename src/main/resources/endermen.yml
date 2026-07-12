@@ -1,0 +1,79 @@
+# Endermen overhaul
+enabled: true
+
+# Vanilla endermen have 40 HP and 7 attack damage.
+max-health: 60.0
+attack-damage: 10.0
+
+void-mark:
+  enabled: true
+  duration-seconds: 15
+  aggro-radius: 24.0
+  max-assist-endermen: 3
+  the-end-radius-multiplier: 0.35
+  trigger-on-target: false
+  trigger-on-damage: true
+
+blink-strike:
+  enabled: true
+  cooldown-seconds: 8
+  telegraph-ticks: 12
+  min-distance: 5.0
+  max-distance: 18.0
+  chance: 0.35
+  telegraph:
+    particle: REVERSE_PORTAL
+    particle-count: 36
+    particle-spread: 0.45
+    particle-speed: 0.025
+    sound: entity.enderman.teleport
+    volume: 0.8
+    pitch: 0.75
+  destination-telegraph:
+    particle: WITCH
+    particle-count: 18
+    particle-spread: 0.35
+    particle-speed: 0.01
+    sound: block.amethyst_block.chime
+    volume: 0.55
+    pitch: 1.7
+  line-telegraph:
+    particle: PORTAL
+    points: 12
+  player-warning-sound: entity.enderman.stare
+  player-warning-volume: 0.45
+  player-warning-pitch: 1.4
+
+anti-tower:
+  enabled: true
+  cooldown-seconds: 10
+  telegraph-ticks: 10
+  min-height-difference: 3.0
+  max-height-difference: 8.0
+  push-strength: 1.1
+  vertical-strength: 0.25
+  telegraph:
+    particle: REVERSE_PORTAL
+    particle-count: 28
+    particle-spread: 0.5
+    particle-speed: 0.025
+    sound: entity.enderman.scream
+    volume: 0.65
+    pitch: 0.75
+
+void-drag:
+  enabled: true
+  cooldown-seconds: 12
+  telegraph-ticks: 16
+  max-distance: 12.0
+  low-ceiling-height: 2
+  search-radius: 4
+  telegraph:
+    particle: WITCH
+    particle-count: 18
+    particle-spread: 0.55
+    particle-speed: 0.02
+    sound: block.respawn_anchor.charge
+    volume: 0.65
+    pitch: 1.35
+    pulse-interval-ticks: 4

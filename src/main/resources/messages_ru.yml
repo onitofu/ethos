@@ -61,7 +61,8 @@ karma:
 
 title:
   no-titles: "§7У вас нет открытых титулов."
-  list-header: "§6Ваши титулы:"
+  list-header: "§8--------------- §fВаши титулы §7(Страница §e{page}§7/§e{pages}) §8---------------"
+  list-footer: "§8----------------------------------------------------"
   page: "§7Страница §e{page}§7/§e{pages}"
   page-hint: "§7Страницы: §f/etitle page {prev} §7| §f/etitle page {next}"
   page-hint-all: "§7Страницы: §f/etitle all {prev} §7| §f/etitle all {next}"
