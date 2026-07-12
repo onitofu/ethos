@@ -77,6 +77,10 @@ public final class Messages {
         return get(normalizeLocale(player.locale().toString()), key);
     }
 
+    public boolean isRussian(Player player) {
+        return "ru".equals(normalizeLocale(player.locale().toString()));
+    }
+
     public String get(String locale, String key) {
         String msg = getFromLocale(locale, key);
         if (msg != null) {

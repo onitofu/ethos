@@ -38,6 +38,14 @@ public class BuffApplyTask extends BukkitRunnable {
 
             plugin.getAntiFarmManager().updatePosition(player);
 
+            if (!plugin.areKarmaEffectsEnabled(player)) {
+                removeHealthModifier(player);
+                if (config.isTabEnabled()) {
+                    updateTabName(player, karma);
+                }
+                continue;
+            }
+
             if (player.getGameMode() != GameMode.SURVIVAL) {
                 if (config.isTabEnabled()) {
                     updateTabName(player, karma);
@@ -132,7 +140,8 @@ public class BuffApplyTask extends BukkitRunnable {
         if (title.isPresent()) {
             NamedTextColor titleColor = parseColor(title.get().color().primary());
             name = Component.text("")
-                    .append(Component.text(title.get().nameRu(), titleColor))
+                    .append(Component.text(
+                            title.get().localizedName(player, plugin.getMessages()), titleColor))
                     .append(Component.text(" "))
                     .append(Component.text(player.getName()))
                     .append(Component.text(" "))

@@ -24,6 +24,8 @@ public final class StatKeys {
 
     // Karma reset
     public static final String LAST_KARMA_RESET = "last-karma-reset";
+    public static final String KARMA_EFFECTS_DISABLED = "karma-effects-disabled";
+    public static final String LAST_KARMA_EFFECTS_TOGGLE = "last-karma-effects-toggle";
 
     // Actions
     public static final String BLOCKS_PLACED = "blocks-placed";

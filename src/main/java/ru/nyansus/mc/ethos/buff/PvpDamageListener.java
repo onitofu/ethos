@@ -23,6 +23,9 @@ public class PvpDamageListener implements Listener {
         if (!(event.getDamager() instanceof Player attacker)) {
             return;
         }
+        if (!plugin.areKarmaEffectsEnabled(attacker)) {
+            return;
+        }
 
         int karma = plugin.getKarmaManager().getKarma(attacker.getUniqueId());
         BuffConfig config = plugin.getBuffConfig();
@@ -50,6 +53,9 @@ public class PvpDamageListener implements Listener {
     @EventHandler(ignoreCancelled = true, priority = EventPriority.NORMAL)
     public void onEntityDamage(EntityDamageEvent event) {
         if (!(event.getEntity() instanceof Player player)) {
+            return;
+        }
+        if (!plugin.areKarmaEffectsEnabled(player)) {
             return;
         }
 

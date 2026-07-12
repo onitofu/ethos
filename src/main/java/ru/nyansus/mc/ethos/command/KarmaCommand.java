@@ -22,6 +22,7 @@ import java.util.UUID;
 public class KarmaCommand implements CommandExecutor, TabCompleter {
 
     private static final int BAR_LENGTH = 20;
+    private static final long MS_PER_HOUR = 3_600_000L;
 
     private final Ethos plugin;
 
@@ -36,6 +37,9 @@ public class KarmaCommand implements CommandExecutor, TabCompleter {
         }
         if (args.length >= 1 && args[0].equalsIgnoreCase("reset")) {
             return handleReset(sender);
+        }
+        if (args.length >= 1 && args[0].equalsIgnoreCase("effects")) {
+            return handleEffects(sender);
         }
 
         if (args.length == 0) {
@@ -126,6 +130,35 @@ public class KarmaCommand implements CommandExecutor, TabCompleter {
         return true;
     }
 
+    private boolean handleEffects(CommandSender sender) {
+        if (!(sender instanceof Player player)) {
+            sender.sendMessage(plugin.getMessages().get(sender, "karma.player-only"));
+            return true;
+        }
+
+        long cooldownHours = plugin.getConfig().getLong("karma-effects-toggle-cooldown-hours", 24);
+        long cooldownMs = cooldownHours * MS_PER_HOUR;
+        StatsStorage stats = plugin.getStatsStorage();
+        long lastToggle = stats.getLongStat(player.getUniqueId(),
+                StatKeys.LAST_KARMA_EFFECTS_TOGGLE);
+        long now = System.currentTimeMillis();
+
+        if (lastToggle > 0 && now - lastToggle < cooldownMs) {
+            long remainingHours = (cooldownMs - (now - lastToggle) + MS_PER_HOUR - 1)
+                    / MS_PER_HOUR;
+            player.sendMessage(plugin.getMessages().get(player, "karma.effects-toggle-cooldown",
+                    "{hours}", String.valueOf(remainingHours)));
+            return true;
+        }
+
+        boolean enabled = plugin.areKarmaEffectsEnabled(player);
+        stats.setStat(player.getUniqueId(), StatKeys.KARMA_EFFECTS_DISABLED, enabled ? 1 : 0);
+        stats.setStat(player.getUniqueId(), StatKeys.LAST_KARMA_EFFECTS_TOGGLE, now);
+        player.sendMessage(plugin.getMessages().get(player,
+                enabled ? "karma.effects-disabled" : "karma.effects-enabled"));
+        return true;
+    }
+
     private void showKarma(Player viewer, UUID targetUuid, String targetName) {
         int karma = plugin.getKarmaManager().getKarma(targetUuid);
         Optional<KarmaTitle> karmaTitle = plugin.getKarmaTitleManager().getTitle(karma);
@@ -133,7 +166,8 @@ public class KarmaCommand implements CommandExecutor, TabCompleter {
         String bar = buildBar(karma);
         String titleStr = karmaTitle
                 .flatMap(kt -> plugin.getTitleManager().getRegistry().getTitle(kt.id()))
-                .map(t -> " §7[" + ColorUtil.colorCode(t.color()) + t.nameRu() + "§7]")
+                .map(t -> " §7[" + ColorUtil.colorCode(t.color())
+                        + t.localizedName(viewer, plugin.getMessages()) + "§7]")
                 .orElse("");
 
         viewer.sendMessage(plugin.getMessages().get(viewer, "karma.display",
@@ -141,6 +175,11 @@ public class KarmaCommand implements CommandExecutor, TabCompleter {
                 "{karma}", String.valueOf(karma),
                 "{bar}", bar,
                 "{title}", titleStr));
+
+        if (!plugin.areKarmaEffectsEnabled(targetUuid)) {
+            viewer.sendMessage(plugin.getMessages().get(viewer, "karma.effects-status-disabled"));
+            return;
+        }
 
         showEffects(viewer, karma);
     }
@@ -171,7 +210,7 @@ public class KarmaCommand implements CommandExecutor, TabCompleter {
         }
 
         boolean isBuff = isBuff(effect);
-        String prefix = isBuff ? "  §a▲ " : "  §c▼ ";
+        String prefix = isBuff ? "§a▲ " : "§c▼ ";
         String value = formatValue(effect);
 
         return prefix + (value.isEmpty() ? msg : value + " " + msg);
@@ -186,7 +225,7 @@ public class KarmaCommand implements CommandExecutor, TabCompleter {
         if (display.startsWith("[")) {
             display = effect.potionType().getKey().getKey() + " " + level;
         }
-        return "  §a▲ " + display;
+        return "§a▲ " + display;
     }
 
     private boolean isBuff(BuffEffect effect) {
@@ -238,12 +277,12 @@ public class KarmaCommand implements CommandExecutor, TabCompleter {
         for (int i = 0; i < BAR_LENGTH; i++) {
             if (i < filled) {
                 if (karma < 0) {
-                    bar.append("§c|");
+                    bar.append("§c▰");
                 } else {
-                    bar.append("§a|");
+                    bar.append("§a▰");
                 }
             } else {
-                bar.append("§7|");
+                bar.append("§7▱");
             }
         }
         bar.append("§8]");
@@ -261,6 +300,9 @@ public class KarmaCommand implements CommandExecutor, TabCompleter {
             }
             if ("reset".startsWith(prefix)) {
                 completions.add("reset");
+            }
+            if ("effects".startsWith(prefix)) {
+                completions.add("effects");
             }
             if (sender.hasPermission("ethos.karma.view.others")) {
                 for (Player player : Bukkit.getOnlinePlayers()) {

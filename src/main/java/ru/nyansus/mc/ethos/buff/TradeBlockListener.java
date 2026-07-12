@@ -29,6 +29,9 @@ public class TradeBlockListener implements Listener {
         if (!(event.getWhoClicked() instanceof Player player)) {
             return;
         }
+        if (!plugin.areKarmaEffectsEnabled(player)) {
+            return;
+        }
 
         int karma = plugin.getKarmaManager().getKarma(player.getUniqueId());
         if (plugin.getBuffConfig().hasEffect(karma, EffectType.BLOCK_TRADING)) {
@@ -44,6 +47,9 @@ public class TradeBlockListener implements Listener {
         }
 
         Player player = event.getPlayer();
+        if (!plugin.areKarmaEffectsEnabled(player)) {
+            return;
+        }
         int karma = plugin.getKarmaManager().getKarma(player.getUniqueId());
         BuffConfig config = plugin.getBuffConfig();
 

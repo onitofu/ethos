@@ -16,6 +16,10 @@ karma:
   invalid-number: "§cНеверное число."
   reset-success: "§aВаша карма сброшена с {old} до 0."
   reset-cooldown: "§cСброс кармы будет доступен через {days} дн."
+  effects-enabled: "§aЭффекты кармы включены."
+  effects-disabled: "§eЭффекты кармы отключены."
+  effects-status-disabled: "§7Эффекты кармы отключены. Карма и титулы продолжают работать."
+  effects-toggle-cooldown: "§cПереключить эффекты кармы можно через {hours} ч."
   effect:
     mob_damage_bonus: "урон по мобам"
     passive_mob_damage_bonus: "урон по мирным мобам"
@@ -58,6 +62,10 @@ karma:
 title:
   no-titles: "§7У вас нет открытых титулов."
   list-header: "§6Ваши титулы:"
+  page: "§7Страница §e{page}§7/§e{pages}"
+  page-hint: "§7Страницы: §f/etitle page {prev} §7| §f/etitle page {next}"
+  page-hint-all: "§7Страницы: §f/etitle all {prev} §7| §f/etitle all {next}"
+  invalid-page: "§cНеверный номер страницы."
   selected: "§aТитул «{title}» установлен."
   not-unlocked: "§cЭтот титул не открыт."
   not-found: "§cТитул не найден."

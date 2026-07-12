@@ -8,11 +8,11 @@ softdepend:
 commands:
   karma:
     description: View or manage karma
-    usage: /karma [player|set <player> <value>]
+    usage: /karma [player|reset|effects|set <player> <value>]
     permission: ethos.karma.view
   etitle:
     description: Manage your titles
-    usage: /etitle [id|reset|info <id>|give <player> <id>]
+    usage: /etitle [id|all [page]|page <page>|reset|info <id>|give <player> <id>]
     permission: ethos.title.use
     aliases: [dt, et]
   ethos:

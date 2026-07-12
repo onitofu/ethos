@@ -26,6 +26,9 @@ public class KarmaEffectsListener implements Listener {
     @EventHandler(priority = EventPriority.HIGH)
     public void onPlayerDeath(PlayerDeathEvent event) {
         Player player = event.getEntity();
+        if (!plugin.areKarmaEffectsEnabled(player)) {
+            return;
+        }
         int karma = plugin.getKarmaManager().getKarma(player.getUniqueId());
         BuffConfig config = plugin.getBuffConfig();
 
@@ -51,6 +54,9 @@ public class KarmaEffectsListener implements Listener {
         if (killer == null) {
             return;
         }
+        if (!plugin.areKarmaEffectsEnabled(killer)) {
+            return;
+        }
 
         int karma = plugin.getKarmaManager().getKarma(killer.getUniqueId());
         double lootBonus = plugin.getBuffConfig().getNumericEffect(karma, EffectType.LOOT_BONUS);
@@ -73,6 +79,9 @@ public class KarmaEffectsListener implements Listener {
         if (event.getFoodLevel() >= player.getFoodLevel()) {
             return;
         }
+        if (!plugin.areKarmaEffectsEnabled(player)) {
+            return;
+        }
 
         int karma = plugin.getKarmaManager().getKarma(player.getUniqueId());
         double rate = plugin.getBuffConfig().getNumericEffect(karma, EffectType.HUNGER_RATE);
@@ -86,6 +95,9 @@ public class KarmaEffectsListener implements Listener {
     @EventHandler(ignoreCancelled = true)
     public void onBlockBreak(BlockBreakEvent event) {
         Player player = event.getPlayer();
+        if (!plugin.areKarmaEffectsEnabled(player)) {
+            return;
+        }
         Block block = event.getBlock();
 
         if (!(block.getBlockData() instanceof Ageable ageable)) {

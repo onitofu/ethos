@@ -36,8 +36,10 @@ import ru.nyansus.mc.ethos.listener.VillagerCureListener;
 import ru.nyansus.mc.ethos.title.TitleManager;
 import ru.nyansus.mc.ethos.title.TitleRegistry;
 import ru.nyansus.mc.ethos.title.UnlockScanTask;
+import ru.nyansus.mc.ethos.util.StatKeys;
 
 import java.sql.SQLException;
+import java.util.UUID;
 
 public class Ethos extends JavaPlugin {
 
@@ -189,6 +191,14 @@ public class Ethos extends JavaPlugin {
         return statsStorage;
     }
 
+    public boolean areKarmaEffectsEnabled(UUID uuid) {
+        return statsStorage.getStat(uuid, StatKeys.KARMA_EFFECTS_DISABLED) == 0;
+    }
+
+    public boolean areKarmaEffectsEnabled(Player player) {
+        return areKarmaEffectsEnabled(player.getUniqueId());
+    }
+
     public void syncKarmaTitles(Player player) {
         int karma = karmaManager.getKarma(player.getUniqueId());
         java.util.List<Title> newTitles = titleManager.syncKarmaTitles(
@@ -202,7 +212,7 @@ public class Ethos extends JavaPlugin {
         for (Player online : getServer().getOnlinePlayers()) {
             String msg = messages.get(online, "title.unlock-broadcast",
                     "{player}", player.getName(),
-                    "{title}", title.nameRu());
+                    "{title}", title.localizedName(online, messages));
             online.sendMessage(msg);
         }
         String consoleMsg = messages.get("ru", "title.unlock-broadcast")
