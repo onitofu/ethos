@@ -19,6 +19,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityTargetLivingEntityEvent;
+import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerGameModeChangeEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -122,6 +123,11 @@ public class EndermanManager extends BukkitRunnable implements Listener {
         clearPlayerPressure(event.getPlayer());
     }
 
+    @EventHandler
+    public void onPlayerDeath(PlayerDeathEvent event) {
+        clearPlayerPressure(event.getEntity());
+    }
+
     @Override
     public void run() {
         if (!enabled()) {
@@ -134,10 +140,9 @@ public class EndermanManager extends BukkitRunnable implements Listener {
                 clearPlayerPressure(player);
                 continue;
             }
-            if (!isMarked(player)) {
-                continue;
+            if (isMarked(player)) {
+                handleMarkedPlayer(player, now);
             }
-            handleMarkedPlayer(player, now);
         }
     }
 
@@ -150,10 +155,7 @@ public class EndermanManager extends BukkitRunnable implements Listener {
                 continue;
             }
             boostEnderman(enderman);
-            if (enderman.getTarget() == null) {
-                if (aggroCount >= maxAggro) {
-                    continue;
-                }
+            if (enderman.getTarget() == null && aggroCount < maxAggro) {
                 enderman.setTarget(player);
                 aggroCount++;
             }
@@ -236,6 +238,10 @@ public class EndermanManager extends BukkitRunnable implements Listener {
         for (Entity entity : player.getNearbyEntities(radius, radius, radius)) {
             if (entity instanceof Enderman enderman && player.equals(enderman.getTarget())) {
                 enderman.setTarget(null);
+                UUID uuid = enderman.getUniqueId();
+                pendingBlink.remove(uuid);
+                pendingTower.remove(uuid);
+                pendingDrag.remove(uuid);
             }
         }
     }
