@@ -7,6 +7,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
 import ru.nyansus.mc.ethos.Ethos;
+import ru.nyansus.mc.ethos.buff.BuffApplyTask;
 import ru.nyansus.mc.ethos.buff.BuffEffect;
 import ru.nyansus.mc.ethos.buff.BuffTier;
 import ru.nyansus.mc.ethos.karma.KarmaTitle;
@@ -152,8 +153,11 @@ public class KarmaCommand implements CommandExecutor, TabCompleter {
         }
 
         boolean enabled = plugin.areKarmaEffectsEnabled(player);
-        stats.setStat(player.getUniqueId(), StatKeys.KARMA_EFFECTS_DISABLED, enabled ? 1 : 0);
+        plugin.setKarmaEffectsEnabled(player.getUniqueId(), !enabled);
         stats.setStat(player.getUniqueId(), StatKeys.LAST_KARMA_EFFECTS_TOGGLE, now);
+        if (enabled) {
+            BuffApplyTask.clearAppliedEffects(player, plugin.getBuffConfig());
+        }
         player.sendMessage(plugin.getMessages().get(player,
                 enabled ? "karma.effects-disabled" : "karma.effects-enabled"));
         return true;

@@ -39,6 +39,8 @@ import ru.nyansus.mc.ethos.title.UnlockScanTask;
 import ru.nyansus.mc.ethos.util.StatKeys;
 
 import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 public class Ethos extends JavaPlugin {
@@ -51,6 +53,7 @@ public class Ethos extends JavaPlugin {
     private TitleManager titleManager;
     private StatsStorage statsStorage;
     private DatabaseManager databaseManager;
+    private final Map<UUID, Boolean> karmaEffectsEnabled = new HashMap<>();
 
     @Override
     public void onEnable() {
@@ -192,11 +195,26 @@ public class Ethos extends JavaPlugin {
     }
 
     public boolean areKarmaEffectsEnabled(UUID uuid) {
-        return statsStorage.getStat(uuid, StatKeys.KARMA_EFFECTS_DISABLED) == 0;
+        return karmaEffectsEnabled.computeIfAbsent(uuid,
+                key -> statsStorage.getStat(key, StatKeys.KARMA_EFFECTS_DISABLED) == 0);
     }
 
     public boolean areKarmaEffectsEnabled(Player player) {
         return areKarmaEffectsEnabled(player.getUniqueId());
+    }
+
+    public void loadKarmaEffectsState(UUID uuid) {
+        karmaEffectsEnabled.put(uuid,
+                statsStorage.getStat(uuid, StatKeys.KARMA_EFFECTS_DISABLED) == 0);
+    }
+
+    public void setKarmaEffectsEnabled(UUID uuid, boolean enabled) {
+        statsStorage.setStat(uuid, StatKeys.KARMA_EFFECTS_DISABLED, enabled ? 0 : 1);
+        karmaEffectsEnabled.put(uuid, enabled);
+    }
+
+    public void clearKarmaEffectsState(UUID uuid) {
+        karmaEffectsEnabled.remove(uuid);
     }
 
     public void syncKarmaTitles(Player player) {

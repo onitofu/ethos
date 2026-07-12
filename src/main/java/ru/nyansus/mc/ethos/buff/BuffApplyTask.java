@@ -39,7 +39,7 @@ public class BuffApplyTask extends BukkitRunnable {
             plugin.getAntiFarmManager().updatePosition(player);
 
             if (!plugin.areKarmaEffectsEnabled(player)) {
-                removeHealthModifier(player);
+                clearAppliedEffects(player, config);
                 if (config.isTabEnabled()) {
                     updateTabName(player, karma);
                 }
@@ -121,7 +121,20 @@ public class BuffApplyTask extends BukkitRunnable {
                 HEALTH_KEY, bonus, AttributeModifier.Operation.ADD_NUMBER));
     }
 
-    private void removeHealthModifier(Player player) {
+    public static void clearAppliedEffects(Player player, BuffConfig config) {
+        removeHealthModifier(player);
+        player.removePotionEffect(PotionEffectType.SPEED);
+        player.removePotionEffect(PotionEffectType.NIGHT_VISION);
+        player.removePotionEffect(PotionEffectType.REGENERATION);
+        player.removePotionEffect(PotionEffectType.HASTE);
+        player.removePotionEffect(PotionEffectType.MINING_FATIGUE);
+        player.removePotionEffect(PotionEffectType.GLOWING);
+        for (PotionEffectType type : config.getPotionEffectTypes()) {
+            player.removePotionEffect(type);
+        }
+    }
+
+    private static void removeHealthModifier(Player player) {
         AttributeInstance attr = player.getAttribute(Attribute.MAX_HEALTH);
         if (attr == null) {
             return;

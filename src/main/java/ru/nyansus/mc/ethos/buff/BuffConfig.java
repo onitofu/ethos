@@ -10,8 +10,10 @@ import org.bukkit.potion.PotionEffectType;
 
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.logging.Logger;
 
 public class BuffConfig {
@@ -165,5 +167,24 @@ public class BuffConfig {
 
     public boolean isTabEnabled() {
         return tabEnabled;
+    }
+
+    public Set<PotionEffectType> getPotionEffectTypes() {
+        Set<PotionEffectType> types = new HashSet<>();
+        for (BuffTier tier : negativeTiers) {
+            collectPotionTypes(tier, types);
+        }
+        for (BuffTier tier : positiveTiers) {
+            collectPotionTypes(tier, types);
+        }
+        return types;
+    }
+
+    private void collectPotionTypes(BuffTier tier, Set<PotionEffectType> types) {
+        for (BuffEffect effect : tier.effects()) {
+            if (effect.effectType() == EffectType.POTION_EFFECT && effect.potionType() != null) {
+                types.add(effect.potionType());
+            }
+        }
     }
 }
