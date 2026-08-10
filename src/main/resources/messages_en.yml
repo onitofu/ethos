@@ -16,6 +16,10 @@ karma:
   invalid-number: "§cInvalid number."
   reset-success: "§aYour karma has been reset from {old} to 0."
   reset-cooldown: "§cKarma reset available in {days} days."
+  effects-enabled: "§aKarma effects enabled."
+  effects-disabled: "§eKarma effects disabled."
+  effects-status-disabled: "§7Karma effects are disabled. Karma and titles still work."
+  effects-toggle-cooldown: "§cYou can toggle karma effects again in {hours} h."
   effect:
     mob_damage_bonus: "mob damage"
     passive_mob_damage_bonus: "passive mob damage"
@@ -57,7 +61,12 @@ karma:
 
 title:
   no-titles: "§7You have no unlocked titles."
-  list-header: "§6Your titles:"
+  list-header: "§8--------------- §fYour titles §7(Page §e{page}§7/§e{pages}) §8---------------"
+  list-footer: "§8----------------------------------------------------"
+  page: "§7Page §e{page}§7/§e{pages}"
+  page-hint: "§7Pages: §f/etitle page {prev} §7| §f/etitle page {next}"
+  page-hint-all: "§7Pages: §f/etitle all {prev} §7| §f/etitle all {next}"
+  invalid-page: "§cInvalid page number."
   selected: "§aTitle \"{title}\" selected."
   not-unlocked: "§cThis title is not unlocked."
   not-found: "§cTitle not found."

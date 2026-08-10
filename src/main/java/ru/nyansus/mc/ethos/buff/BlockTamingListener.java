@@ -20,6 +20,9 @@ public class BlockTamingListener implements Listener {
         if (!(event.getOwner() instanceof Player player)) {
             return;
         }
+        if (!plugin.areKarmaEffectsEnabled(player)) {
+            return;
+        }
         int karma = plugin.getKarmaManager().getKarma(player.getUniqueId());
         if (plugin.getBuffConfig().hasEffect(karma, EffectType.BLOCK_TAMING)) {
             event.setCancelled(true);

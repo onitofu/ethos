@@ -47,6 +47,10 @@ public class UnlockCondition {
         };
     }
 
+    public int value() {
+        return value;
+    }
+
     private int sumEntityStats(Player player, Statistic stat) {
         int sum = 0;
         for (EntityType entity : entities) {

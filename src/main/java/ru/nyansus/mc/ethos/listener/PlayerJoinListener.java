@@ -6,6 +6,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
 import ru.nyansus.mc.ethos.Ethos;
 import ru.nyansus.mc.ethos.title.Title;
 import ru.nyansus.mc.ethos.title.TitleManager;
@@ -29,11 +30,18 @@ public class PlayerJoinListener implements Listener {
         UUID uuid = player.getUniqueId();
         TitleManager tm = plugin.getTitleManager();
 
+        plugin.loadKarmaEffectsState(uuid);
+
         if (tm.getUnlockedTitles(uuid).isEmpty()) {
             grantDefaultTitle(uuid, tm);
         }
 
         checkSeasonalTitles(player, tm);
+    }
+
+    @EventHandler
+    public void onPlayerQuit(PlayerQuitEvent event) {
+        plugin.clearKarmaEffectsState(event.getPlayer().getUniqueId());
     }
 
     private void grantDefaultTitle(UUID uuid, TitleManager tm) {

@@ -23,6 +23,9 @@ public class BlockRidingListener implements Listener {
         if (!(event.getVehicle() instanceof Animals)) {
             return;
         }
+        if (!plugin.areKarmaEffectsEnabled(player)) {
+            return;
+        }
         int karma = plugin.getKarmaManager().getKarma(player.getUniqueId());
         if (plugin.getBuffConfig().hasEffect(karma, EffectType.BLOCK_RIDING)) {
             event.setCancelled(true);

@@ -39,6 +39,9 @@ public class MobBehaviorTask extends BukkitRunnable {
             if (player.getGameMode() != GameMode.SURVIVAL) {
                 continue;
             }
+            if (!plugin.areKarmaEffectsEnabled(player)) {
+                continue;
+            }
             int karma = plugin.getKarmaManager().getKarma(player.getUniqueId());
 
             if (config.hasEffect(karma, EffectType.PASSIVE_MOB_HOSTILE)) {

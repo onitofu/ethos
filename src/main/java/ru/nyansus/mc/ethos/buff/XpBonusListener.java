@@ -15,6 +15,9 @@ public class XpBonusListener implements Listener {
 
     @EventHandler
     public void onExpChange(PlayerExpChangeEvent event) {
+        if (!plugin.areKarmaEffectsEnabled(event.getPlayer())) {
+            return;
+        }
         int karma = plugin.getKarmaManager().getKarma(event.getPlayer().getUniqueId());
         BuffConfig config = plugin.getBuffConfig();
 

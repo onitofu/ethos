@@ -50,6 +50,9 @@ public class HostileMobListener implements Listener {
         if (player.getGameMode() != GameMode.SURVIVAL) {
             return;
         }
+        if (!plugin.areKarmaEffectsEnabled(player)) {
+            return;
+        }
 
         int karma = plugin.getKarmaManager().getKarma(player.getUniqueId());
         BuffConfig config = plugin.getBuffConfig();

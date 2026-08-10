@@ -26,6 +26,9 @@ public class GolemAggroListener implements Listener {
         IronGolem golem = (IronGolem) event.getEntity();
 
         if (event.getTarget() instanceof Player player) {
+            if (!plugin.areKarmaEffectsEnabled(player)) {
+                return;
+            }
             int karma = plugin.getKarmaManager().getKarma(player.getUniqueId());
             if (plugin.getBuffConfig().hasEffect(karma, EffectType.GOLEM_AGGRO)) {
                 return;
@@ -43,6 +46,9 @@ public class GolemAggroListener implements Listener {
     private Player findNearbyEvilPlayer(IronGolem golem) {
         for (Entity entity : golem.getNearbyEntities(16, 16, 16)) {
             if (entity instanceof Player player) {
+                if (!plugin.areKarmaEffectsEnabled(player)) {
+                    continue;
+                }
                 int karma = plugin.getKarmaManager().getKarma(player.getUniqueId());
                 double range = plugin.getBuffConfig()
                         .getNumericEffect(karma, EffectType.GOLEM_AGGRO);
