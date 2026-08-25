@@ -10,10 +10,8 @@ import org.bukkit.potion.PotionEffectType;
 
 import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.logging.Logger;
 
 public class BuffConfig {
@@ -21,13 +19,11 @@ public class BuffConfig {
     private static final Logger LOGGER = Logger.getLogger(BuffConfig.class.getName());
 
     private final int effectDuration;
-    private final boolean tabEnabled;
     private final List<BuffTier> negativeTiers;
     private final List<BuffTier> positiveTiers;
 
     public BuffConfig(FileConfiguration config) {
         this.effectDuration = config.getInt("buffs.effect-duration", 1400);
-        this.tabEnabled = config.getBoolean("tab.enabled", true);
         this.negativeTiers = new ArrayList<>();
         this.positiveTiers = new ArrayList<>();
         loadTiers(config);
@@ -165,26 +161,4 @@ public class BuffConfig {
         return effectDuration;
     }
 
-    public boolean isTabEnabled() {
-        return tabEnabled;
-    }
-
-    public Set<PotionEffectType> getPotionEffectTypes() {
-        Set<PotionEffectType> types = new HashSet<>();
-        for (BuffTier tier : negativeTiers) {
-            collectPotionTypes(tier, types);
-        }
-        for (BuffTier tier : positiveTiers) {
-            collectPotionTypes(tier, types);
-        }
-        return types;
-    }
-
-    private void collectPotionTypes(BuffTier tier, Set<PotionEffectType> types) {
-        for (BuffEffect effect : tier.effects()) {
-            if (effect.effectType() == EffectType.POTION_EFFECT && effect.potionType() != null) {
-                types.add(effect.potionType());
-            }
-        }
-    }
 }

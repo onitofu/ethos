@@ -7,12 +7,11 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
 import ru.nyansus.mc.ethos.Ethos;
-import ru.nyansus.mc.ethos.buff.BuffApplyTask;
 import ru.nyansus.mc.ethos.buff.BuffEffect;
 import ru.nyansus.mc.ethos.buff.BuffTier;
 import ru.nyansus.mc.ethos.karma.KarmaTitle;
 import ru.nyansus.mc.ethos.karma.StatsStorage;
-import ru.nyansus.mc.ethos.util.ColorUtil;
+import ru.nyansus.mc.ethos.title.TitleRenderer;
 import ru.nyansus.mc.ethos.util.StatKeys;
 
 import java.util.ArrayList;
@@ -156,7 +155,7 @@ public class KarmaCommand implements CommandExecutor, TabCompleter {
         plugin.setKarmaEffectsEnabled(player.getUniqueId(), !enabled);
         stats.setStat(player.getUniqueId(), StatKeys.LAST_KARMA_EFFECTS_TOGGLE, now);
         if (enabled) {
-            BuffApplyTask.clearAppliedEffects(player, plugin.getBuffConfig());
+            plugin.clearAppliedKarmaEffects(player);
         }
         player.sendMessage(plugin.getMessages().get(player,
                 enabled ? "karma.effects-disabled" : "karma.effects-enabled"));
@@ -170,8 +169,12 @@ public class KarmaCommand implements CommandExecutor, TabCompleter {
         String bar = buildBar(karma);
         String titleStr = karmaTitle
                 .flatMap(kt -> plugin.getTitleManager().getRegistry().getTitle(kt.id()))
-                .map(t -> " §7[" + ColorUtil.colorCode(t.color())
-                        + t.localizedName(viewer, plugin.getMessages()) + "§7]")
+                .map(t -> " " + plugin.getMessages().render(
+                        "<gray>[</gray>"
+                                + TitleRenderer.render(
+                                        t.localizedName(viewer, plugin.getMessages()),
+                                        t.color(), plugin.getTitleGradientShift())
+                                + "<gray>]</gray>"))
                 .orElse("");
 
         viewer.sendMessage(plugin.getMessages().get(viewer, "karma.display",
@@ -214,14 +217,14 @@ public class KarmaCommand implements CommandExecutor, TabCompleter {
         }
 
         boolean isBuff = isBuff(effect);
-        String prefix = isBuff ? "§a▲ " : "§c▼ ";
+        String prefix = plugin.getMessages().render(
+                isBuff ? "<green>▲ </green>" : "<red>▼ </red>");
         String value = formatValue(effect);
 
         return prefix + (value.isEmpty() ? msg : value + " " + msg);
     }
 
     private String formatPotionEffect(Player viewer, BuffEffect effect) {
-        String name = effect.potionType().translationKey();
         int level = effect.amplifier() + 1;
         String display = plugin.getMessages().get(viewer,
                 "karma.potion." + effect.potionType().getKey().getKey(),
@@ -229,7 +232,7 @@ public class KarmaCommand implements CommandExecutor, TabCompleter {
         if (display.startsWith("[")) {
             display = effect.potionType().getKey().getKey() + " " + level;
         }
-        return "§a▲ " + display;
+        return plugin.getMessages().render("<green>▲ </green>") + display;
     }
 
     private boolean isBuff(BuffEffect effect) {
@@ -277,20 +280,20 @@ public class KarmaCommand implements CommandExecutor, TabCompleter {
         double ratio = (double) (karma - min) / (max - min);
         int filled = (int) (ratio * BAR_LENGTH);
 
-        StringBuilder bar = new StringBuilder("§8[");
+        StringBuilder bar = new StringBuilder("<dark_gray>[");
         for (int i = 0; i < BAR_LENGTH; i++) {
             if (i < filled) {
                 if (karma < 0) {
-                    bar.append("§c▰");
+                    bar.append("<red>▰");
                 } else {
-                    bar.append("§a▰");
+                    bar.append("<green>▰");
                 }
             } else {
-                bar.append("§7▱");
+                bar.append("<gray>▱");
             }
         }
-        bar.append("§8]");
-        return bar.toString();
+        bar.append("<dark_gray>]");
+        return plugin.getMessages().render(bar.toString());
     }
 
     @Override

@@ -1,7 +1,5 @@
 package ru.nyansus.mc.ethos.buff;
 
-import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.GameMode;
 import org.bukkit.NamespacedKey;
 import org.bukkit.attribute.Attribute;
@@ -13,9 +11,10 @@ import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 import ru.nyansus.mc.ethos.Ethos;
 import ru.nyansus.mc.ethos.karma.KarmaManager;
-import ru.nyansus.mc.ethos.title.Title;
 
-import java.util.Optional;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 
 public class BuffApplyTask extends BukkitRunnable {
 
@@ -24,6 +23,8 @@ public class BuffApplyTask extends BukkitRunnable {
 
     private final Ethos plugin;
     private final KarmaManager karmaManager;
+    private final Map<UUID, Map<PotionEffectType, OwnedPotionEffect>> ownedPotionEffects =
+            new HashMap<>();
 
     public BuffApplyTask(Ethos plugin, KarmaManager karmaManager) {
         this.plugin = plugin;
@@ -39,26 +40,15 @@ public class BuffApplyTask extends BukkitRunnable {
             plugin.getAntiFarmManager().updatePosition(player);
 
             if (!plugin.areKarmaEffectsEnabled(player)) {
-                clearAppliedEffects(player, config);
-                if (config.isTabEnabled()) {
-                    updateTabName(player, karma);
-                }
+                clearAppliedEffects(player);
                 continue;
             }
 
             if (player.getGameMode() != GameMode.SURVIVAL) {
-                if (config.isTabEnabled()) {
-                    updateTabName(player, karma);
-                }
                 continue;
             }
 
             applyEffects(player, karma, config);
-
-
-            if (config.isTabEnabled()) {
-                updateTabName(player, karma);
-            }
         }
     }
 
@@ -74,26 +64,26 @@ public class BuffApplyTask extends BukkitRunnable {
         for (BuffEffect effect : tier.effects()) {
             switch (effect.effectType()) {
                 case POTION_EFFECT -> applyPotionIfStronger(player, effect, duration);
-                case SPEED_BONUS -> player.addPotionEffect(
+                case SPEED_BONUS -> applyOwnedPotionEffect(player,
                         new PotionEffect(PotionEffectType.SPEED, duration, 0, true, false));
-                case NIGHT_VISION -> player.addPotionEffect(
+                case NIGHT_VISION -> applyOwnedPotionEffect(player,
                         new PotionEffect(PotionEffectType.NIGHT_VISION,
                                 duration, 0, true, false));
-                case REGENERATION_BONUS -> player.addPotionEffect(
+                case REGENERATION_BONUS -> applyOwnedPotionEffect(player,
                         new PotionEffect(PotionEffectType.REGENERATION, duration,
                                 (int) effect.value(), true, false));
                 case MINING_SPEED -> {
                     int amp = (int) effect.value();
                     if (amp >= 0) {
-                        player.addPotionEffect(new PotionEffect(
+                        applyOwnedPotionEffect(player, new PotionEffect(
                                 PotionEffectType.HASTE, duration, amp, true, false));
                     } else {
-                        player.addPotionEffect(new PotionEffect(
+                        applyOwnedPotionEffect(player, new PotionEffect(
                                 PotionEffectType.MINING_FATIGUE, duration,
                                 Math.abs(amp) - 1, true, false));
                     }
                 }
-                case GLOWING -> player.addPotionEffect(
+                case GLOWING -> applyOwnedPotionEffect(player,
                         new PotionEffect(PotionEffectType.GLOWING,
                                 duration, 0, true, false));
                 case HEALTH_BONUS -> applyHealthModifier(player, effect.value());
@@ -107,7 +97,7 @@ public class BuffApplyTask extends BukkitRunnable {
         if (existing != null && existing.getAmplifier() > effect.amplifier()) {
             return;
         }
-        player.addPotionEffect(new PotionEffect(effect.potionType(), duration,
+        applyOwnedPotionEffect(player, new PotionEffect(effect.potionType(), duration,
                 effect.amplifier(), effect.ambient(), !effect.ambient()));
     }
 
@@ -121,16 +111,29 @@ public class BuffApplyTask extends BukkitRunnable {
                 HEALTH_KEY, bonus, AttributeModifier.Operation.ADD_NUMBER));
     }
 
-    public static void clearAppliedEffects(Player player, BuffConfig config) {
+    public void clearAppliedEffects(Player player) {
         removeHealthModifier(player);
-        player.removePotionEffect(PotionEffectType.SPEED);
-        player.removePotionEffect(PotionEffectType.NIGHT_VISION);
-        player.removePotionEffect(PotionEffectType.REGENERATION);
-        player.removePotionEffect(PotionEffectType.HASTE);
-        player.removePotionEffect(PotionEffectType.MINING_FATIGUE);
-        player.removePotionEffect(PotionEffectType.GLOWING);
-        for (PotionEffectType type : config.getPotionEffectTypes()) {
-            player.removePotionEffect(type);
+        Map<PotionEffectType, OwnedPotionEffect> effects =
+                ownedPotionEffects.remove(player.getUniqueId());
+        if (effects == null) {
+            return;
+        }
+        for (Map.Entry<PotionEffectType, OwnedPotionEffect> entry : effects.entrySet()) {
+            PotionEffect current = player.getPotionEffect(entry.getKey());
+            if (entry.getValue().matches(current)) {
+                player.removePotionEffect(entry.getKey());
+            }
+        }
+    }
+
+    public void forgetPlayer(UUID uuid) {
+        ownedPotionEffects.remove(uuid);
+    }
+
+    private void applyOwnedPotionEffect(Player player, PotionEffect effect) {
+        if (player.addPotionEffect(effect)) {
+            ownedPotionEffects.computeIfAbsent(player.getUniqueId(), ignored -> new HashMap<>())
+                    .put(effect.getType(), OwnedPotionEffect.from(effect));
         }
     }
 
@@ -142,34 +145,28 @@ public class BuffApplyTask extends BukkitRunnable {
         attr.removeModifier(HEALTH_KEY);
     }
 
-    private void updateTabName(Player player, int karma) {
-        NamedTextColor karmaColor = karma > 0 ? NamedTextColor.GREEN
-                : karma < 0 ? NamedTextColor.RED : NamedTextColor.GRAY;
-
-        Optional<Title> title = plugin.getKarmaTitleManager().getTitle(karma)
-                .flatMap(kt -> plugin.getTitleManager().getRegistry().getTitle(kt.id()));
-
-        Component name;
-        if (title.isPresent()) {
-            NamedTextColor titleColor = parseColor(title.get().color().primary());
-            name = Component.text("")
-                    .append(Component.text(
-                            title.get().localizedName(player, plugin.getMessages()), titleColor))
-                    .append(Component.text(" "))
-                    .append(Component.text(player.getName()))
-                    .append(Component.text(" "))
-                    .append(Component.text("[" + karma + "]", karmaColor));
-        } else {
-            name = Component.text(player.getName())
-                    .append(Component.text(" "))
-                    .append(Component.text("[" + karma + "]", karmaColor));
+    private record OwnedPotionEffect(
+            int amplifier,
+            boolean ambient,
+            boolean particles,
+            boolean icon
+    ) {
+        private static OwnedPotionEffect from(PotionEffect effect) {
+            return new OwnedPotionEffect(
+                    effect.getAmplifier(),
+                    effect.isAmbient(),
+                    effect.hasParticles(),
+                    effect.hasIcon()
+            );
         }
 
-        player.playerListName(name);
-    }
-
-    private static NamedTextColor parseColor(String color) {
-        NamedTextColor parsed = NamedTextColor.NAMES.value(color);
-        return parsed != null ? parsed : NamedTextColor.WHITE;
+        private boolean matches(PotionEffect effect) {
+            return effect != null
+                    && !effect.isInfinite()
+                    && effect.getAmplifier() == amplifier
+                    && effect.isAmbient() == ambient
+                    && effect.hasParticles() == particles
+                    && effect.hasIcon() == icon;
+        }
     }
 }

@@ -202,18 +202,22 @@ public class TitleCommand implements CommandExecutor, TabCompleter {
 
         Title t = title.get();
         boolean unlocked = plugin.getTitleManager().getUnlockedTitles(player.getUniqueId()).contains(id);
-        String status = unlocked ? "§a✔" : "§c✘";
+        String status = plugin.getMessages().render(
+                unlocked ? "<green>✔</green>" : "<red>✘</red>");
 
         player.sendMessage(plugin.getMessages().get(player, "title.info-header"));
         String nameRendered = TitleRenderer.render(t.localizedName(player, plugin.getMessages()),
                 t.color(), plugin.getTitleGradientShift());
         player.sendMessage(MM.deserialize(nameRendered));
-        player.sendMessage("§7ID: " + t.id());
+        player.sendMessage(plugin.getMessages().get(player, "title.id",
+                "{id}", String.valueOf(t.id())));
         String description = t.localizedDescription(player, plugin.getMessages());
         if (!description.isEmpty()) {
-            player.sendMessage("§7" + description);
+            player.sendMessage(plugin.getMessages().get(player, "title.description",
+                    "{description}", description));
         }
-        player.sendMessage("§7" + plugin.getMessages().get(player, "title.status") + ": " + status);
+        player.sendMessage(plugin.getMessages().get(player, "title.status-line",
+                "{status}", status));
         return true;
     }
 

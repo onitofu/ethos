@@ -24,8 +24,9 @@ public class EthosCommand implements CommandExecutor, TabCompleter {
         }
 
         if (args.length == 0) {
-            sender.sendMessage("§6Ethos §7v" + plugin.getPluginMeta().getVersion());
-            sender.sendMessage("§7/ethos reload");
+            sender.sendMessage(plugin.getMessages().get(sender, "command.info",
+                    "{version}", plugin.getPluginMeta().getVersion()));
+            sender.sendMessage(plugin.getMessages().get(sender, "command.reload-usage"));
             return true;
         }
 

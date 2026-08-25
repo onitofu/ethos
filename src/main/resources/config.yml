@@ -377,10 +377,6 @@ passive-mob-damage:
   small: 1.0
   default: 1.0
 
-# Tab display
-tab:
-  enabled: false
-
 # Task intervals (ticks)
 buff-check-interval: 1200
 unlock-check-interval: 6000

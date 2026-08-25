@@ -4,7 +4,10 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
+import net.kyori.adventure.text.minimessage.MiniMessage;
+import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -17,6 +20,9 @@ import java.util.logging.Level;
 public final class Messages {
 
     private static final String FALLBACK_LOCALE = "en";
+    private static final MiniMessage MINI_MESSAGE = MiniMessage.miniMessage();
+    private static final LegacyComponentSerializer LEGACY =
+            LegacyComponentSerializer.legacySection();
     private static final Map<String, String> LOCALE_MAP = Map.of(
             "ru", "ru",
             "en", "en",
@@ -36,21 +42,27 @@ public final class Messages {
 
     private void load() {
         locales.clear();
-        loadLocale("ru", "messages_ru.yml");
-        loadLocale("en", "messages_en.yml");
-        defaultLocale = plugin.getConfig().getString("default-locale", FALLBACK_LOCALE);
+        loadLocale("ru", "lang/ru.yml");
+        loadLocale("en", "lang/en.yml");
+        defaultLocale = plugin.getConfig().getString("default-locale", FALLBACK_LOCALE)
+                .toLowerCase(Locale.ROOT);
         if (!locales.containsKey(defaultLocale)) {
             defaultLocale = FALLBACK_LOCALE;
         }
     }
 
     private void loadLocale(String locale, String resource) {
+        File localeFile = new File(plugin.getDataFolder(), resource);
+        if (!localeFile.exists()) {
+            plugin.saveResource(resource, false);
+        }
+        YamlConfiguration config = YamlConfiguration.loadConfiguration(localeFile);
         try (InputStream stream = plugin.getResource(resource)) {
             if (stream == null) {
                 return;
             }
-            YamlConfiguration config = YamlConfiguration.loadConfiguration(
-                    new InputStreamReader(stream, StandardCharsets.UTF_8));
+            config.setDefaults(YamlConfiguration.loadConfiguration(
+                    new InputStreamReader(stream, StandardCharsets.UTF_8)));
             locales.put(locale, config);
         } catch (IOException e) {
             plugin.getLogger().log(Level.WARNING, "Failed to load locale file: " + resource, e);
@@ -89,7 +101,16 @@ public final class Messages {
         if (!FALLBACK_LOCALE.equals(locale)) {
             msg = getFromLocale(FALLBACK_LOCALE, key);
         }
-        return msg != null ? msg : "[" + key + "]";
+        if (msg == null) {
+            return "[" + key + "]";
+        }
+        return msg.indexOf('\u00a7') >= 0
+                ? msg
+                : LEGACY.serialize(MINI_MESSAGE.deserialize(msg));
+    }
+
+    public String render(String miniMessage) {
+        return LEGACY.serialize(MINI_MESSAGE.deserialize(miniMessage));
     }
 
     private String getFromLocale(String locale, String key) {

@@ -63,9 +63,12 @@ When PlaceholderAPI is installed, Ethos provides:
 
 - `config.yml` controls karma actions, decay, cooldowns, anti-farm rules, title ranges, and karma effects.
 - `titles.yml` defines title names, colors, descriptions, and unlock conditions.
-- `endermen.yml` controls the plugin's Enderman behavior.
-- `messages_en.yml` and `messages_ru.yml` contain localized messages.
+- `lang/en.yml` and `lang/ru.yml` contain editable MiniMessage localizations.
 - `ethos.db` stores karma, statistics, unlocked titles, and active titles by player UUID.
+
+Ethos owns gameplay state only. It exposes karma and titles through PlaceholderAPI but does not write player-list
+names or modify Endermen. A tab-list plugin such as TAB can render the provided placeholders, while all custom mob
+behavior belongs to `ethos-mobs`.
 
 Back up `ethos.db` before replacing or restoring a production installation.
 
