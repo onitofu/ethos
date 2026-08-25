@@ -10,7 +10,7 @@ checkstyle {
 }
 
 group = 'ru.nyansus.mc'
-version = '2.0.0'
+version = '1.0.0'
 
 repositories {
     mavenCentral()
@@ -53,5 +53,11 @@ processResources {
     filteringCharset = 'UTF-8'
     filesMatching('plugin.yml') {
         expand props
+    }
+}
+
+tasks.named('jar') {
+    from(rootProject.file('LICENSE')) {
+        into('META-INF')
     }
 }

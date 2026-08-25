@@ -2,6 +2,7 @@ name: ethos
 version: '${version}'
 main: ru.nyansus.mc.ethos.Ethos
 api-version: '1.21'
+author: Nyansus
 softdepend:
   - PlaceholderAPI
 
