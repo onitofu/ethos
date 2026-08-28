@@ -39,13 +39,16 @@ public class MobKillListener implements Listener {
             return;
         }
 
-        if (plugin.getAntiFarmManager().isAfk(killer)) {
-            return;
-        }
+        boolean antiFarmExempt = isAntiFarmExempt(entity.getType());
+        if (!antiFarmExempt) {
+            if (plugin.getAntiFarmManager().isAfk(killer)) {
+                return;
+            }
 
-        if (plugin.getAntiFarmManager().isMobStreakExceeded(
-                killer.getUniqueId(), entity.getType())) {
-            return;
+            if (plugin.getAntiFarmManager().isMobStreakExceeded(
+                    killer.getUniqueId(), entity.getType())) {
+                return;
+            }
         }
 
         int karmaChange = calculateKarmaChange(entity);
@@ -53,7 +56,7 @@ public class MobKillListener implements Listener {
             return;
         }
 
-        if (entity.fromMobSpawner()) {
+        if (!antiFarmExempt && entity.fromMobSpawner()) {
             karmaChange = plugin.getAntiFarmManager().applySpawnerMultiplier(karmaChange);
             if (karmaChange == 0) {
                 return;
@@ -61,6 +64,10 @@ public class MobKillListener implements Listener {
         }
 
         plugin.getKarmaManager().addKarma(killer.getUniqueId(), karmaChange);
+    }
+
+    static boolean isAntiFarmExempt(EntityType entityType) {
+        return BOSSES.contains(entityType);
     }
 
     private int calculateKarmaChange(Entity entity) {
