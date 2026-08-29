@@ -24,7 +24,14 @@ import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 import ru.nyansus.mc.ethos.Ethos;
 
+import java.util.Set;
+
 public class MobBehaviorTask extends BukkitRunnable {
+
+    private static final Set<EntityType> FORCED_AGGRO_EXEMPT = Set.of(
+            EntityType.ENDERMAN,
+            EntityType.ZOMBIFIED_PIGLIN
+    );
 
     private final Ethos plugin;
 
@@ -116,10 +123,14 @@ public class MobBehaviorTask extends BukkitRunnable {
 
     private void attractHostileMobs(Player player, double range) {
         for (Entity entity : player.getNearbyEntities(range, range, range)) {
-            if (entity instanceof Enemy mob && ((Mob) mob).getTarget() == null
-                    && entity.getType() != EntityType.ZOMBIFIED_PIGLIN) {
-                ((Mob) mob).setTarget(player);
+            if (entity instanceof Enemy && ((Mob) entity).getTarget() == null
+                    && !isForcedAggroExempt(entity.getType())) {
+                ((Mob) entity).setTarget(player);
             }
         }
+    }
+
+    static boolean isForcedAggroExempt(EntityType entityType) {
+        return FORCED_AGGRO_EXEMPT.contains(entityType);
     }
 }
