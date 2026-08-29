@@ -6,7 +6,9 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 public class EthosTest {
 
@@ -28,5 +30,16 @@ public class EthosTest {
     public void pluginLoads() {
         assertNotNull(plugin);
         assertNotNull(plugin.getMessages());
+    }
+
+    @Test
+    public void localizedMessagesRenderMiniMessageFormatting() {
+        String english = plugin.getMessages().get("en", "title.list-header");
+        String russian = plugin.getMessages().get("ru", "title.list-header");
+
+        assertFalse(english.contains("<dark_gray>"));
+        assertFalse(russian.contains("<dark_gray>"));
+        assertTrue(english.contains("\u00a78"));
+        assertTrue(russian.contains("\u00a78"));
     }
 }

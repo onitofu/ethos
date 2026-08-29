@@ -95,10 +95,7 @@ public final class Messages {
 
     public String get(String locale, String key) {
         String msg = getFromLocale(locale, key);
-        if (msg != null) {
-            return msg;
-        }
-        if (!FALLBACK_LOCALE.equals(locale)) {
+        if (msg == null && !FALLBACK_LOCALE.equals(locale)) {
             msg = getFromLocale(FALLBACK_LOCALE, key);
         }
         if (msg == null) {
